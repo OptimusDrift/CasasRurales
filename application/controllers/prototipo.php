@@ -7,9 +7,16 @@ class Prototipo extends CI_Controller {
     }
     function index()
 	{
+        $dato['inicioactivo'] = 'active';
+        $dato['misalquileresactivo'] = '';
+        $dato['reservapendienteactivo'] = '';
+        $dato['propiedadactivo'] = '';
+        $dato['paqueteactivo'] = '';
+        $dato['misreservaactivo'] = '';
+        $dato['reservaactivo'] = '';
         $this->load->view('prototipo/primera');
         $this->load->view('prototipo/barranav');
-        $this->load->view('prototipo/barraizq');
+        $this->load->view('prototipo/barraizq', $dato);
         $this->load->view('prototipo/template');
         $this->load->view('prototipo/footeryscrips');
 	}

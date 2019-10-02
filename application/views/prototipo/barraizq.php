@@ -22,7 +22,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-                <a href="prototipo" class="nav-link active">
+                <a href="prototipo" class="nav-link <?php echo $inicioactivo ?>" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inicio</p>
                 </a>
@@ -30,28 +30,28 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="<?php echo base_url()."assets/"; ?>#" class="nav-link">
+            <a href="<?php echo base_url()."assets/"; ?>#" class="nav-link <?php echo $misalquileresactivo ?>" >
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Tus Alquileres
+                Mis Alquileres
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url()."index.php/"; ?>reservaspendientes" class="nav-link">
+                <a href="<?php echo base_url()."index.php/"; ?>reservaspendientes" class="nav-link <?php echo $reservapendienteactivo ?>" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reservas Pendientes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url()."index.php/"; ?>propiedadespropietario" class="nav-link">
+                <a href="<?php echo base_url()."index.php/"; ?>propiedadespropietario" class="nav-link <?php echo $propiedadactivo ?>" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Mis Propiedades</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url()."index.php/"; ?>paquetes" class="nav-link">
+                <a href="<?php echo base_url()."index.php/"; ?>paquetes" class="nav-link <?php echo $paqueteactivo ?>" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Mis Paquetes</p>
                 </a>
@@ -59,16 +59,16 @@
             </ul>
           </li>
                     <li class="nav-item has-treeview menu-open">
-            <a href="<?php echo base_url()."assets/"; ?>#" class="nav-link">
+            <a href="<?php echo base_url()."assets/"; ?>#" class="nav-link <?php echo $misreservaactivo ?>" >
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Tus Reservas
+                Mis Reservas
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url()."index.php/"; ?>#" class="nav-link">
+                <a href="<?php echo base_url()."index.php/"; ?>#" class="nav-link <?php echo $reservaactivo ?>" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reservas Realizadas</p>
                 </a>

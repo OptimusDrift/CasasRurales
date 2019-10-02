@@ -7,9 +7,16 @@ class Reservaspendientes extends CI_Controller {
     }
     function index()
 	{
+        $dato['inicioactivo'] = '';
+        $dato['misalquileresactivo'] = 'active';
+        $dato['reservapendienteactivo'] = 'active';
+        $dato['propiedadactivo'] = '';
+        $dato['paqueteactivo'] = '';
+        $dato['misreservaactivo'] = '';
+        $dato['reservaactivo'] = '';
         $this->load->view('prototipo/primera');
         $this->load->view('prototipo/barranav');
-        $this->load->view('prototipo/barraizq');
+        $this->load->view('prototipo/barraizq', $dato);
         $this->load->view('prototipo/reservaspendientes');
         $this->load->view('prototipo/footeryscrips');
 	}
