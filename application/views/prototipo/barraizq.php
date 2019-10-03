@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <!-- link del usuario -->
-    <a href="<?php echo base_url()."assets/"; ?>" class="brand-link">
+    <a href="<?php echo base_url()."index.php/prototipo"; ?>" class="brand-link">
     <!-- link de la imagen del logo -->
       <img src="<?php echo base_url()."assets/"; ?>dist/img/WoodenHouse.png" alt="WoodenHouse Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
@@ -14,7 +14,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="<?php echo base_url()."assets/"; ?>#" class="d-block">Juan Pablo</a>
+          <a href="" class="d-block">Juan Pablo</a>
         </div>
       </div>
 

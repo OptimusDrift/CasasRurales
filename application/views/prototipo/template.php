@@ -1,78 +1,51 @@
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- /.col-md-6 -->
-            <div class="col-lg-12">
-
-            <!-- $variable de la casa o id -->
-            <a href="<?php echo base_url()."index.php/"; ?>prototipo" style='text-decoration:none;color:black;'>
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="m-0">Casa 1</h5>
-                </div>
-                <div class="card-body">
-                <!-- remplazar dist/img/ "casa1.jpg" por la ubi en la bdd y hacerlo auto -->
-                <table>
-                  <tr>
-                    <td>
-                      <img src="<?php echo base_url()."assets/"; ?>dist/img/casa1.jpg" alt="casa1" class="" width="200" height="150">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                      <p class="card-text" align="justify">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.</p>
-                    </td>
-                  </tr>
-                </table>
-                </div>
-              </div>
-              </a>
-
-            <div class="card">
-              <div class="card-header">
-                <h5 class="m-0">Casa 2</h5>
-              </div>
-              <div class="card-body">
-              <table>
-                <tr>
-                  <td>
-                    <img src="<?php echo base_url()."assets/"; ?>dist/img/casa2.jpg" alt="casa2" class="" width="200" height="150">
-                  </td>
-                  <td>
-                  </td>
-                  <td>
-                  </td>
-                  <td>
-                    <p class="card-text" align="justify">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.</p>
-                  </td>
-                </tr>
-              </table>
-              </div>
-            </div>
-
-            
-          </div>
-          <!-- /.col-md-6 -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="background-image: url(<?php echo base_url().'assets/dist/img/fondoinicio.jpg'; ?>); background-size: 100%;"> 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="card card-outline card-dark ml-5 col-5">
+<br>
+<!-- Left navbar links -->
+<ul class="text-center">
+    <form class="form-inline ml-2">
+      <h3>Reserva alojamientos y experiencias únicas.</h3>
+      <li class=" d-none d-sm-inline">
+        <!-- SEARCH FORM -->
+      <div class="input-group input-group">
+        <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
+        <div class="input-group-append">
+          <button class="btn badge-dark" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
+      </li>
+      <li class=" d-none d-sm-inline">
+      <!-- Calendario -->
+      <div class="form-inline ml-2">
+        <div class="input-group input-group">
+          <div class="input-group-prepend">
+            <span class="btn badge-dark">
+              <i class="far fa-calendar-alt"></i>
+            </span>
+          </div>
+          <input class="form-control" type="text" id="reservation">
+        </div>
+      <!-- /Calendario -->
+      </li>
+      <li class=" d-none d-sm-inline">
+        <div class="form-inline ml-2">
+          <a href="<?php echo base_url()."index.php/buscarcasa"; ?>"><button type="submit" class="btn  btn-secondary badge-dark">Buscar</button></a>
+        </div>
+      </li>
+      </form>
+      <!-- Meter dentro del form -->
+    </ul>
     </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+
+
+<!-- /.content-wrapper -->
+</div>

@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Prototipo extends CI_Controller {
+class Buscarcasa extends CI_Controller {
     function __construct(){
         parent::__construct();
     }
     function index()
 	{
-        $dato['inicioactivo'] = 'active';
+        $dato['inicioactivo'] = '';
         $dato['misalquileresactivo'] = '';
         $dato['reservapendienteactivo'] = '';
         $dato['propiedadactivo'] = '';
@@ -15,9 +15,10 @@ class Prototipo extends CI_Controller {
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
         $this->load->view('prototipo/primera');
-        $this->load->view('prototipo/sinbarranav');
+        $this->load->view('prototipo/barranav');
         $this->load->view('prototipo/barraizq', $dato);
-        $this->load->view('prototipo/template');
+        //vista a cargar
+        $this->load->view('prototipo/buscarcasa');
         $this->load->view('prototipo/footeryscrips');
 	}
 }
