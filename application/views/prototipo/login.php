@@ -27,9 +27,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Inicia sesión para comenzar.</p>
 
-      <form action="<?php echo base_url().'index.php/prototipo';?>" method="post">
+      <form action="" method="POST">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Correo electrónico">
+          <input type="email" name="correo" class="form-control" placeholder="Correo electrónico">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Contraseña">
+          <input type="password" name="contrasenna" class="form-control" placeholder="Contraseña">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

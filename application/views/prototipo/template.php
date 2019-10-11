@@ -8,9 +8,9 @@
 <br>
 <div class="card card-outline card-dark ml-5 col-5">
 <br>
-<!-- Left navbar links -->
+<!-- Left navbar links  form-inline ml-2-->
 <ul class="text-center">
-    <form class="form-inline ml-2">
+    <form class="form-inline ml-2" action="<?php echo base_url().'index.php/buscarcasa'; ?>" method="post">
       <h3>Reserva alojamientos y experiencias únicas.</h3>
       <li class=" d-none d-sm-inline">
         <!-- SEARCH FORM -->
@@ -38,7 +38,7 @@
       </li>
       <li class=" d-none d-sm-inline">
         <div class="form-inline ml-2">
-          <a href="<?php echo base_url()."index.php/buscarcasa"; ?>"><button type="submit" class="btn  btn-secondary badge-dark">Buscar</button></a>
+          <button type="submit" class="btn  btn-secondary badge-dark">Buscar</button>
         </div>
       </li>
       </form>

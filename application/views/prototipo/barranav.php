@@ -6,9 +6,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <!-- SEARCH FORM -->
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Buscar">
+        <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
         <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
+          <button class="btn btn-navbar badge-dark" type="submit">
             <i class="fas fa-search"></i>
           </button>
         </div>
@@ -23,17 +23,16 @@
               <i class="far fa-calendar-alt"></i>
             </span>
           </div>
-          <input class="form-control form-control-navbar text-white-50" type="text" id="reservation" aria-label="r">
+          <input class="form-control" type="text" id="reservation" aria-label="r">
         </div>
       <!-- /Calendario -->
       </li>
-      </form>
-      <!-- Meter dentro del form -->
       <li class="nav-item d-none d-sm-inline-block">
         <div class="form-inline ml-2">
-          <a href="<?php echo base_url()."index.php/buscarcasa"; ?>"><button type="submit" class="btn btn-navbar btn-secondary btn-sm">Buscar</button></a>
+          <a href="<?php echo base_url()."index.php/buscarcasa"; ?>"><button type="submit" class="btn btn-secondary btn-sm">Buscar</button></a>
         </div>
       </li>
+      </form>
     </ul>
   
 
