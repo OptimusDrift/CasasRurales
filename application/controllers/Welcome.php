@@ -20,17 +20,22 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		if (isset($_POST['contrasenna']) && isset($_POST['correo'])) {
-			echo($_POST['contrasenna']);
-            $this->load->model('usuario_model');
-            if ($this->usuario_model->login($_POST['correo'], md5($_POST['contrasenna']))) {
-                redirect('prototipo');
+		session_start();
+		//session_destroy();
+		if (isset($_SESSION['correo'])) {
+			redirect('prototipo');
+		  } else if (isset($_POST['contrasenna']) && isset($_POST['correo'])) {
+			$this->load->model('usuario_model');
+			$usuario = $this->usuario_model->login($_POST['correo'], md5($_POST['contrasenna']));
+            if (isset($usuario)) {
+				$_SESSION['nombre'] = $usuario->nombre;
+				$_SESSION['apellido'] = $usuario->apellido;
+				$_SESSION['correo'] = $_POST['correo'];
+				redirect('prototipo');
             }else {
                 redirect('login#FAIL');
             }
-        } else {
-            
-		}
+		  }
 		$this->load->view('prototipo/primera');
 		$this->load->view('prototipo/login');
 	}

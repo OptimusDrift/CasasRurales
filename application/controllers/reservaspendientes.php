@@ -15,6 +15,7 @@ class Reservaspendientes extends CI_Controller {
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
         $this->load->view('prototipo/primera');
+        $this->load->view('prototipo/manejoDeSesion');
         $this->load->view('prototipo/barranav');
         $this->load->view('prototipo/barraizq', $dato);
         $this->load->view('prototipo/reservaspendientes');
