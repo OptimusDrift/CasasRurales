@@ -10,10 +10,10 @@ class Usuario_model extends CI_Model
     public function Login($correo, $contrasenna)
     {
         $this->db->where('correo', (string) $correo);
-        $this->db->where('contrasenna',(string) $contrasenna);
-        if ($this->db->get('usuario')->num_rows()>0) {
+        $this->db->where('contrasenna', (string) $contrasenna);
+        if ($this->db->get('usuario')->num_rows() > 0) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
