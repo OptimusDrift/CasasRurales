@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Welcome extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -24,18 +25,18 @@ class Welcome extends CI_Controller {
 		//session_destroy();
 		if (isset($_SESSION['correo'])) {
 			redirect('prototipo');
-		  } else if (isset($_POST['contrasenna']) && isset($_POST['correo'])) {
+		} else if (isset($_POST['contrasenna']) && isset($_POST['correo'])) {
 			$this->load->model('usuario_model');
 			$usuario = $this->usuario_model->login($_POST['correo'], md5($_POST['contrasenna']));
-            if (isset($usuario)) {
+			if (isset($usuario)) {
 				$_SESSION['nombre'] = $usuario->nombre;
 				$_SESSION['apellido'] = $usuario->apellido;
 				$_SESSION['correo'] = $_POST['correo'];
 				redirect('prototipo');
-            }else {
-                redirect('login#FAIL');
-            }
-		  }
+			} else {
+				redirect('login#FAIL');
+			}
+		}
 		$this->load->view('prototipo/primera');
 		$this->load->view('prototipo/login');
 	}

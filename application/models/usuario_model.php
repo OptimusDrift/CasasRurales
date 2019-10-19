@@ -7,14 +7,32 @@ class Usuario_model extends CI_Model
         parent::__construct();
     }
 
+    private function VerificarRows($result)
+    {
+        if ($result->num_rows() > 0) {
+            return $result->row();
+        } else {
+            return null;
+        }
+    }
+
     public function Login($correo, $contrasenna)
     {
-        $this->db->where('correo', (string) $correo);
-        $this->db->where('contrasenna', (string) $contrasenna);
-        if ($this->db->get('usuario')->num_rows() > 0) {
-            return $this->db->get('usuario')->row(0);
+        $result = $this->db->query("select * From usuario where correo = \"" . $correo . "\" and contrasenna = \"" . $contrasenna . "\" LIMIT 1");
+        if ($result->num_rows() > 0) {
+            return $result->row();
         } else {
-            return false;
+            return null;
+        }
+    }
+
+    public function GetPropiedades($idUsuario)
+    {
+        $result = $this->db->query("select * From propiedad where id_propietario =" . $idUsuario);
+        if ($result->num_rows() > 0) {
+            return $result;
+        } else {
+            return null;
         }
     }
 }
