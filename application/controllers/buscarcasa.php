@@ -23,13 +23,13 @@ class Buscarcasa extends CI_Controller
         //! Carga todas las propiedades de una ubicacion.
         $this->load->model('usuario_model');
         $Casas = $this->usuario_model->BuscarPaquetes($_POST['poblacion'], $_POST['fechas']);
-        if ($Casas == null) {
-            $Casas = $this->usuario_model->BuscarTodosLosPaquetes();
-        }
         $casaStr["casaStr"] = "";
-        $i = 1;
-        foreach ($Casas as $key => $casa) {
-            $casaStr["casaStr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
+        if ($Casas == null) {
+            $casaStr["casaStr"] = "<h1>No se encontraron resultados.</h1>";
+        } else {
+            $i = 1;
+            foreach ($Casas as $key => $casa) {
+                $casaStr["casaStr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
               <h5 class=\"m-0\">" . $casa->nombre_propiedad . "</h5>
@@ -52,7 +52,8 @@ class Buscarcasa extends CI_Controller
             </div>
           </div>
           </a>";
-            $i++;
+                $i++;
+            }
         }
         $this->load->view('prototipo/buscarcasa', $casaStr);
         $this->load->view('prototipo/footeryscrips');
