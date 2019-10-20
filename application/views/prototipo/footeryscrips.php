@@ -10,12 +10,11 @@
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
+    <strong>Copyright &copy; 2019-2019 WoodenHouse.</strong>
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Todos los derechos reservados.</b>
     </div>
-    <!-- Default to the left -->
   </footer>
-  </div>
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->

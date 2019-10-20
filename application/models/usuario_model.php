@@ -36,7 +36,7 @@ class Usuario_model extends CI_Model
         }
     }
 
-    public function BuscarPropiedade($ubicacion, $fechas)
+    public function BuscarPaquetes($ubicacion, $fechas)
     {
         $result = $this->db->query("select * from paquete_dormitorio INNER JOIN dormitorio ON paquete_dormitorio.id_dormitorio = dormitorio.id_dormitorio INNER JOIN propiedad ON dormitorio.id_propiedad = propiedad.id_propiedad INNER JOIN poblacion ON propiedad.id_poblacion = poblacion.id_poblacion INNER JOIN rango_dias ON rango_dias.id_paquete = paquete_dormitorio.id_paquete INNER JOIN paquete ON paquete_dormitorio.id_paquete = paquete.id_paquete where poblacion.nombre_poblacion = \"" . $ubicacion . "\" and paquete.id_estado = 5");
         $i = 0;
@@ -45,7 +45,7 @@ class Usuario_model extends CI_Model
         $fechaDeFin = strtotime(substr($fechas, 13, 23));
         $ant = null;
         $guardar = true;
-
+        $casas = null;
         //? Revisa si es del mismo paquete
         while ($result->num_rows() > $i) {
             if ($ant != null) {
@@ -57,16 +57,41 @@ class Usuario_model extends CI_Model
             }
             //? Guarda todos los paquetes que esten dentro de las fechas ingresadas
             if ($guardar) {
-                $fecha_inicial_row = strtotime(date($result->row($i)->fecha_inicial));
-                $fecha_final_row = strtotime(date($result->row($i)->fecha_final));
-                if ($fecha_inicial_row <= $fechaDeInicio) {
-                    if ($fecha_final_row >= $fechaDeFin) {
+                if (strtotime(date($result->row($i)->fecha_inicial)) <= $fechaDeInicio) {
+                    if (strtotime(date($result->row($i)->fecha_final)) >= $fechaDeFin) {
                         $casas[$j] = $result->row($i);
                         $j++;
                     }
                 }
             }
             //? Para consistir el paquete
+            $ant = $result->row($i)->id_paquete;
+            $i++;
+        }
+        return $casas;
+    }
+
+    public function BuscarTodosLosPaquetes()
+    {
+        $i = 0;
+        $j = 0;
+        $guardar = true;
+        $ant = null;
+        $result = $this->db->query("select * from paquete_dormitorio INNER JOIN dormitorio ON paquete_dormitorio.id_dormitorio = dormitorio.id_dormitorio INNER JOIN propiedad ON dormitorio.id_propiedad = propiedad.id_propiedad INNER JOIN poblacion ON propiedad.id_poblacion = poblacion.id_poblacion INNER JOIN rango_dias ON rango_dias.id_paquete = paquete_dormitorio.id_paquete INNER JOIN paquete ON paquete_dormitorio.id_paquete = paquete.id_paquete where paquete.id_estado = 5");
+        while ($result->num_rows() > $i) {
+            if ($ant != null) {
+                if ($ant == $result->row($i)->id_paquete) {
+                    $guardar = false;
+                } else {
+                    $guardar = true;
+                }
+            }
+            if ($guardar) {
+                if (strtotime(date($result->row($i)->fecha_inicial)) <= strtotime(date("Y/m/d"))) {
+                    $casas[$j] = $result->row($i);
+                    $j++;
+                }
+            }
             $ant = $result->row($i)->id_paquete;
             $i++;
         }

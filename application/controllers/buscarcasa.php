@@ -22,9 +22,9 @@ class Buscarcasa extends CI_Controller
         $this->load->view('prototipo/barraizq', $dato);
         //! Carga todas las propiedades de una ubicacion.
         $this->load->model('usuario_model');
-        $Casas = $this->usuario_model->BuscarPropiedade($_POST['poblacion'], $_POST['fechas']);
+        $Casas = $this->usuario_model->BuscarPaquetes($_POST['poblacion'], $_POST['fechas']);
         if ($Casas == null) {
-            redirect('prototipo');
+            $Casas = $this->usuario_model->BuscarTodosLosPaquetes();
         }
         $casaStr["casaStr"] = "";
         $i = 1;

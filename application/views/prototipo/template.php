@@ -15,7 +15,7 @@
         <li class=" d-none d-sm-inline">
           <!-- SEARCH FORM -->
           <div class="input-group input-group">
-            <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar" name="poblacion">
+            <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar" id="poblacion" name="poblacion">
             <div class="input-group-append">
               <button class="btn badge-dark" type="submit">
                 <i class="fas fa-search"></i>
