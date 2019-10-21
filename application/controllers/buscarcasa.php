@@ -27,7 +27,6 @@ class Buscarcasa extends CI_Controller
         if ($Casas == null) {
             $casaStr["casaStr"] = "<h1>No se encontraron resultados.</h1>";
         } else {
-            $i = 1;
             foreach ($Casas as $key => $casa) {
                 $casaStr["casaStr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
@@ -38,7 +37,7 @@ class Buscarcasa extends CI_Controller
             <table>
               <tr>
                 <td>
-                  <img src=\"" . base_url() . "assets/imagenes" . $this->usuario_model->ObtenerImagenPortada($casa->id_propiedad) . "\" alt=\"casa1\" class=\"\" width=\"200\" height=\"150\">
+                  <img src=\"" . base_url() . "assets/imagenes" . $this->usuario_model->ObtenerImagenPortada($casa->id_propiedad) . ".jpg\" alt=\"casa1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>
@@ -52,7 +51,6 @@ class Buscarcasa extends CI_Controller
             </div>
           </div>
           </a>";
-                $i++;
             }
         }
         $this->load->view('prototipo/buscarcasa', $casaStr);

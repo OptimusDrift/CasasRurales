@@ -5,7 +5,7 @@
   <a href="<?php echo base_url() . "index.php/prototipo"; ?>" class="brand-link">
     <!-- link de la imagen del logo -->
     <img src="<?php echo base_url() . "assets/"; ?>dist/img/WoodenHouse.png" alt="WoodenHouse Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">Wooden house</span>
+    <span class="brand-text font-weight-light">Wooden House</span>
   </a>
 
   <!-- Sidebar -->
@@ -32,7 +32,7 @@
           <a href="<?php echo base_url() . "assets/"; ?>#" class="nav-link <?php echo $misalquileresactivo ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              Mis Alquileres
+              Mis Propiedades
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -44,9 +44,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() . "index.php/"; ?>propiedadespropietario" class="nav-link <?php echo $propiedadactivo ?>">
+              <a href="<?php echo base_url() . "index.php/"; ?>controladorPropiedades" class="nav-link <?php echo $propiedadactivo ?>">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Mis Propiedades</p>
+                <p>Ver Propiedades</p>
               </a>
             </li>
             <li class="nav-item">

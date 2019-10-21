@@ -38,7 +38,7 @@ class Usuario_model extends CI_Model
 
     public function BuscarPaquetes($ubicacion, $fechas)
     {
-        $result = $this->db->query("select * from paquete_dormitorio INNER JOIN dormitorio ON paquete_dormitorio.id_dormitorio = dormitorio.id_dormitorio INNER JOIN propiedad ON dormitorio.id_propiedad = propiedad.id_propiedad INNER JOIN poblacion ON propiedad.id_poblacion = poblacion.id_poblacion INNER JOIN rango_dias ON rango_dias.id_paquete = paquete_dormitorio.id_paquete INNER JOIN paquete ON paquete_dormitorio.id_paquete = paquete.id_paquete where poblacion.nombre_poblacion = \"" . $ubicacion . "\" and paquete.id_estado = 5");
+        $result = $this->db->query("select * from paquete_dormitorio INNER JOIN dormitorio ON paquete_dormitorio.id_dormitorio = dormitorio.id_dormitorio INNER JOIN propiedad ON dormitorio.id_propiedad = propiedad.id_propiedad INNER JOIN poblacion ON propiedad.id_poblacion = poblacion.id_poblacion INNER JOIN rango_dias ON rango_dias.id_paquete = paquete_dormitorio.id_paquete INNER JOIN paquete ON paquete_dormitorio.id_paquete = paquete.id_paquete where poblacion.nombre_poblacion like \"%" . $ubicacion . "%\" and paquete.id_estado = 5");
         $i = 0;
         $j = 0;
         $fechaDeInicio = strtotime(substr($fechas, 0, 10));
