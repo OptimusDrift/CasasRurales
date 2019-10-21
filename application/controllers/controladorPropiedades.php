@@ -7,10 +7,7 @@ class ControladorPropiedades extends CI_Controller
     {
         parent::__construct();
         $this->load->model('propiedades_model');
-<<<<<<< HEAD
-=======
         $this->load->model('usuario_model');
->>>>>>> 47f88fc2cca3907aa727784e0a0c132f027ae80e
     }
     
     function index()
@@ -22,17 +19,10 @@ class ControladorPropiedades extends CI_Controller
         $dato['paqueteactivo'] = '';
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
-<<<<<<< HEAD
-        $dato['propiedades'] = $this->propiedades_model->obtenerPropiedades();
-=======
->>>>>>> 47f88fc2cca3907aa727784e0a0c132f027ae80e
         $this->load->view('prototipo/primera');
         $this->load->view('prototipo/manejoDeSesion');
         $this->load->view('prototipo/barranav');
         $this->load->view('prototipo/barraizq', $dato);
-<<<<<<< HEAD
-        $this->load->view('prototipo/propiedadespropietario', $dato);
-=======
         $propiedades = $this->propiedades_model->obtenerPropiedades($_SESSION['id']);
         $propStr["propStr"] = "";
         $i = 0;
@@ -69,7 +59,6 @@ class ControladorPropiedades extends CI_Controller
 
 
         $this->load->view('prototipo/propiedadespropietario', $propStr);
->>>>>>> 47f88fc2cca3907aa727784e0a0c132f027ae80e
         $this->load->view('prototipo/footeryscrips');
     }
 
