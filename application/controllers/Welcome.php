@@ -31,6 +31,7 @@ class Welcome extends CI_Controller
 			if (isset($usuario)) {
 				$_SESSION['nombre'] = $usuario->nombre;
 				$_SESSION['apellido'] = $usuario->apellido;
+				$_SESSION['id'] = $usuario->id_usuario;
 				$_SESSION['correo'] = $_POST['correo'];
 				redirect('prototipo');
 			} else {

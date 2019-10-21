@@ -29,6 +29,7 @@ class Buscarcasa extends CI_Controller
         } else {
             $i = 1;
             foreach ($Casas as $key => $casa) {
+              echo base_url() . "assets/imagenes".$this->usuario_model->ObtenerImagenPortada($casa->id_propiedad);
                 $casaStr["casaStr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
@@ -38,7 +39,7 @@ class Buscarcasa extends CI_Controller
             <table>
               <tr>
                 <td>
-                  <img src=\"" . base_url() . "assets/imagenes" . $this->usuario_model->ObtenerImagenPortada($casa->id_propiedad) . "\" alt=\"casa1\" class=\"\" width=\"200\" height=\"150\">
+                  <img src=\"" . base_url() . "assets/imagenes" . $this->usuario_model->ObtenerImagenPortada($casa->id_propiedad) . ".jpg\" alt=\"casa1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>
