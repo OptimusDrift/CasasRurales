@@ -24,7 +24,7 @@ class ReservasrealizadasCI extends CI_Controller {
         $id = $_SESSION['id'];
         $reservas = $this->usuario_model->ObtenerReservasRealizadas($id);
         $reservastr["reservastr"] = "";
-        if ($reservas == null) {
+        if ($reservas->num_rows() == 0) {
             $reservastr["reservastr"] = "<h1>No se encontraron resultados.</h1>";
         } else 
         {
