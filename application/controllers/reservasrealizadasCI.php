@@ -7,7 +7,7 @@ class ReservasrealizadasCI extends CI_Controller {
     }
     function index()
 	{
-    $this->load->model('usuario_model');
+    $this->load->model('reservas_model');
         $dato['inicioactivo'] = '';
         $dato['misalquileresactivo'] = '';
         $dato['reservapendienteactivo'] = '';
@@ -22,7 +22,7 @@ class ReservasrealizadasCI extends CI_Controller {
         
 
         $id = $_SESSION['id'];
-        $reservas = $this->usuario_model->ObtenerReservasRealizadas($id);
+        $reservas = $this->reservas_model->ObtenerReservasRealizadas($id);
         $reservastr["reservastr"] = "";
         if ($reservas->num_rows() == 0) {
             $reservastr["reservastr"] = "<h1>No se encontraron resultados.</h1>";
