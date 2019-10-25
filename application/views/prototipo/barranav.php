@@ -42,7 +42,7 @@
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
         <i class="far fa-bell"></i>
-        <span class="badge badge-warning navbar-badge">3</span>
+        <span class="badge badge-warning navbar-badge"><?php echo $datosAlerta['numAlertas']; ?> </span>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <span class="dropdown-header">3 Notificaciones</span>

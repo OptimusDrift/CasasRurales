@@ -28,7 +28,7 @@ class reservas_model extends CI_Model
 
     public function Alerta($idusr)
     {
-        $result = $this->db->query("CALL `AlertarUsuario` (" .$idusr .")");
+        $result = $this->db->query("CALL `AletarUsuario` (" .$idusr .")");
         return $result;
     }
 
