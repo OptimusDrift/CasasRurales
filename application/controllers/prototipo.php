@@ -24,6 +24,7 @@ class Prototipo extends CI_Controller
         $alerta = $this->reservas_model->Alerta($_SESSION['id']);
 
         $datosAlerta['numAlertas'] = $alerta->num_rows();
+        $datosAlerta['tipoAlerta'] = "alertas de falta de pago";
         
 
         //echo $datosAlerta['numAlertas'];
