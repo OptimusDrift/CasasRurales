@@ -16,9 +16,10 @@ class Buscarcasa extends CI_Controller
         $dato['paqueteactivo'] = '';
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
+        $this->load->model('notificacion_alerta');
         $this->load->view('prototipo/primera');
         $this->load->view('prototipo/manejoDeSesion');
-        $this->load->view('prototipo/barranav');
+        $this->load->view('prototipo/barranav', $_SESSION)['alerta'];
         $this->load->view('prototipo/barraizq', $dato);
         //! Carga todas las propiedades de una ubicacion.
         $this->load->model('usuario_model');

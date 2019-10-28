@@ -17,7 +17,8 @@ class ReservasrealizadasCI extends CI_Controller {
         $dato['reservaactivo'] = 'active';
         $this->load->view('prototipo/primera');
         $this->load->view('prototipo/manejoDeSesion');
-        $this->load->view('prototipo/barranav');
+
+        $this->load->view('prototipo/barranav',  $_SESSION['alerta']);
         $this->load->view('prototipo/barraizq', $dato);
         
 

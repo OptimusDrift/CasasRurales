@@ -19,9 +19,9 @@ class ControladorPropiedades extends CI_Controller
         $dato['paqueteactivo'] = '';
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
-        $this->load->view('prototipo/primera');
         $this->load->view('prototipo/manejoDeSesion');
-        $this->load->view('prototipo/barranav');
+        $this->load->view('prototipo/primera');
+        $this->load->view('prototipo/barranav', $_SESSION['alerta']);
         $this->load->view('prototipo/barraizq', $dato);
         $propiedades = $this->propiedades_model->obtenerPropiedades($_SESSION['id']);
         $propStr["propStr"] = "";
