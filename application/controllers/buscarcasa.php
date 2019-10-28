@@ -7,6 +7,7 @@ class Buscarcasa extends CI_Controller
   {
     parent::__construct();
   }
+
   function index()
   {
     $dato['inicioactivo'] = '';
@@ -28,7 +29,7 @@ class Buscarcasa extends CI_Controller
       $casaStr["casaStr"] = "<h1>No se encontraron resultados.</h1>";
     } else {
       foreach ($Casas as $key => $casa) {
-        $casaStr["casaStr"] .= "<a href=\"controladorpaquete\" style='text-decoration:none;color:black;'>
+        $casaStr["casaStr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $casa->id_paquete . "\" style='text-decoration:none;color:black;' onClick='event.target.parentNode.submit();'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
               <h5 class=\"m-0\">" . $casa->nombre_propiedad . "</h5>

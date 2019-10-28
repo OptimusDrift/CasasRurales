@@ -12,13 +12,23 @@ class Controladorpaquete extends CI_Controller
 
     function index()
     {
+        if (!isset($_GET['paquete'])) {
+            redirect('prototipo');
+        }
 
-        $imagenes = $this->propiedades_model->ObtenerImagenesPropiedades(1);
+        $paquete = $this->propiedades_model->ObtenerPaquete($_GET['paquete']);
+        $propiedad = $this->propiedades_model->ObtenerPropiedad($paquete->id_dormitorio);
+        $imagenes = $this->propiedades_model->ObtenerImagenesPropiedades($propiedad->id_propiedad);
         $dato['imagen'] = "<img src=\"" . base_url() . "assets/imagenes" . $imagenes[0] . ".jpg\" class=\"product-image\" alt=\"Product Image\"></div><div class=\"col-12 product-image-thumbs\">";
 
         for ($i = 0; $i < count($imagenes); $i++) {
             $dato['imagen'] .= "<div class=\"product-image-thumb active\"><img src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
         }
+
+        $infoPropiedad = $this->propiedades_model->ObtenerInfoPropiedad($propiedad->id_propiedad);
+        $dato['nombre'] = $infoPropiedad->nombre_propiedad;
+        $dato['descripcion'] = $infoPropiedad->descripcion;
+        $dato['precio'] = $paquete->precio;
         $dato['inicioactivo'] = '';
         $dato['misalquileresactivo'] = '';
         $dato['reservapendienteactivo'] = '';
