@@ -108,7 +108,7 @@ class Usuario_model extends CI_Model
 
     public function ObtenerReservasRealizadas($idusr)
     {
-        $result = $this->db->query("CALL `VistaReservasRealizadas` (" .$idusr .")");
+        $result = $this->db->query("CALL `VistaReservasRealizadas` (" . $idusr . ")");
         return $result;
     }
 }

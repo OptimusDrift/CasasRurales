@@ -17,7 +17,9 @@
         <div class="row">
           <!-- /.col-md-6 -->
           <div class="col-lg-12">
-            <?php echo $casaStr; ?>
+            <form action="controladorpaquete.php" method="post">
+              <?php echo $casaStr; ?>
+            </form>
           </div>
           <!-- /.col-md-6 -->
         </div>
