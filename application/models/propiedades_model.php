@@ -19,6 +19,7 @@ class Propiedades_model extends CI_Model
 
     function obtenerImagenesPropiedades($idPropiedad)
     {
+        $this->db->reconnect();
         $result = $this->db->query("SELECT link FROM imagen_propiedad WHERE id_propiedad = " . $idPropiedad);
         $adress = null;
         if ($result->num_rows() > 0) {
@@ -41,7 +42,8 @@ class Propiedades_model extends CI_Model
     }
     public function ObtenerInfoPropiedad($propiedad)
     {
-        $result = $this->db->query("SELECT * FROM propiedad WHERE id_propiedad =  " . $propiedad);
+        $this->db->reconnect();
+        $result = $this->db->query("CALL `VistaPropiedad` (" .$propiedad .")");
         return $result->row(0);
     }
 }

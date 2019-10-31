@@ -7,7 +7,10 @@ class ReservasrealizadasCI extends CI_Controller {
     }
     function index()
 	{
-    $this->load->model('reservas_model');
+        $this->load->model('reservas_model');
+        $this->load->model('usuario_model');
+        $this->load->model('propiedades_model');
+
         $dato['inicioactivo'] = '';
         $dato['misalquileresactivo'] = '';
         $dato['reservapendienteactivo'] = '';
@@ -32,24 +35,31 @@ class ReservasrealizadasCI extends CI_Controller {
             $i = 0;
             while($reservas->num_rows() > $i)
             {
-                $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
+              //arregla error de base de datos 'out of sync'
+              $this->db->reconnect();
+              $reserva = $reservas->row($i);
+
+              $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($reserva->id_propiedad);
+
+
+              $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
-              <h5 class=\"m-0\">" . $reservas->row($i)->nombre_propiedad ."</h5>
+              <h5 class=\"m-0\">" . $propiedad->nombre_propiedad ."</h5>
             </div>
             <div class=\"card-body\">
             <table>
               <tr>
-                <td>"
-                //  <img src=\"" . base_url() . "assets/imagenes" . $this->usuario_model->ObtenerImagenPortada($reserva->id_propiedad) . "\" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
-                ."</td>
                 <td>
+                  <img src=\"" . base_url() . "assets/imagenes" . $this->usuario_model->ObtenerImagenPortada($reserva->id_propiedad) . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>
-                <td>"
-                  //<p class=\"card-text\" align=\"justify\">" . substr($reserva->descripcion, 0, 300) . "...</p>
-                ."</td>
+                <td>
+                </td>
+                <td>
+                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->descripcionReserva($reserva,$propiedad) . "</p>
+                </td>
               </tr>
             </table>
             </div>

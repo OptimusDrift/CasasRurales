@@ -101,6 +101,7 @@ class Usuario_model extends CI_Model
     //? Busca la imagen de portada de la propiedad
     public function ObtenerImagenPortada($idPropiedad)
     {
+        $this->db->reconnect();
         $result = $this->db->query("SELECT link FROM imagen_propiedad WHERE id_propiedad = " . $idPropiedad);
         return $result->row(0)->link;
     }
@@ -110,5 +111,16 @@ class Usuario_model extends CI_Model
     {
         $result = $this->db->query("CALL `VistaReservasRealizadas` (" . $idusr . ")");
         return $result;
+    }
+
+    function clearStoredResults(){
+        global $mysqli;
+    
+        do {
+             if ($res = $mysqli->store_result()) {
+               $res->free();
+             }
+            } while ($mysqli->more_results() && $mysqli->next_result());        
+    
     }
 }
