@@ -25,14 +25,15 @@ class Buscarcasa extends CI_Controller
     $this->load->model('paquetes_model');
     $Casas = $this->paquetes_model->BuscarPaquetes($_GET['poblacion'], $_GET['fechas'], $_GET['cantidad']);
     $casaStr["casaStr"] = "";
-    if ($Casas == null) {
+    $i = 0;
+    if ($Casas['paquete'] == null) {
       $casaStr["casaStr"] = "<h1>No se encontraron resultados.</h1>";
     } else {
-      foreach ($Casas as $key => $casa) {
+      foreach ($Casas['paquete'] as $key => $casa) {
         $casaStr["casaStr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $casa['id_paquete'] . "\" style='text-decoration:none;color:black;' onClick='event.target.parentNode.submit();'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
-              <h5 class=\"m-0\">" . $casa['nombre_propiedad'] . "</h5>
+              <h5>" . $casa['nombre_propiedad'] . "</h5>
             </div>
             <div class=\"card-body\">
             <table>
@@ -48,10 +49,23 @@ class Buscarcasa extends CI_Controller
                   <p class=\"card-text\" align=\"justify\">" . substr($casa['descripcion'], 0, 300) . "...</p>
                 </td>
               </tr>
+              <tr>
+                <td>
+                <p class=\"card-text\" align=\"right\"> Cantidad personas: " . $Casas['numeroPersonas'][$i] . "</p>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                  <p class=\"card-text\" align=\"right\"> Precio: (ARS) $" . $casa['precio'] . "/noche, estadia minima: " . $casa['minNoches'] . "</p>
+                </td>
+              </tr>
             </table>
             </div>
           </div>
           </a>";
+        $i++;
       }
     }
     $this->load->view('prototipo/buscarcasa', $casaStr);

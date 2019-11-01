@@ -110,7 +110,9 @@ class Paquetes_model extends CI_Model
         if ($paquete == null) return null;
         //? Elimino las filas que no se usan
         $paquete = $this->EliminarPaquetesRepetidos($paquete);
-        return $paquete;
+        $res['paquete'] = $paquete;
+        $res['numeroPersonas'] = $numeroPersonas;
+        return $res;
     }
 
     public function BuscarTodosLosPaquetes()
