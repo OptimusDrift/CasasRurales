@@ -17,7 +17,9 @@
         <div class="row">
           <!-- /.col-md-6 -->
           <div class="col-lg-12">
+          <form class='form-inline ml-1' action="<?php echo base_url();?>index.php/cancelarReserva"  method='post'>
             <?php echo $reservastr; ?>
+          </form>
           </div>
           <!-- /.col-md-6 -->
         </div>

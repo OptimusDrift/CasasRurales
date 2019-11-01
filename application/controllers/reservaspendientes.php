@@ -46,7 +46,13 @@ class Reservaspendientes extends CI_Controller
                   <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad) . "</p>
                 </td>
               </tr>
+              <tr>
+                <td>
+                <input value='" .$reserva['id_reserva'] ."' name'idReserva' hidden=''> 
+                <input type='submit' class='btn btn-block btn-danger' value='Cancelar Reserva' >
 
+                </td>
+              </tr>
             </table>
             </div>
           </div>
