@@ -48,8 +48,8 @@ class Reservaspendientes extends CI_Controller
               </tr>
               <tr>
                 <td>
-                <input value='" .$reserva['id_reserva'] ."' name'idReserva' hidden=''> 
-                <input type='submit' class='btn btn-block btn-danger' value='Cancelar Reserva' >
+                <input type='text' value='" .$reserva['id_reserva'] ."' name='idReserva' hidden=''> 
+                <input type='submit' class='btn btn-block btn-danger' value='Cancelar Reserva' name='cancelarReserva' >
 
                 </td>
               </tr>

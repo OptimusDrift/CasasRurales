@@ -12,8 +12,12 @@ class cancelarReserva extends CI_Controller
   function index()
   {
     $this->load->view('manejoDeSesion');
-    
-    echo "<script> alert('jkakhs') </script>";
+    echo $_POST['idReserva'];
+   if(isset($_POST['cancelarReserva']))
+   {
+        if($this->reservas_model->cancelarReserva($_POST['idReserva']))
+        { redirect('reservaspendientes');}
+   }
    
   }
 }

@@ -80,4 +80,12 @@ class reservas_model extends CI_Model
         
         return $result['result'];
     }
+
+
+    public function cancelarReserva($idRes)
+    {
+     $this->db->query("CALL `CancelarReserva` (" . $idRes . ")");
+        return true;
+    }
 }
+
