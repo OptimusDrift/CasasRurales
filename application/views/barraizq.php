@@ -56,7 +56,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item has-treeview <?php $MisReservasOpen ?>">
+        <li class="nav-item has-treeview <?php echo $misReservasOpen ?>">
           <a href="<?php echo base_url() . "assets/"; ?>#" class="nav-link <?php echo $misreservaactivo ?>">
             <i class="nav-icon fas ion-ios-book"></i>
             <p>
