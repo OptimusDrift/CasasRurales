@@ -13,17 +13,21 @@ class ReservasrealizadasCI extends CI_Controller
   {
     $this->load->view('manejoDeSesion');
     $id = $_SESSION['id'];
-    $reservas = $this->reservas_model->ObtenerReservasRealizadas($id);
+    $res = $this->reservas_model->ObtenerReservasRealizadas($id);
+
+    $reservas = $res->result_array();
+    $this->db->close();
     $reservastr["reservastr"] = "";
-    if ($reservas->num_rows() == 0) {
+    if (count($reservas) == 0) {
       $reservastr["reservastr"] = "<h1>No se encontraron resultados.</h1>";
     } else {
       $i = 0;
-      while ($reservas->num_rows() > $i) {
+      while (count($reservas) > $i) {
         //arregla error de base de datos 'out of sync'
         $this->db->reconnect();
-        $reserva = $reservas->row($i);
-        $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($reserva->id_propiedad);
+        $reserva = $reservas[$i];
+
+        $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
@@ -33,7 +37,7 @@ class ReservasrealizadasCI extends CI_Controller
             <table>
               <tr>
                 <td>
-                  <img src=\"" . base_url() . "assets/imagenes" . $this->propiedades_model->ObtenerImagenesPropiedades($reserva->id_propiedad)[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
+                  <img src=\"" . base_url() . "assets/imagenes" . $this->propiedades_model->ObtenerImagenesPropiedades($reserva['id_propiedad'])[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>

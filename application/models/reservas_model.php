@@ -5,6 +5,7 @@ class reservas_model extends CI_Model
     public function __construct()
     {
         $this->load->model('dormitorio_model');
+        $this->load->model('paquetes_model');
         //require_once('dormitorio_model.php');
         parent::__construct();
     }
@@ -40,10 +41,10 @@ class reservas_model extends CI_Model
 
     public function DescripcionReserva($res, $prop)
     {
-        $this->db->reconnect();
+        
         $result['result'] = "";
 
-        $dormitorio = $this->dormitorio_model->obtenerDormitorio($res->id_dormitorio);
+        $dormitorio = $this->dormitorio_model->obtenerDormitorio($res['id_dormitorio']);
         $result['result'] = "";
 
         $result['result'] .= "Reservado en " . $prop->nombre_poblacion . "<br>";
@@ -66,8 +67,17 @@ class reservas_model extends CI_Model
             }
         }
 
+        $fInicio= $res['fecha_inicial_reserva'];
+        $fFin= $res['fecha_final_reserva'];
+        $result['result'] .= "Entre " .date("d-m-Y",strtotime($fInicio)) . " y " .date("d-m-Y",strtotime($fFin))  ."<br>";
 
-
+        $dif = strtotime($fFin) - strtotime($fInicio); 
+        $dias = $dif /(60*60*24);
+        $this->db->close();
+        $paquete = $this->paquetes_model->ObtenerPaquete($res['id_paquete']);
+        $precio = $paquete->row(0)->precio * $dias;
+        $result['result'] .="Pesos arg: $" . $precio  . "<br>";
+        
         return $result['result'];
     }
 }

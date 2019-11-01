@@ -13,33 +13,40 @@ class Reservaspendientes extends CI_Controller
   {
     $this->load->view('manejoDeSesion');
     $id = $_SESSION['id'];
-    $reservas = $this->reservas_model->ObtenerReservasPendientes($id);
+    $res = $this->reservas_model->ObtenerReservasPendientes($id);
+
+    $reservas = $res->result_array();
+    $this->db->close();
 
     $reservastr["reservastr"] = "";
-    if ($reservas->num_rows() == 0) {
+    if (count($reservas) == 0) {
       $reservastr["reservastr"] = "<h1>No se encontraron resultados.</h1>";
     } else {
       $i = 0;
-      while ($reservas->num_rows() > $i) {
+      while (count($reservas) > $i) {
+        $reserva = $reservas[$i];
+       
+        $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
-              <h5 class=\"m-0\">" . $reservas->row($i)->nombre_propiedad . "</h5>
+              <h5 class=\"m-0\">" . $propiedad->nombre_propiedad . "</h5>
             </div>
             <div class=\"card-body\">
             <table>
               <tr>
                 <td>
-                <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($reservas->row($i)->id_propiedad)[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
+                <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($reserva['id_propiedad'])[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>
                 <td>
                 </td>
-                <td>" .
-          //<p class=\"card-text\" align=\"justify\">" . substr($reservas->row($i)->descripcion, 0, 300) . "...</p>
-          "</td>
+                <td>
+                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad) . "</p>
+                </td>
               </tr>
+
             </table>
             </div>
           </div>
