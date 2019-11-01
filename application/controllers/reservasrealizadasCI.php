@@ -58,6 +58,8 @@ class ReservasrealizadasCI extends CI_Controller
     $dato['paqueteactivo'] = '';
     $dato['misreservaactivo'] = 'active';
     $dato['reservaactivo'] = 'active';
+    $dato['misPropiedadesOpen'] = '';
+    $dato['MisReservasOpen'] = 'menu-open';
     $this->load->view('primera');
     $this->load->view('barranav',  $_SESSION['alerta']);
     $this->load->view('barraizq', $dato);

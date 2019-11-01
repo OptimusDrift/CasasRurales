@@ -67,6 +67,8 @@ class Buscarcasa extends CI_Controller
     $dato['paqueteactivo'] = '';
     $dato['misreservaactivo'] = '';
     $dato['reservaactivo'] = '';
+    $dato['misPropiedadesOpen'] = '';
+    $dato['MisReservasOpen'] = '';
     //?Cargar las vistas
     $this->load->view('primera');
     $this->load->view('barranav', $_SESSION['alerta']);

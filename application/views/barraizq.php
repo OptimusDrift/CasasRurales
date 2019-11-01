@@ -10,10 +10,9 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="info">
-        <a href="" class="d-block"><?php echo ($_SESSION['nombre'] . " " . $_SESSION["apellido"]); ?></a>
+        <h5 class="card-text" style="color:#cccccc"><?php echo ($_SESSION['nombre'] . " " . $_SESSION["apellido"]); ?></h5>
       </div>
     </div>
 
@@ -28,7 +27,7 @@
         </li>
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-        <li class="nav-item has-treeview menu-open">
+        <li class="nav-item has-treeview <?php echo $misPropiedadesOpen ?>">
           <a href="<?php echo base_url() . "assets/"; ?>#" class="nav-link <?php echo $misalquileresactivo ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
@@ -57,7 +56,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item has-treeview menu-open">
+        <li class="nav-item has-treeview <?php $misReservasOpen ?>">
           <a href="<?php echo base_url() . "assets/"; ?>#" class="nav-link <?php echo $misreservaactivo ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>

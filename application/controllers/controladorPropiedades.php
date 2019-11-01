@@ -54,6 +54,8 @@ class ControladorPropiedades extends CI_Controller
     $dato['paqueteactivo'] = '';
     $dato['misreservaactivo'] = '';
     $dato['reservaactivo'] = '';
+    $dato['misPropiedadesOpen'] = 'menu-open';
+    $dato['MisReservasOpen'] = '';
     $this->load->view('primera');
     $this->load->view('barranav', $_SESSION['alerta']);
     $this->load->view('barraizq', $dato);

@@ -23,6 +23,8 @@ class PaginaInicial extends CI_Controller
         $dato['paqueteactivo'] = '';
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
+        $dato['misPropiedadesOpen'] = '';
+        $dato['MisReservasOpen'] = '';
         $this->load->view('primera');
         $this->load->view('sinbarranav', $datosAlerta);
         $this->load->view('barraizq', $dato);
