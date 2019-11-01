@@ -39,7 +39,7 @@
 
                         <div class="bg-gray py-2 px-3 mt-4">
                             <h2 class="mb-0">
-                                <?php echo "Pesos arg: $" . $precio ?>
+                                <?php echo "Pesos arg: $" . $precio . "/ noche, minimo: " . $minNoches ?>
                             </h2>
                         </div>
 

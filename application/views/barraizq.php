@@ -21,7 +21,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="paginaInicial" class="nav-link <?php echo $inicioactivo ?>">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="far fas fa-home nav-icon"></i>
             <p>Inicio</p>
           </a>
         </li>
@@ -29,7 +29,7 @@
                with font-awesome or any other icon font library -->
         <li class="nav-item has-treeview <?php echo $misPropiedadesOpen ?>">
           <a href="<?php echo base_url() . "assets/"; ?>#" class="nav-link <?php echo $misalquileresactivo ?>">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa-building"></i>
             <p>
               Mis Propiedades
               <i class="right fas fa-angle-left"></i>
@@ -56,9 +56,9 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item has-treeview <?php $misReservasOpen ?>">
+        <li class="nav-item has-treeview <?php $MisReservasOpen ?>">
           <a href="<?php echo base_url() . "assets/"; ?>#" class="nav-link <?php echo $misreservaactivo ?>">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas ion-ios-book"></i>
             <p>
               Mis Reservas
               <i class="right fas fa-angle-left"></i>
