@@ -33,7 +33,7 @@ class ReservasrealizadasCI extends CI_Controller
             <table>
               <tr>
                 <td>
-                  <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($reserva->id_propiedad)[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
+                  <img src=\"" . base_url() . "assets/imagenes" . $this->propiedades_model->ObtenerImagenesPropiedades($reserva->id_propiedad)[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>

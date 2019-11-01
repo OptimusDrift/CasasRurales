@@ -30,7 +30,7 @@ class Reservaspendientes extends CI_Controller
             <table>
               <tr>
                 <td>
-                <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($reservas->row($i)->id_propiedad)[0] . "\" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
+                <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($reservas->row($i)->id_propiedad)[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>
