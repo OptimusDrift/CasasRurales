@@ -17,8 +17,10 @@ class Controladorpaquete extends CI_Controller
             redirect('paginaInicial');
         }
 
-        $paquete = $this->paquetes_model->ObtenerPaquete($_GET['paquete']);
-        $propiedad = $this->propiedades_model->ObtenerPropiedad($paquete->id_dormitorio);
+        $paquetes = $this->paquetes_model->ObtenerPaquete($_GET['paquete']);
+        $paquete = $paquetes->result_array();
+        $this->db->close();
+        $propiedad = $this->propiedades_model->ObtenerPropiedad($paquete[0]['id_dormitorio']);
         $imagenes = $this->propiedades_model->ObtenerImagenesPropiedades($propiedad->id_propiedad);
         $dato['imagen'] = "<img src=\"" . base_url() . "assets/imagenes" . $imagenes[0] . ".jpg\" class=\"product-image\" alt=\"Product Image\"></div><div class=\"col-12 product-image-thumbs\">";
 
@@ -29,7 +31,7 @@ class Controladorpaquete extends CI_Controller
         $infoPropiedad = $this->propiedades_model->ObtenerInfoPropiedad($propiedad->id_propiedad);
         $dato['nombre'] = $infoPropiedad->nombre_propiedad;
         $dato['descripcion'] = $infoPropiedad->descripcion;
-        $dato['precio'] = $paquete->precio;
+        $dato['precio'] = $paquete[0]['precio'];
         $dato['inicioactivo'] = '';
         $dato['misalquileresactivo'] = '';
         $dato['reservapendienteactivo'] = '';

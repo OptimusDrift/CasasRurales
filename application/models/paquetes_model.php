@@ -151,6 +151,6 @@ class Paquetes_model extends CI_Model
     public function ObtenerPaquete($paquete)
     {
         $result = $this->db->query("CALL `ObtenerPaquete` (" . $paquete . ")");
-        return $result->row(0);
+        return $result;
     }
 }
