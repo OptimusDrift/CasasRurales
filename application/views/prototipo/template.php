@@ -6,12 +6,12 @@
   <br>
   <br>
   <br>
-  <div class="card card-outline card-dark ml-5 col-5">
+  <div class="card card-outline card-dark ml-5 col-7">
     <br>
+    <h3 class="ml-5">Reserva alojamientos y experiencias únicas.</h3>
     <!-- Left navbar links  form-inline ml-2-->
     <ul class="text-center">
-      <form class="form-inline ml-2" action="<?php echo base_url() . 'index.php/buscarcasa'; ?>" method="post">
-        <h3>Reserva alojamientos y experiencias únicas.</h3>
+      <form class="form-inline ml-2" action="<?php echo base_url() . 'index.php/buscarcasa'; ?>" method="get">
         <li class=" d-none d-sm-inline">
           <!-- SEARCH FORM -->
           <div class="input-group input-group">
@@ -34,7 +34,15 @@
               </div>
               <input class="form-control" type="text" id="reservation" name="fechas">
             </div>
-            <!-- /Calendario -->
+          </div>
+          <!-- /Calendario -->
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <div class="form-inline ml-2">
+            <div class="input-group input-group">
+              <input class="form-control" type="number" aria-label="r" name="cantidad" placeholder="Cantidad de personas" min="1">
+            </div>
+          </div>
         </li>
         <li class=" d-none d-sm-inline">
           <div class="form-inline ml-2">

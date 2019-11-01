@@ -2,7 +2,7 @@
 <nav class="main-header navbar navbar-expand navbar-dark">
   <!-- Left navbar links -->
   <ul class="navbar-nav text-center">
-    <form class="form-inline ml-1" action="<?php echo base_url() . 'index.php/buscarcasa'; ?>" method="post">
+    <form class="form-inline ml-1" action="<?php echo base_url() . 'index.php/buscarcasa'; ?>" method="get">
       <li class="nav-item d-none d-sm-inline-block">
         <!-- SEARCH FORM -->
         <div class="input-group input-group-sm">
@@ -25,7 +25,15 @@
             </div>
             <input class="form-control" type="text" id="reservation" aria-label="r" name="fechas">
           </div>
-          <!-- /Calendario -->
+        </div>
+        <!-- /Calendario -->
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <div class="form-inline ml-2">
+          <div class="input-group input-group-sm">
+            <input class="form-control" type="number" aria-label="r" name="cantidad" placeholder="Cantidad de personas" min="1">
+          </div>
+        </div>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <div class="form-inline ml-2">
@@ -47,8 +55,9 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <span class="dropdown-header"><?php echo $numAlertas; ?> Notificaciones</span>
         <a href="#" class="dropdown-item">
-          <i class="fas fa-file mr-2"></i> <?php echo $numAlertas ." Nuevas " .$tipoAlerta; ?>
-          <span class="float-right text-muted text-sm"><?php //dias? ?></span>
+          <i class="fas fa-file mr-2"></i> <?php echo $numAlertas . " Nuevas " . $tipoAlerta; ?>
+          <span class="float-right text-muted text-sm"><?php //dias? 
+                                                        ?></span>
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item dropdown-footer">Ver Todas Las Notificaciones</a>
