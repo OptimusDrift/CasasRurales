@@ -6,6 +6,8 @@ class Buscarcasa extends CI_Controller
   function __construct()
   {
     parent::__construct();
+    $this->load->model('paquetes_model');
+    $this->load->model('Propiedades_model');
   }
 
   function index()
@@ -17,12 +19,11 @@ class Buscarcasa extends CI_Controller
     $dato['paqueteactivo'] = '';
     $dato['misreservaactivo'] = '';
     $dato['reservaactivo'] = '';
-    $this->load->view('prototipo/primera');
-    $this->load->view('prototipo/manejoDeSesion');
-    $this->load->view('prototipo/barranav', $_SESSION['alerta']);
-    $this->load->view('prototipo/barraizq', $dato);
+    $this->load->view('primera');
+    $this->load->view('manejoDeSesion');
+    $this->load->view('barranav', $_SESSION['alerta']);
+    $this->load->view('barraizq', $dato);
     //! Carga todas las propiedades de una ubicacion.
-    $this->load->model('paquetes_model');
     $Casas = $this->paquetes_model->BuscarPaquetes($_GET['poblacion'], $_GET['fechas'], $_GET['cantidad']);
     $casaStr["casaStr"] = "";
     $i = 0;
@@ -39,7 +40,7 @@ class Buscarcasa extends CI_Controller
             <table>
               <tr>
                 <td>
-                  <img src=\"" . base_url() . "assets/imagenes" . $this->paquetes_model->ObtenerImagenPortada($casa['id_propiedad']) . ".jpg\" alt=\"casa1\" class=\"\" width=\"200\" height=\"150\">
+                  <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($casa['id_propiedad'])[0] . ".jpg\" alt=\"casa1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>
@@ -68,7 +69,7 @@ class Buscarcasa extends CI_Controller
         $i++;
       }
     }
-    $this->load->view('prototipo/buscarcasa', $casaStr);
-    $this->load->view('prototipo/footeryscrips');
+    $this->load->view('buscarcasa', $casaStr);
+    $this->load->view('footeryscrips');
   }
 }

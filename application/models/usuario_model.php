@@ -19,21 +19,13 @@ class Usuario_model extends CI_Model
     public function Login($correo, $contrasenna)
     {
         $result = $this->db->query("select * From usuario where correo = \"" . $correo . "\" and contrasenna = \"" . $contrasenna . "\" LIMIT 1");
-        if ($result->num_rows() > 0) {
-            return $result->row();
-        } else {
-            return null;
-        }
+        return $this->VerificarRows($result);
     }
 
     public function GetPropiedadesUsuario($idUsuario)
     {
         $result = $this->db->query("select * From propiedad where id_propietario =" . $idUsuario);
-        if ($result->num_rows() > 0) {
-            return $result;
-        } else {
-            return null;
-        }
+        return $this->VerificarRows($result);
     }
 
     public function BuscarPaquetes($ubicacion, $fechas)
@@ -113,14 +105,14 @@ class Usuario_model extends CI_Model
         return $result;
     }
 
-    function clearStoredResults(){
+    function clearStoredResults()
+    {
         global $mysqli;
-    
+
         do {
-             if ($res = $mysqli->store_result()) {
-               $res->free();
-             }
-            } while ($mysqli->more_results() && $mysqli->next_result());        
-    
+            if ($res = $mysqli->store_result()) {
+                $res->free();
+            }
+        } while ($mysqli->more_results() && $mysqli->next_result());
     }
 }

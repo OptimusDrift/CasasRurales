@@ -6,17 +6,17 @@ class Controladorpaquete extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model("usuario_model");
+        $this->load->model("paquetes_model");
         $this->load->model("propiedades_model");
     }
 
     function index()
     {
         if (!isset($_GET['paquete'])) {
-            redirect('prototipo');
+            redirect('paginaInicial');
         }
 
-        $paquete = $this->propiedades_model->ObtenerPaquete($_GET['paquete']);
+        $paquete = $this->paquetes_model->ObtenerPaquete($_GET['paquete']);
         $propiedad = $this->propiedades_model->ObtenerPropiedad($paquete->id_dormitorio);
         $imagenes = $this->propiedades_model->ObtenerImagenesPropiedades($propiedad->id_propiedad);
         $dato['imagen'] = "<img src=\"" . base_url() . "assets/imagenes" . $imagenes[0] . ".jpg\" class=\"product-image\" alt=\"Product Image\"></div><div class=\"col-12 product-image-thumbs\">";
@@ -36,11 +36,11 @@ class Controladorpaquete extends CI_Controller
         $dato['paqueteactivo'] = '';
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
-        $this->load->view('prototipo/primera');
-        $this->load->view('prototipo/manejoDeSesion');
-        $this->load->view('prototipo/barranav');
-        $this->load->view('prototipo/barraizq', $dato);
-        $this->load->view('prototipo/verpaquete', $dato);
-        $this->load->view('prototipo/footeryscrips');
+        $this->load->view('primera');
+        $this->load->view('manejoDeSesion');
+        $this->load->view('barranav');
+        $this->load->view('barraizq', $dato);
+        $this->load->view('verpaquete', $dato);
+        $this->load->view('footeryscrips');
     }
 }

@@ -22,7 +22,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="<?php echo base_url() . 'index.php/prototipo'; ?>"><b>Wooden</b>House</a>
+        <a href="<?php echo base_url() . 'index.php/paginaInicial'; ?>"><b>Wooden</b>House</a>
       </div>
       <!-- /.login-logo -->
       <div class="card">

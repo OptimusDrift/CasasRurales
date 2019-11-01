@@ -121,7 +121,7 @@ class Paquetes_model extends CI_Model
         $j = 0;
         $guardar = true;
         $ant = null;
-        $result = $this->db->query("select * from paquete_dormitorio INNER JOIN dormitorio ON paquete_dormitorio.id_dormitorio = dormitorio.id_dormitorio INNER JOIN propiedad ON dormitorio.id_propiedad = propiedad.id_propiedad INNER JOIN poblacion ON propiedad.id_poblacion = poblacion.id_poblacion INNER JOIN rango_dias ON rango_dias.id_paquete = paquete_dormitorio.id_paquete INNER JOIN paquete ON paquete_dormitorio.id_paquete = paquete.id_paquete where paquete.id_estado = 5");
+        $result = $this->db->query("CALL `ObtenerTodosLosPaquetes` ()");
         while ($result->num_rows() > $i) {
             if ($ant != null) {
                 if ($ant == $result->row($i)->id_paquete) {
@@ -142,17 +142,15 @@ class Paquetes_model extends CI_Model
         return $casas;
     }
 
-    //? Busca la imagen de portada de la propiedad
-    public function ObtenerImagenPortada($idPropiedad)
-    {
-        $result = $this->db->query("SELECT link FROM imagen_propiedad WHERE id_propiedad = " . $idPropiedad);
-        return $result->row(0)->link;
-    }
-
-
     public function ObtenerReservasRealizadas($idusr)
     {
         $result = $this->db->query("CALL `VistaReservasRealizadas` (" . $idusr . ")");
         return $result;
+    }
+
+    public function ObtenerPaquete($paquete)
+    {
+        $result = $this->db->query("CALL `ObtenerPaquete` (" . $paquete . ")");
+        return $result->row(0);
     }
 }

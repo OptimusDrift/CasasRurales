@@ -24,7 +24,7 @@ class Welcome extends CI_Controller
 		session_start();
 		//session_destroy();
 		if (isset($_SESSION['correo'])) {
-			redirect('prototipo');
+			redirect('paginaInicial');
 		} else if (isset($_POST['contrasenna']) && isset($_POST['correo'])) {
 			$this->load->model('usuario_model');
 			$usuario = $this->usuario_model->login($_POST['correo'], md5($_POST['contrasenna']));
@@ -33,12 +33,12 @@ class Welcome extends CI_Controller
 				$_SESSION['apellido'] = $usuario->apellido;
 				$_SESSION['id'] = $usuario->id_usuario;
 				$_SESSION['correo'] = $_POST['correo'];
-				redirect('prototipo');
+				redirect('paginaInicial');
 			} else {
 				redirect('login#FAIL');
 			}
 		}
-		$this->load->view('prototipo/primera');
-		$this->load->view('prototipo/login');
+		$this->load->view('primera');
+		$this->load->view('login');
 	}
 }

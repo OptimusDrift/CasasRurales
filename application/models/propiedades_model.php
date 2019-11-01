@@ -7,7 +7,7 @@ class Propiedades_model extends CI_Model
         parent::__construct();
     }
 
-    function obtenerPropiedades($idUsuario)
+    function ObtenerPropiedades($idUsuario)
     {
         $result = $this->db->query("select * from propiedad where id_propietario = " . $idUsuario);
         if ($result->num_rows() > 0) {
@@ -17,7 +17,7 @@ class Propiedades_model extends CI_Model
         }
     }
 
-    function obtenerImagenesPropiedades($idPropiedad)
+    function ObtenerImagenesPropiedades($idPropiedad)
     {
         $this->db->reconnect();
         $result = $this->db->query("SELECT link FROM imagen_propiedad WHERE id_propiedad = " . $idPropiedad);
@@ -30,11 +30,6 @@ class Propiedades_model extends CI_Model
         return $adress;
     }
 
-    public function ObtenerPaquete($paquete)
-    {
-        $result = $this->db->query("SELECT * FROM paquete inner join paquete_dormitorio on paquete.id_paquete = paquete_dormitorio.id_paquete WHERE paquete.id_paquete = " . $paquete);
-        return $result->row(0);
-    }
     public function ObtenerPropiedad($dormitorio)
     {
         $result = $this->db->query("SELECT * FROM dormitorio WHERE id_dormitorio =  " . $dormitorio);
@@ -43,7 +38,7 @@ class Propiedades_model extends CI_Model
     public function ObtenerInfoPropiedad($propiedad)
     {
         $this->db->reconnect();
-        $result = $this->db->query("CALL `VistaPropiedad` (" .$propiedad .")");
+        $result = $this->db->query("CALL `VistaPropiedad` (" . $propiedad . ")");
         return $result->row(0);
     }
 }
