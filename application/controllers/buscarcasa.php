@@ -12,17 +12,7 @@ class Buscarcasa extends CI_Controller
 
   function index()
   {
-    $dato['inicioactivo'] = '';
-    $dato['misalquileresactivo'] = '';
-    $dato['reservapendienteactivo'] = '';
-    $dato['propiedadactivo'] = '';
-    $dato['paqueteactivo'] = '';
-    $dato['misreservaactivo'] = '';
-    $dato['reservaactivo'] = '';
-    $this->load->view('primera');
     $this->load->view('manejoDeSesion');
-    $this->load->view('barranav', $_SESSION['alerta']);
-    $this->load->view('barraizq', $dato);
     //! Carga todas las propiedades de una ubicacion.
     $Casas = $this->paquetes_model->BuscarPaquetes($_GET['poblacion'], $_GET['fechas'], $_GET['cantidad']);
     $casaStr["casaStr"] = "";
@@ -69,6 +59,18 @@ class Buscarcasa extends CI_Controller
         $i++;
       }
     }
+    //?Datos de la barra de navegacion
+    $dato['inicioactivo'] = '';
+    $dato['misalquileresactivo'] = '';
+    $dato['reservapendienteactivo'] = '';
+    $dato['propiedadactivo'] = '';
+    $dato['paqueteactivo'] = '';
+    $dato['misreservaactivo'] = '';
+    $dato['reservaactivo'] = '';
+    //?Cargar las vistas
+    $this->load->view('primera');
+    $this->load->view('barranav', $_SESSION['alerta']);
+    $this->load->view('barraizq', $dato);
     $this->load->view('buscarcasa', $casaStr);
     $this->load->view('footeryscrips');
   }

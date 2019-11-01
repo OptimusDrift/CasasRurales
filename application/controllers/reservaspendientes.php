@@ -11,19 +11,7 @@ class Reservaspendientes extends CI_Controller
   }
   function index()
   {
-    $dato['inicioactivo'] = '';
-    $dato['misalquileresactivo'] = 'active';
-    $dato['reservapendienteactivo'] = 'active';
-    $dato['propiedadactivo'] = '';
-    $dato['paqueteactivo'] = '';
-    $dato['misreservaactivo'] = '';
-    $dato['reservaactivo'] = '';
-    $this->load->view('primera');
     $this->load->view('manejoDeSesion');
-    $this->load->view('barranav',  $_SESSION['alerta']);
-    $this->load->view('barraizq', $dato);
-
-
     $id = $_SESSION['id'];
     $reservas = $this->reservas_model->ObtenerReservasPendientes($id);
 
@@ -59,9 +47,17 @@ class Reservaspendientes extends CI_Controller
         $i++;
       }
     }
-
+    $dato['inicioactivo'] = '';
+    $dato['misalquileresactivo'] = 'active';
+    $dato['reservapendienteactivo'] = 'active';
+    $dato['propiedadactivo'] = '';
+    $dato['paqueteactivo'] = '';
+    $dato['misreservaactivo'] = '';
+    $dato['reservaactivo'] = '';
+    $this->load->view('primera');
+    $this->load->view('barranav',  $_SESSION['alerta']);
+    $this->load->view('barraizq', $dato);
     $this->load->view('reservaspendientes', $reservastr);
-
     $this->load->view('footeryscrips');
   }
 }

@@ -12,6 +12,7 @@ class Controladorpaquete extends CI_Controller
 
     function index()
     {
+        $this->load->view('manejoDeSesion');
         if (!isset($_GET['paquete'])) {
             redirect('paginaInicial');
         }
@@ -37,7 +38,6 @@ class Controladorpaquete extends CI_Controller
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
         $this->load->view('primera');
-        $this->load->view('manejoDeSesion');
         $this->load->view('barranav');
         $this->load->view('barraizq', $dato);
         $this->load->view('verpaquete', $dato);

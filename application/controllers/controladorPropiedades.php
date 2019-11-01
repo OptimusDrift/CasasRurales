@@ -12,17 +12,7 @@ class ControladorPropiedades extends CI_Controller
 
   function index()
   {
-    $dato['inicioactivo'] = '';
-    $dato['misalquileresactivo'] = 'active';
-    $dato['reservapendienteactivo'] = '';
-    $dato['propiedadactivo'] = 'active';
-    $dato['paqueteactivo'] = '';
-    $dato['misreservaactivo'] = '';
-    $dato['reservaactivo'] = '';
     $this->load->view('manejoDeSesion');
-    $this->load->view('primera');
-    $this->load->view('barranav', $_SESSION['alerta']);
-    $this->load->view('barraizq', $dato);
     $propiedades = $this->propiedades_model->ObtenerPropiedades($_SESSION['id']);
     $propStr["propStr"] = "";
     $i = 0;
@@ -57,7 +47,16 @@ class ControladorPropiedades extends CI_Controller
       }
     }
 
-
+    $dato['inicioactivo'] = '';
+    $dato['misalquileresactivo'] = 'active';
+    $dato['reservapendienteactivo'] = '';
+    $dato['propiedadactivo'] = 'active';
+    $dato['paqueteactivo'] = '';
+    $dato['misreservaactivo'] = '';
+    $dato['reservaactivo'] = '';
+    $this->load->view('primera');
+    $this->load->view('barranav', $_SESSION['alerta']);
+    $this->load->view('barraizq', $dato);
     $this->load->view('propiedadespropietario', $propStr);
     $this->load->view('footeryscrips');
   }

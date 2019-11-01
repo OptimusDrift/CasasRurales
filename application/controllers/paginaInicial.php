@@ -6,11 +6,16 @@ class PaginaInicial extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('notificacion_alerta');
+        $this->load->model('reservas_model');
     }
     function index()
     {
-        $this->load->model('notificacion_alerta');
-        $this->load->model('reservas_model');
+        $this->load->view('manejoDeSesion');
+        //manejo de la alerta de las reservas pendientes a pagar
+        $datosAlerta = $this->notificacion_alerta->Alerta();
+        $_SESSION['alerta'] = $datosAlerta;
+        //////////////////////////
         $dato['inicioactivo'] = 'active';
         $dato['misalquileresactivo'] = '';
         $dato['reservapendienteactivo'] = '';
@@ -19,12 +24,6 @@ class PaginaInicial extends CI_Controller
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
         $this->load->view('primera');
-        $this->load->view('manejoDeSesion');
-
-        //manejo de la alerta de las reservas pendientes a pagar
-        $datosAlerta = $this->notificacion_alerta->Alerta();
-        $_SESSION['alerta'] = $datosAlerta;
-        //////////////////////////
         $this->load->view('sinbarranav', $datosAlerta);
         $this->load->view('barraizq', $dato);
         $this->load->view('template');

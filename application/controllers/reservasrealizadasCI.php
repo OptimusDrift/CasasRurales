@@ -11,19 +11,7 @@ class ReservasrealizadasCI extends CI_Controller
   }
   function index()
   {
-    $dato['inicioactivo'] = '';
-    $dato['misalquileresactivo'] = '';
-    $dato['reservapendienteactivo'] = '';
-    $dato['propiedadactivo'] = '';
-    $dato['paqueteactivo'] = '';
-    $dato['misreservaactivo'] = 'active';
-    $dato['reservaactivo'] = 'active';
-    $this->load->view('primera');
     $this->load->view('manejoDeSesion');
-    $this->load->view('barranav',  $_SESSION['alerta']);
-    $this->load->view('barraizq', $dato);
-
-
     $id = $_SESSION['id'];
     $reservas = $this->reservas_model->ObtenerReservasRealizadas($id);
     $reservastr["reservastr"] = "";
@@ -63,8 +51,17 @@ class ReservasrealizadasCI extends CI_Controller
       }
     }
 
+    $dato['inicioactivo'] = '';
+    $dato['misalquileresactivo'] = '';
+    $dato['reservapendienteactivo'] = '';
+    $dato['propiedadactivo'] = '';
+    $dato['paqueteactivo'] = '';
+    $dato['misreservaactivo'] = 'active';
+    $dato['reservaactivo'] = 'active';
+    $this->load->view('primera');
+    $this->load->view('barranav',  $_SESSION['alerta']);
+    $this->load->view('barraizq', $dato);
     $this->load->view('reservasrealizadas', $reservastr);
-
     $this->load->view('footeryscrips');
   }
 }
