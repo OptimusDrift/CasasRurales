@@ -25,12 +25,12 @@ class Reservaspendientes extends CI_Controller
       $i = 0;
       while (count($reservas) > $i) {
         $reserva = $reservas[$i];
-       
+
         $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
-        $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
+        $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
-              <h5 class=\"m-0\">" . $propiedad->nombre_propiedad . "</h5>
+              <h5>" . $propiedad->nombre_propiedad . "</h5>
             </div>
             <div class=\"card-body\">
             <table>
@@ -48,9 +48,10 @@ class Reservaspendientes extends CI_Controller
               </tr>
               <tr>
                 <td>
-                <input type='text' value='" .$reserva['id_reserva'] ."' name='idReserva' hidden=''> 
                 <input type='submit' class='btn btn-block btn-danger' value='Cancelar Reserva' name='cancelarReserva' >
-
+                </td>
+                <td>
+                <input type='text' value='" . $reserva['id_reserva'] . "' name='idReserva' hidden=''> 
                 </td>
               </tr>
             </table>

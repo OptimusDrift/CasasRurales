@@ -17,10 +17,14 @@
         <div class="row">
           <!-- /.col-md-6 -->
           <div class="col-lg-12">
-          <script type="text/javascript"> function CancelarReserva(){ return window.confirm('Seguro desea cancelar la reserva?');} </script>
-          <form class='form-inline ml-1' action="<?php echo base_url();?>index.php/cancelarReserva"  method='post' onsubmit="return CancelarReserva()">
-            <?php echo $reservastr; ?>
-          </form>
+            <script type="text/javascript">
+              function CancelarReserva() {
+                return window.confirm('Seguro desea cancelar la reserva?');
+              }
+            </script>
+            <form class='col-lg-12' action="<?php echo base_url(); ?>index.php/cancelarReserva" method='post' onsubmit="return CancelarReserva()">
+              <?php echo $reservastr; ?>
+            </form>
           </div>
           <!-- /.col-md-6 -->
         </div>
