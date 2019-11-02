@@ -26,6 +26,19 @@ class ReservasrealizadasCI extends CI_Controller
         //arregla error de base de datos 'out of sync'
         $this->db->reconnect();
         $reserva = $reservas[$i];
+        if (!$this->reservas_model->ReservaCancelada($reserva['id_reserva'])) {
+          if ($this->reservas_model->ReservaPagada($reserva['id_reserva'])) {
+            $form = "<form action=\" " . base_url() . "index.php/validarImagenes\" enctype=\"multipart/form-data\" method=\"post\">
+                  <input type='text' value='" . $reserva['id_reserva'] . "' name='idReserva' hidden=''>
+                  <input class='btn-block' id=\"imagen\" name=\"imagen\" size=\"30\" type=\"file\">
+                  <input class='btn btn-block btn-success' type=\"submit\" value=\"Subir comprobante\">
+                </form>";
+          } else {
+            $form = "Pagada!";
+          }
+        } else {
+          $form = "La reserva fue cancelada!";
+        }
 
         $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
@@ -46,6 +59,16 @@ class ReservasrealizadasCI extends CI_Controller
                 <td>
                   <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad) . "</p>
                 </td>
+              </tr>
+              <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>" . $form .
+          "</td>
               </tr>
             </table>
             </div>
