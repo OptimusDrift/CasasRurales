@@ -12,7 +12,9 @@ class ValidarImagenes extends CI_Controller
     {
         $this->load->view('manejoDeSesion');
 
+        //?Nombre de la imagen
         //$_FILES['imagen']['name'];
+        //?Desde donde se sube
         //$_FILES['imagen']['tmp_name'];
         if ($_FILES['imagen']['name'] == "") {
             redirect('ReservasrealizadasCI');
