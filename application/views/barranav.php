@@ -19,8 +19,8 @@
         <div class="form-inline ml-2">
           <div class="input-group input-group-sm">
             <div class="input-group-prepend">
-              <span class="btn btn-navbar">
-                <i class="far fa-calendar-alt"></i>
+              <span class="btn btn-navbar badge-dark">
+                <i class="fas fa-calendar-alt"></i>
               </span>
             </div>
             <input class="form-control" type="text" id="reservation" aria-label="r" name="fechas">

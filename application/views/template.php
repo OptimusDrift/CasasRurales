@@ -23,13 +23,13 @@
             </div>
           </div>
         </li>
-        <li class=" d-none d-sm-inline">
+        <li class="nav-item d-none d-lg-inline-block">
           <!-- Calendario -->
           <div class="form-inline ml-2">
             <div class="input-group input-group">
               <div class="input-group-prepend">
                 <span class="btn badge-dark">
-                  <i class="far fa-calendar-alt"></i>
+                  <i class="fas fa-calendar-alt"></i>
                 </span>
               </div>
               <input class="form-control" type="text" id="reservation" name="fechas">
