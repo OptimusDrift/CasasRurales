@@ -66,8 +66,12 @@ class Paquetes_model extends CI_Model
                             }
                         }
                     } else {
-                        $result[$fila] = $paquete[$i];
-                        $fila++;
+                        $this->db->close();
+                        $estado = $this->db->query("CALL `EstadoReserva` (" . $paquete[$i]['id_paquete'] . ")");
+                        if (!($estado->num_rows > 0)) {
+                            $result[$fila] = $paquete[$i];
+                            $fila++;
+                        }
                     }
                 }
                 $this->db->close();
@@ -83,6 +87,11 @@ class Paquetes_model extends CI_Model
             if ($nroPersonas[$i] >= $cantidadPersonasIngresadas) {
                 $result[$j] = $paquete[$i];
                 $j++;
+            } else {
+                for ($j = $i; $j < count($nroPersonas) - 1; $j++) {
+                    $nroPersonas[$j] = $nroPersonas[$i + 1];
+                }
+                unset($nroPersonas[count($nroPersonas) - 1]);
             }
         }
         return $result;
