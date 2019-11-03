@@ -103,6 +103,15 @@ class Paquetes_model extends CI_Model
         }
         return $result;
     }
+    private function FormatearFecha($fechaAModificar)
+    {
+
+        $dia = preg_split('[/]', $fechaAModificar)[0];
+        $mes = preg_split('[/]', $fechaAModificar)[1];
+        $anno = preg_split('[/]', $fechaAModificar)[2];
+        $fechaAModificar = $mes . "/" . $dia . "/" . $anno;
+        $fechaAModificar = str_replace(" ", "", $fechaAModificar);
+    }
     public function BuscarPaquetes($ubicacion, $fechas, $cantidadPersonasIngresadas = 1)
     {
         //? Busco todos los paquetes
@@ -119,8 +128,8 @@ class Paquetes_model extends CI_Model
         $paquete = $this->ConsisitirPersonas($paquete, $numeroPersonas, $cantidadPersonasIngresadas);
         if ($paquete == null) return null;
         //?Fechas ingresadas por el usuario
-        $fechaDeInicio = substr($fechas, 0, 10);
-        $fechaDeFin = substr($fechas, 13, 23);
+        $this->FormatearFecha($fechaDeInicio = preg_split('[-]', $fechas)[0]);
+        $this->FormatearFecha($fechaDeFin = preg_split('[-]', $fechas)[1]);
         //? Consisto las fechas
         $paquete = $this->ConsisitirFechas($paquete, $fechaDeInicio, $fechaDeFin);
         if ($paquete == null) return null;

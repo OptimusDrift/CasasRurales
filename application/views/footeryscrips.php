@@ -56,13 +56,41 @@
     $(function() {
       //Date range picker
       $('#reservation').daterangepicker({
-        opens: 'left',
+        isInvalidDate: function(date) {
+          return false;
+        },
+        opens: 'center',
         startDate: moment(),
         endDate: moment().add(24, 'hour'),
         minDate: moment(),
         autoApply: true,
+        showDropdowns: true,
         locale: {
-          format: 'DD/MM/YYYY'
+          format: 'DD/MM/YYYY',
+          "weekLabel": "S",
+          "daysOfWeek": [
+            "Do",
+            "Lu",
+            "Ma",
+            "Mi",
+            "Ju",
+            "Vi",
+            "Sa"
+          ],
+          "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+          ]
         }
       });
     })
