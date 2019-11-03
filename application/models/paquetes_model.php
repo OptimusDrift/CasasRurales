@@ -53,28 +53,35 @@ class Paquetes_model extends CI_Model
     {
         $fila = 0;
         $result = null;
+        $dateIn = new DateTime($fechaDeInicio);
+        $dateFn = new DateTime($fechaDeFin);
+        $diff = $dateIn->diff($dateFn);
+        $dateIn = strtotime($fechaDeInicio);
+        $dateFn = strtotime($fechaDeFin);
         for ($i = 0; $i < count($paquete); $i++) {
             //? Guarda todos los paquetes que esten dentro de las fechas ingresadas
-            if (strtotime(date($paquete[$i]['fecha_inicial'])) <= $fechaDeInicio) {
-                if (strtotime(date($paquete[$i]['fecha_final'])) >= $fechaDeFin) {
-                    $resultFechas = $this->db->query("CALL `FechasDeReserva` (" . $paquete[$i]['id_paquete'] . ")");
-                    if ($resultFechas->num_rows() > 0) {
-                        for ($j = 0; $j < $resultFechas->num_rows(); $j++) {
-                            if (strtotime(date($resultFechas->row($j)->fecha_final_reserva)) < $fechaDeInicio) {
+            if ($diff->days >= $paquete[$i]['minNoches']) {
+                if (strtotime(date($paquete[$i]['fecha_inicial'])) <= $dateIn) {
+                    if (strtotime(date($paquete[$i]['fecha_final'])) >= $dateFn) {
+                        $resultFechas = $this->db->query("CALL `FechasDeReserva` (" . $paquete[$i]['id_paquete'] . ")");
+                        if ($resultFechas->num_rows() > 0) {
+                            for ($j = 0; $j < $resultFechas->num_rows(); $j++) {
+                                if (strtotime(date($resultFechas->row($j)->fecha_final_reserva)) < $dateIn) {
+                                    $result[$fila] = $paquete[$i];
+                                    $fila++;
+                                }
+                            }
+                        } else {
+                            $this->db->close();
+                            $estado = $this->db->query("CALL `EstadoReserva` (" . $paquete[$i]['id_paquete'] . ")");
+                            if (!($estado->num_rows > 0)) {
                                 $result[$fila] = $paquete[$i];
                                 $fila++;
                             }
                         }
-                    } else {
-                        $this->db->close();
-                        $estado = $this->db->query("CALL `EstadoReserva` (" . $paquete[$i]['id_paquete'] . ")");
-                        if (!($estado->num_rows > 0)) {
-                            $result[$fila] = $paquete[$i];
-                            $fila++;
-                        }
                     }
+                    $this->db->close();
                 }
-                $this->db->close();
             }
         }
         return $result;
@@ -112,8 +119,8 @@ class Paquetes_model extends CI_Model
         $paquete = $this->ConsisitirPersonas($paquete, $numeroPersonas, $cantidadPersonasIngresadas);
         if ($paquete == null) return null;
         //?Fechas ingresadas por el usuario
-        $fechaDeInicio = strtotime(substr($fechas, 0, 10));
-        $fechaDeFin = strtotime(substr($fechas, 13, 23));
+        $fechaDeInicio = substr($fechas, 0, 10);
+        $fechaDeFin = substr($fechas, 13, 23);
         //? Consisto las fechas
         $paquete = $this->ConsisitirFechas($paquete, $fechaDeInicio, $fechaDeFin);
         if ($paquete == null) return null;
