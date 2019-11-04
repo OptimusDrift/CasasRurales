@@ -10,7 +10,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-sm-6">
-                        <div class="col-12">
+                        <div id="imgPrincipal" class="col-12">
                             <?php echo $imagen ?>
                         </div>
                     </div>

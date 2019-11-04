@@ -25,7 +25,7 @@ class Controladorpaquete extends CI_Controller
         $dato['imagen'] = "<img src=\"" . base_url() . "assets/imagenes" . $imagenes[0] . ".jpg\" class=\"product-image\" alt=\"Product Image\"></div><div class=\"col-12 product-image-thumbs\">";
 
         for ($i = 0; $i < count($imagenes); $i++) {
-            $dato['imagen'] .= "<div class=\"product-image-thumb active\"><img src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
+            $dato['imagen'] .= "<div class=\"product-image-thumb active\"><img onclick=\"cambiar(this)\" id=\"img" . $i . "\" name=\"" . $propiedad->id_propiedad . "\" src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
         }
 
         $infoPropiedad = $this->propiedades_model->ObtenerInfoPropiedad($propiedad->id_propiedad);
