@@ -26,8 +26,10 @@ class ReservasrealizadasCI extends CI_Controller
         //arregla error de base de datos 'out of sync'
         $this->db->reconnect();
         $reserva = $reservas[$i];
-        if (!$this->reservas_model->ReservaCancelada($reserva['id_reserva'])) {
-          if ($this->reservas_model->ReservaPagada($reserva['id_reserva'])) {
+        if (!$this->reservas_model->ReservaCancelada($reserva['id_reserva'])) 
+        {
+          if ($this->reservas_model->ReservaPagada($reserva['id_reserva'])) 
+          {
             $form = "<form action=\" " . base_url() . "index.php/validarImagenes\" enctype=\"multipart/form-data\" method=\"post\">
                   <input type='text' value='" . $reserva['id_reserva'] . "' name='idReserva' hidden=''>
                   <input class='btn-block' id=\"imagen\" name=\"imagen\" size=\"30\" type=\"file\">
@@ -41,7 +43,7 @@ class ReservasrealizadasCI extends CI_Controller
         }
 
         $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
-        $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
+        $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
               <h5 class=\"m-0\">" . $propiedad->nombre_propiedad . "</h5>

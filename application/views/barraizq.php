@@ -49,7 +49,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() . "index.php/"; ?>paquetes" class="nav-link <?php echo $paqueteactivo ?>">
+              <a href="<?php echo base_url() . "index.php/"; ?>mispaquetes" class="nav-link <?php echo $paqueteactivo ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Mis Paquetes</p>
               </a>

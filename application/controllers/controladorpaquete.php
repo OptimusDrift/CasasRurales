@@ -43,7 +43,7 @@ class Controladorpaquete extends CI_Controller
         $dato['MisReservasOpen'] = '';
         $dato['minNoches'] = $paquete[0]['minNoches'];
         $this->load->view('primera');
-        $this->load->view('barranav');
+        $this->load->view('barranav', $_SESSION['alerta']);
         $this->load->view('barraizq', $dato);
         $this->load->view('verpaquete', $dato);
         $this->load->view('footeryscrips');

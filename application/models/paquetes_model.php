@@ -167,15 +167,44 @@ class Paquetes_model extends CI_Model
         return $casas;
     }
 
-    public function ObtenerReservasRealizadas($idusr)
-    {
-        $result = $this->db->query("CALL `VistaReservasRealizadas` (" . $idusr . ")");
-        return $result;
-    }
+
 
     public function ObtenerPaquete($paquete)
     {
         $result = $this->db->query("CALL `ObtenerPaquete` (" . $paquete . ")");
         return $result;
+    }
+
+    public function ObtenerPaquetesDePropietario($idusr)
+    {
+        $result = $this->db->query("CALL `VistaPaquetesDeUsuario` (" . $idusr . ")");
+        return $result;
+    }
+
+    public function DescripcionPaquete($res, $prop)
+    {
+
+        $result['result'] = "";
+        $dormitorio = $this->dormitorio_model->obtenerDormitorio($res['id_dormitorio']);
+        $result['result'] = "";
+        $result['result'] .= "Ubicado en " . $prop->nombre_poblacion . "<br>";
+        $result['result'] .= "Habitacion de " . $dormitorio->mtsCuadrado . "mts. Cuadrados" . "<br>";
+        $camas = $this->dormitorio_model->obtenerCamas($dormitorio->id_dormitorio);
+        $cantCamas =  $camas->num_rows();
+        if ($cantCamas < 2) {
+            $result['result'] .= "Posee una cama tipo " . $camas->row(0)->tipo_cama  . "<br>";
+        } else {
+
+            $result['result'] .= "Posee " . $cantCamas . " camas:"  . "<br>";
+            $i = 0;
+            while ($camas->num_rows() > $i) {
+                $result['result'] .= "• " . $camas->row($i)->cant_camas . " cama tipo " . $camas->row($i)->tipo_cama . "<br>";
+                $i++;
+            }
+        }
+      
+        $precio = $res['precio'];
+        $result['result'] .= "Pesos arg: $" . $precio .' por Noche' . "<br>";
+        return $result['result'];
     }
 }
