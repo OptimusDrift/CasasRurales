@@ -21,18 +21,7 @@
                         <hr>
                         <h4>Servicios</h4>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-default text-center active">
-                                <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
-                                Desayuno
-                                <br>
-                                <i class="fas fa-circle fa-2x fa-coffee"></i>
-                            </label>
-                            <label class="btn btn-default text-center">
-                                <input type="radio" name="color_option" id="color_option2" autocomplete="off">
-                                Wifi
-                                <br>
-                                <i class="fas fa-circle fa-2x fa-wifi"></i>
-                            </label>
+                            <?php echo $servicios ?>
                         </div>
 
 
