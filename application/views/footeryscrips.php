@@ -51,6 +51,9 @@
   <script src="<?php echo base_url() . "assets/"; ?>plugins/fullcalendar-timegrid/main.min.js"></script>
   <script src="<?php echo base_url() . "assets/"; ?>plugins/fullcalendar-interaction/main.min.js"></script>
   <script src="<?php echo base_url() . "assets/"; ?>plugins/fullcalendar-bootstrap/main.min.js"></script>
+
+  <script src="<?php echo base_url() . "assets/"; ?>plugins/cambia-foto/cambiar-foto.js"></script>
+
   <!-- Page script -->
   <script>
     $(function() {

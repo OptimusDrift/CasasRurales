@@ -41,4 +41,9 @@ class Propiedades_model extends CI_Model
         $result = $this->db->query("CALL `VistaPropiedad` (" . $propiedad . ")");
         return $result->row(0);
     }
+    public function ObtenerServiciosPropiedad($idPropiedad)
+    {
+        $result = $this->db->query("CALL `ObtenerServiciosPropiedad` (" . $idPropiedad . ")");
+        return $result;
+    }
 }
