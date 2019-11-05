@@ -56,6 +56,8 @@ class Controladorpaquete extends CI_Controller
         $dato['diaFinalDeReserva'] = $this->paquetes_model->ObtenerDiaFinalDeReserva($_GET['paquete']);
         $this->db->close();
         $prop = $this->usuario_model->PropiedadUsuario($_GET['paquete']);
+        //! hacer que cuando intente alquilar en fechas ya alquiladas tire error onClick
+        //!!!!!! Input de seleccion de habitacion y si esta disp complenta en las fechas
         if (!($prop > 0)) {
             $dato['formulario'] = '<form action="controlarreserva" method="post">
             <div class="form-inline py-2 mt-2">
