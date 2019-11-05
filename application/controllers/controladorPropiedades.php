@@ -20,8 +20,7 @@ class ControladorPropiedades extends CI_Controller
       $propStr["propStr"] = "<h1>No tienes propiedades.</h1>";
     } else {
       while ($propiedades->num_rows() > $i) {
-        $propStr["propStr"] .= "<a href=\"" . base_url() . "index.php/" . "\"paquete\" style='text-decoration:none;color:black;'>
-            <div class=\"card card-outline card-dark\">
+        $propStr["propStr"] .= "<div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
               <h5 class=\"m-0\">" . $propiedades->row($i)->nombre_propiedad . "</h5>
             </div>
@@ -41,8 +40,7 @@ class ControladorPropiedades extends CI_Controller
               </tr>
             </table>
             </div>
-          </div>
-          </a>";
+          </div>";
         $i++;
       }
     }

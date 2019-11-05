@@ -9,8 +9,6 @@ class mispaquetes extends CI_Controller
     $this->load->model('reservas_model');
     $this->load->model('propiedades_model');
     $this->load->model('paquetes_model');
-
-
   }
   function index()
   {
@@ -19,22 +17,18 @@ class mispaquetes extends CI_Controller
     $res = $this->paquetes_model->ObtenerPaquetesDePropietario($id);
 
     $paquetes = $res->result_array();
-    
+
     $this->db->close();
     $paquetesrt["paquetesrt"] = "";
-    if (count($paquetes) == 0) 
-    {
+    if (count($paquetes) == 0) {
       $paquetesrt["paquetesrt"] = "<h1>No se encontraron resultados.</h1>";
-    } 
-    else 
-    {
+    } else {
       $i = 0;
-      while (count($paquetes) > $i) 
-      {
+      while (count($paquetes) > $i) {
         //arregla error de base de datos 'out of sync'
         //$this->db->reconnect();
         $paquete = $paquetes[$i];
- 
+
         $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($paquete['id_propiedad']);
         $paquetesrt["paquetesrt"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $paquete['id_paquete'] . "\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
@@ -70,9 +64,8 @@ class mispaquetes extends CI_Controller
           </div>
           </a>";
         $i++;
-
+      }
     }
-}
 
     $dato['inicioactivo'] = '';
     $dato['misalquileresactivo'] = 'active';
@@ -81,13 +74,12 @@ class mispaquetes extends CI_Controller
     $dato['paqueteactivo'] = 'active';
     $dato['misreservaactivo'] = '';
     $dato['reservaactivo'] = '';
-    $dato['misPropiedadesOpen'] = '';
-    $dato['MisReservasOpen'] = 'menu-open';
+    $dato['misPropiedadesOpen'] = 'menu-open';
+    $dato['MisReservasOpen'] = '';
     $this->load->view('primera');
     $this->load->view('barranav',  $_SESSION['alerta']);
     $this->load->view('barraizq', $dato);
     $this->load->view('mispaquetes', $paquetesrt);
     $this->load->view('footeryscrips');
-  
-}
+  }
 }

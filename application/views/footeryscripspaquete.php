@@ -94,6 +94,54 @@
         }
       });
     })
+    $(function() {
+      var array = <?php echo json_encode($fechasAlquiladas); ?>;
+      var maxDia = <?php echo json_encode($diaFinalDeReserva); ?>;
+      //YYYY-MM-DD
+      $('#reservar').daterangepicker({
+        isInvalidDate: function(date) {
+          for (let index = 0; index < array.length; index++) {
+            if (date.format('YYYY-M-DD') == array[index]) {
+              return true;
+            }
+          }
+        },
+        opens: 'center',
+        startDate: moment(),
+        endDate: moment().add(24, 'hour'),
+        minDate: moment(),
+        autoApply: true,
+        maxDate: maxDia,
+        showDropdowns: true,
+        locale: {
+          format: 'DD/MM/YYYY',
+          "weekLabel": "S",
+          "daysOfWeek": [
+            "Do",
+            "Lu",
+            "Ma",
+            "Mi",
+            "Ju",
+            "Vi",
+            "Sa"
+          ],
+          "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+          ]
+        }
+      });
+    })
   </script>
   </body>
 

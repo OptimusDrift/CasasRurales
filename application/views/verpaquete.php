@@ -20,32 +20,42 @@
 
                         <hr>
                         <h4>Servicios</h4>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-toggle">
                             <?php echo $servicios ?>
                         </div>
-
-
-
-                        <div class="bg-gray py-2 px-3 mt-4">
-                            <h2 class="mb-0">
+                        <div class="bg-green py-2 px-3 mt-4">
+                            <h2 class="mb-auto">
                                 <?php echo "Pesos arg: $" . $precio . "/ noche, minimo: " . $minNoches ?>
                             </h2>
                         </div>
-
-                        <div class="mt-4">
-                            <div class="btn btn-primary btn-lg btn-flat">
-                                <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                                Reservar
+                        <form action="controlarreserva" method="post">
+                            <div class="form-inline py-2 mt-2">
+                                <div class="input-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="btn btn-dark">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" type="text" id="reservar" name="fechas">
+                                </div>
+                                <div class="input-group input-group ml-2">
+                                    <div class="input-group-prepend">
+                                        <span class="btn btn-dark">
+                                            <i class="fas fa-phone"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" type="number" id="telefono" name="fechas" placeholder="Ingresa tu teléfono.">
+                                </div>
                             </div>
-                        </div>
 
+                            <div class="mt-2">
+                                <button class="btn btn-primary btn-lg" type="submit"><i class="fas fa-cart-plus fa-lg mr-2"></i> Reservar</button>
+                            </div>
                     </div>
+                    </form>
                 </div>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
-
-    </section>
-    <!-- /.content -->
+        <!-- /.card-body -->
 </div>
+<!-- /.card -->

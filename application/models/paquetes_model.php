@@ -63,7 +63,7 @@ class Paquetes_model extends CI_Model
             if ($diff->days >= $paquete[$i]['minNoches']) {
                 if (strtotime(date($paquete[$i]['fecha_inicial'])) <= $dateIn) {
                     if (strtotime(date($paquete[$i]['fecha_final'])) >= $dateFn) {
-                        $resultFechas = $this->db->query("CALL `FechasDeReserva` (" . $paquete[$i]['id_paquete'] . ")");
+                        $resultFechas = $this->FechasReserva($paquete[$i]['id_paquete']);
                         if ($resultFechas->num_rows() > 0) {
                             for ($j = 0; $j < $resultFechas->num_rows(); $j++) {
                                 if (strtotime(date($resultFechas->row($j)->fecha_final_reserva)) < $dateIn) {
@@ -202,9 +202,43 @@ class Paquetes_model extends CI_Model
                 $i++;
             }
         }
-      
+
         $precio = $res['precio'];
-        $result['result'] .= "Pesos arg: $" . $precio .' por Noche' . "<br>";
+        $result['result'] .= "Pesos arg: $" . $precio . ' por Noche' . "<br>";
         return $result['result'];
+    }
+
+    private function FechasReserva($idPaquete)
+    {
+        $resultFechas = $this->db->query("CALL `FechasDeReserva` (" . $idPaquete . ")");
+        return $resultFechas;
+    }
+
+    public function ObtenerDiasReservados($idPaquete)
+    {
+        $result = $this->FechasReserva($idPaquete);
+        $i = 0;
+        $j = 0;
+        while ($result->num_rows() > $i) {
+            $dateIn = new DateTime($result->row($i)->fecha_inicial_reserva);
+            $dateFn = new DateTime($result->row($i)->fecha_final_reserva);
+            $diff = $dateIn->diff($dateFn);
+            $diff->days;
+            $k = 0;
+            while ($diff->days >= $k) {
+                $dias[$j] = $dateIn->format('Y-m-d');
+                $dateIn->modify('+1 day');
+                $j++;
+                $k++;
+            }
+            $i++;
+        }
+        $this->db->close();
+        return $dias;
+    }
+    public function ObtenerDiaFinalDeReserva($idPaquete)
+    {
+        $fecha = new DateTime($this->db->query("CALL `FechaFinalDeReservaPaquete` (" . $idPaquete . ")")->row(0)->fecha_final);
+        return $fecha->format('d/m/Y');
     }
 }

@@ -27,21 +27,20 @@ class Controladorpaquete extends CI_Controller
         $i = 0;
         $servicios = $this->propiedades_model->ObtenerServiciosPropiedad($propiedad->id_propiedad);
         while ($servicios->num_rows() > $i) {
-            $dato['servicios'] .= '<label class="btn btn-default text-center active">
-            ' . $servicios->row($i)->nombre_servicio . '
-            <br>
-            ' . $servicios->row($i)->icon . '
+            $dato['servicios'] .= '<label class="btn btn-default ml-2 ">
+            ' . $servicios->row($i)->nombre_servicio . '<br>' . $servicios->row($i)->icon . '
         </label>';
             $i++;
         }
 
         for ($i = 0; $i < count($imagenes); $i++) {
-            $dato['imagen'] .= "<div class=\"product-image-thumb active\"><img onclick=\"cambiar(this)\" id=\"img" . $i . "\" name=\"" . $propiedad->id_propiedad . "\" src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
+            $dato['imagen'] .= "<div class=\"product-image-thumb\"><img onclick=\"cambiar(this)\" id=\"img" . $i . "\" name=\"" . $propiedad->id_propiedad . "\" src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
         }
 
         $infoPropiedad = $this->propiedades_model->ObtenerInfoPropiedad($propiedad->id_propiedad);
         $dato['nombre'] = $infoPropiedad->nombre_propiedad;
         $dato['descripcion'] = $infoPropiedad->descripcion;
+        $this->db->close();
         $dato['precio'] = $paquete[0]['precio'];
         $dato['inicioactivo'] = '';
         $dato['misalquileresactivo'] = '';
@@ -50,13 +49,15 @@ class Controladorpaquete extends CI_Controller
         $dato['paqueteactivo'] = '';
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
-        $dato['misPropiedadesOpen'] = 'menu-open';
+        $dato['misPropiedadesOpen'] = '';
         $dato['MisReservasOpen'] = '';
         $dato['minNoches'] = $paquete[0]['minNoches'];
+        $dato['fechasAlquiladas'] = $this->paquetes_model->ObtenerDiasReservados($_GET['paquete']);
+        $dato['diaFinalDeReserva'] = $this->paquetes_model->ObtenerDiaFinalDeReserva($_GET['paquete']);
         $this->load->view('primera');
         $this->load->view('barranav', $_SESSION['alerta']);
         $this->load->view('barraizq', $dato);
         $this->load->view('verpaquete', $dato);
-        $this->load->view('footeryscrips');
+        $this->load->view('footeryscripspaquete');
     }
 }

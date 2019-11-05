@@ -2,7 +2,7 @@
 <nav class="main-header navbar navbar-expand navbar-dark">
   <!-- Left navbar links -->
   <ul class="navbar-nav text-center">
-    <form class="form-inline ml-1" action="<?php echo base_url() . 'index.php/buscarcasa'; ?>" method="get">
+    <form class="form-inline ml-1" action="buscarcasa" method="get">
       <li class="nav-item d-none d-sm-inline-block">
         <!-- SEARCH FORM -->
         <div class="input-group input-group-sm">
@@ -54,9 +54,9 @@
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <span class="dropdown-header"><?php echo $numAlertas; ?> Notificaciones</span>
-       
-         <?php echo $notiAlerta ?>
-         
+
+        <?php echo $notiAlerta ?>
+
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item dropdown-footer">Ver Todas Las Notificaciones</a>
       </div>
