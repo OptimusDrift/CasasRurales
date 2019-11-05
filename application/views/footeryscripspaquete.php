@@ -94,54 +94,70 @@
         }
       });
     })
-    $(function() {
-      var array = <?php echo json_encode($fechasAlquiladas); ?>;
-      var maxDia = <?php echo json_encode($diaFinalDeReserva); ?>;
-      //YYYY-MM-DD
-      $('#reservar').daterangepicker({
-        isInvalidDate: function(date) {
-          for (let index = 0; index < array.length; index++) {
-            if (date.format('YYYY-M-DD') == array[index]) {
-              return true;
+    var maxDia = <?php echo json_encode($diaFinalDeReserva); ?>;
+    var array = "";
+
+    function ObtenerFechas(boton, pos) {
+      $.post("dormitorios", {
+        idPaquete: <?php echo json_encode($idPaquete); ?>,
+        lista: <?php echo json_encode($lista); ?>,
+        idDormitorio: boton.name,
+        val: pos
+      }, function(mensaje) {
+        var msj = mensaje.split("~");
+        var array = msj[1].split(",");
+        document.getElementById("formularioReserva").innerHTML = msj[0];
+        $(function() {
+
+          //YYYY-MM-DD
+          $('#reservar').daterangepicker({
+            isInvalidDate: function(date) {
+              for (let index = 0; index < array.length; index++) {
+                if (date.format('YYYY-MM-DD') == array[index]) {
+                  return true;
+                }
+              }
+            },
+            opens: 'center',
+            startDate: moment(),
+            endDate: moment().add(24, 'hour'),
+            minDate: moment(),
+            autoApply: true,
+            maxDate: maxDia,
+            showDropdowns: true,
+            locale: {
+              format: 'DD/MM/YYYY',
+              "weekLabel": "S",
+              "daysOfWeek": [
+                "Do",
+                "Lu",
+                "Ma",
+                "Mi",
+                "Ju",
+                "Vi",
+                "Sa"
+              ],
+              "monthNames": [
+                "Enero",
+                "Febrero",
+                "Marzo",
+                "Abril",
+                "Mayo",
+                "Junio",
+                "Julio",
+                "Agosto",
+                "Septiembre",
+                "Octubre",
+                "Noviembre",
+                "Diciembre"
+              ]
             }
-          }
-        },
-        opens: 'center',
-        startDate: moment(),
-        endDate: moment().add(24, 'hour'),
-        minDate: moment(),
-        autoApply: true,
-        maxDate: maxDia,
-        showDropdowns: true,
-        locale: {
-          format: 'DD/MM/YYYY',
-          "weekLabel": "S",
-          "daysOfWeek": [
-            "Do",
-            "Lu",
-            "Ma",
-            "Mi",
-            "Ju",
-            "Vi",
-            "Sa"
-          ],
-          "monthNames": [
-            "Enero",
-            "Febrero",
-            "Marzo",
-            "Abril",
-            "Mayo",
-            "Junio",
-            "Julio",
-            "Agosto",
-            "Septiembre",
-            "Octubre",
-            "Noviembre",
-            "Diciembre"
-          ]
-        }
+          });
+        })
       });
-    })
+    }
+
+    //function cambiarFormulario(habitacion) {}
   </script>
   </body>
 

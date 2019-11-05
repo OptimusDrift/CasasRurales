@@ -28,7 +28,9 @@
                                 <?php echo "Pesos arg: $" . $precio . "/ noche, minimo: " . $minNoches ?>
                             </h2>
                         </div>
-                        <?php echo $formulario ?>
+                        <div class="py-2">
+                            <?php echo $formulario ?>
+                        </div>
                     </div>
                 </div>
             </div>

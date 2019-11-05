@@ -9,24 +9,27 @@ class Controladorpaquete extends CI_Controller
         $this->load->model("paquetes_model");
         $this->load->model("propiedades_model");
         $this->load->model("usuario_model");
+        $this->load->model("dormitorio_model");
     }
 
     function index()
     {
         $this->load->view('manejoDeSesion');
-        if (!isset($_GET['paquete'])) {
+        $dato['idPaquete'] = $_GET['paquete'];
+        if (!isset($dato['idPaquete'])) {
             redirect('paginaInicial');
         }
 
-        $paquetes = $this->paquetes_model->ObtenerPaquete($_GET['paquete']);
+        $paquetes = $this->paquetes_model->ObtenerPaquete($dato['idPaquete']);
         $paquete = $paquetes->result_array();
         $this->db->close();
         $propiedad = $this->propiedades_model->ObtenerPropiedad($paquete[0]['id_dormitorio']);
-        $imagenes = $this->propiedades_model->ObtenerImagenesPropiedades($propiedad->id_propiedad);
+        $idPorpiedad = $propiedad->id_propiedad;
+        $imagenes = $this->propiedades_model->ObtenerImagenesPropiedades($idPorpiedad);
         $dato['imagen'] = "<img src=\"" . base_url() . "assets/imagenes" . $imagenes[0] . ".jpg\" class=\"product-image\" alt=\"Product Image\"></div><div class=\"col-12 product-image-thumbs\">";
         $dato['servicios'] = "";
         $i = 0;
-        $servicios = $this->propiedades_model->ObtenerServiciosPropiedad($propiedad->id_propiedad);
+        $servicios = $this->propiedades_model->ObtenerServiciosPropiedad($idPorpiedad);
         while ($servicios->num_rows() > $i) {
             $dato['servicios'] .= '<label class="btn btn-default ml-2 ">
             ' . $servicios->row($i)->nombre_servicio . '<br>' . $servicios->row($i)->icon . '
@@ -35,9 +38,11 @@ class Controladorpaquete extends CI_Controller
         }
 
         for ($i = 0; $i < count($imagenes); $i++) {
-            $dato['imagen'] .= "<div class=\"product-image-thumb\"><img onclick=\"cambiar(this)\" id=\"img" . $i . "\" name=\"" . $propiedad->id_propiedad . "\" src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
+            $dato['imagen'] .= "<div class=\"product-image-thumb\"><img onclick=\"cambiar(this)\" id=\"img" . $i . "\" name=\"" . $idPorpiedad . "\" src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
         }
-        $infoPropiedad = $this->propiedades_model->ObtenerInfoPropiedad($propiedad->id_propiedad);
+
+
+        $infoPropiedad = $this->propiedades_model->ObtenerInfoPropiedad($idPorpiedad);
         $dato['nombre'] = $infoPropiedad->nombre_propiedad;
         $dato['descripcion'] = $infoPropiedad->descripcion;
         $this->db->close();
@@ -52,43 +57,31 @@ class Controladorpaquete extends CI_Controller
         $dato['misPropiedadesOpen'] = '';
         $dato['MisReservasOpen'] = '';
         $dato['minNoches'] = $paquete[0]['minNoches'];
-        $dato['fechasAlquiladas'] = $this->paquetes_model->ObtenerDiasReservados($_GET['paquete']);
-        $dato['diaFinalDeReserva'] = $this->paquetes_model->ObtenerDiaFinalDeReserva($_GET['paquete']);
+        //$dato['fechasAlquiladas'] = $this->paquetes_model->ObtenerDiasReservados($dato['idPaquete']);
+        $dato['diaFinalDeReserva'] = $this->paquetes_model->ObtenerDiaFinalDeReserva($dato['idPaquete']);
         $this->db->close();
-        $prop = $this->usuario_model->PropiedadUsuario($_GET['paquete']);
+        $prop = $this->usuario_model->PropiedadUsuario($dato['idPaquete']);
         //! hacer que cuando intente alquilar en fechas ya alquiladas tire error onClick
-        //!!!!!! Input de seleccion de habitacion y si esta disp complenta en las fechas
-        if (!($prop > 0)) {
-            $dato['formulario'] = '<form action="controlarreserva" method="post">
-            <div class="form-inline py-2 mt-2">
-                <div class="input-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="btn btn-dark">
-                            <i class="fas fa-calendar-alt"></i>
-                        </span>
-                    </div>
-                    <input class="form-control" type="text" id="reservar" name="fechas">
-                </div>
-                <input class="form-control" size="1" type="telephone" id="area" name="ar" placeholder="Area (011)" hidden="">
-                <div class="input-group input-group ml-2">
-                    <div class="input-group-prepend">
-                        <span class="btn btn-dark">
-                            <i class="fas fa-phone"></i>
-                        </span>
-                    </div>
-                    <input class="form-control" size="5" maxlength="4" type="telephone" id="area" name="ar" placeholder="Area (011)">
-                </div>
-                <div class="input-group input-group">
-                    <input class="form-control" type="telephone" id="telefono" name="tel" placeholder="Ingresa tu teléfono sin 15.">
-                </div>
-            </div>
-            <div class="mt-2">
-                <button class="btn btn-primary btn-lg" type="submit"><i class="fas fa-cart-plus fa-lg mr-2"></i> Reservar</button>
-            </div>
-        </form>';
-        } else {
-            $dato['formulario'] = '<br><h1>Esta es tu propiedad.</h1>';
+        //if (!($prop > 0)) {
+        $this->db->close();
+        $dato['formulario'] = "";
+        if ($this->dormitorio_model->DisponibleCompleta($idPorpiedad)) {
+            $dato['formulario'] = "<button class='btn btn-default ml-2' id='habitacion' onclick='ObtenerFechas(this)' name='0'> Propiedad Completa<br><i class='fas fa-home'></i></button>";
         }
+        $this->db->close();
+        $dormitorios = $this->dormitorio_model->ObtenerDormitorios($idPorpiedad)->result_array();
+        $this->db->close();
+        $i = 0;
+        while (count($dormitorios) > $i) {
+            $dato['lista'][$i] = $this->dormitorio_model->CantidadCamas($dormitorios[$i]['id_dormitorio']);
+            $dato['formulario'] .=  "<button class='btn btn-default ml-2' id='habitacion' onclick='ObtenerFechas(this," . $i . ")' name='" . $dormitorios[$i]['id_dormitorio'] . "'> Dormitorio " . ($i + 1) . " <br><i class='fas fa-bed'></i></button>";
+            $i++;
+        }
+        $dato['formulario'] .= "<div id='formularioReserva'>
+        </div>";
+        //} else {
+        //    $dato['formulario'] = '<br><h1>Esta es tu propiedad.</h1>';
+        //}
         $this->load->view('primera');
         $this->load->view('barranav', $_SESSION['alerta']);
         $this->load->view('barraizq', $dato);

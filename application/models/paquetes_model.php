@@ -227,16 +227,43 @@ class Paquetes_model extends CI_Model
             $diff->days;
             $k = 0;
             while ($diff->days >= $k) {
-                $dias[$j] = $dateIn->format('Y-m-d');
+                $dias .= "" . $dateIn->format('Y-m-d') . ",";
                 $dateIn->modify('+1 day');
                 $j++;
                 $k++;
             }
             $i++;
         }
+        $dias .= "";
         $this->db->close();
         return $dias;
     }
+
+    public function ObtenerDiasReservadosDormitorio($idDormitorio)
+    {
+        $result = $this->db->query("CALL `FechasDeReservaDormitorio` (" . $idDormitorio . ")");
+        $i = 0;
+        $j = 0;
+        $dias = '';
+        while ($result->num_rows() > $i) {
+            $dateIn = new DateTime($result->row($i)->fecha_inicial_reserva);
+            $dateFn = new DateTime($result->row($i)->fecha_final_reserva);
+            $diff = $dateIn->diff($dateFn);
+            $diff->days;
+            $k = 0;
+            while ($diff->days >= $k) {
+                $dias .= "" . $dateIn->format('Y-m-d') . ",";
+                $dateIn->modify('+1 day');
+                $j++;
+                $k++;
+            }
+            $i++;
+        }
+        $dias .= "";
+        $this->db->close();
+        return $dias;
+    }
+
     public function ObtenerDiaFinalDeReserva($idPaquete)
     {
         $fecha = new DateTime($this->db->query("CALL `FechaFinalDeReservaPaquete` (" . $idPaquete . ")")->row(0)->fecha_final);
