@@ -8,6 +8,7 @@ class Controladorpaquete extends CI_Controller
         parent::__construct();
         $this->load->model("paquetes_model");
         $this->load->model("propiedades_model");
+        $this->load->model("usuario_model");
     }
 
     function index()
@@ -36,7 +37,6 @@ class Controladorpaquete extends CI_Controller
         for ($i = 0; $i < count($imagenes); $i++) {
             $dato['imagen'] .= "<div class=\"product-image-thumb\"><img onclick=\"cambiar(this)\" id=\"img" . $i . "\" name=\"" . $propiedad->id_propiedad . "\" src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
         }
-
         $infoPropiedad = $this->propiedades_model->ObtenerInfoPropiedad($propiedad->id_propiedad);
         $dato['nombre'] = $infoPropiedad->nombre_propiedad;
         $dato['descripcion'] = $infoPropiedad->descripcion;
@@ -54,6 +54,39 @@ class Controladorpaquete extends CI_Controller
         $dato['minNoches'] = $paquete[0]['minNoches'];
         $dato['fechasAlquiladas'] = $this->paquetes_model->ObtenerDiasReservados($_GET['paquete']);
         $dato['diaFinalDeReserva'] = $this->paquetes_model->ObtenerDiaFinalDeReserva($_GET['paquete']);
+        $this->db->close();
+        $prop = $this->usuario_model->PropiedadUsuario($_GET['paquete']);
+        if (!($prop > 0)) {
+            $dato['formulario'] = '<form action="controlarreserva" method="post">
+            <div class="form-inline py-2 mt-2">
+                <div class="input-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="btn btn-dark">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" id="reservar" name="fechas">
+                </div>
+                <input class="form-control" size="1" type="telephone" id="area" name="ar" placeholder="Area (011)" hidden="">
+                <div class="input-group input-group ml-2">
+                    <div class="input-group-prepend">
+                        <span class="btn btn-dark">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                    </div>
+                    <input class="form-control" size="5" maxlength="4" type="telephone" id="area" name="ar" placeholder="Area (011)">
+                </div>
+                <div class="input-group input-group">
+                    <input class="form-control" type="telephone" id="telefono" name="tel" placeholder="Ingresa tu teléfono sin 15.">
+                </div>
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-primary btn-lg" type="submit"><i class="fas fa-cart-plus fa-lg mr-2"></i> Reservar</button>
+            </div>
+        </form>';
+        } else {
+            $dato['formulario'] = '<br><h1>Esta es tu propiedad.</h1>';
+        }
         $this->load->view('primera');
         $this->load->view('barranav', $_SESSION['alerta']);
         $this->load->view('barraizq', $dato);

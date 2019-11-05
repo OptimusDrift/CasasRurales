@@ -219,6 +219,7 @@ class Paquetes_model extends CI_Model
         $result = $this->FechasReserva($idPaquete);
         $i = 0;
         $j = 0;
+        $dias = '';
         while ($result->num_rows() > $i) {
             $dateIn = new DateTime($result->row($i)->fecha_inicial_reserva);
             $dateFn = new DateTime($result->row($i)->fecha_final_reserva);
