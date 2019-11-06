@@ -82,13 +82,15 @@ class Controladorpaquete extends CI_Controller
             }
             $dato['formulario'] .= "<div id='formularioReserva'>Seleccione lo que quiere alquilar.
         </div>";
+            $foot = 'footeryscripspaquete';
         } else {
             $dato['formulario'] = '<br><h1>Esta es tu propiedad.</h1>';
+            $foot = 'footeryscrips';
         }
         $this->load->view('primera');
         $this->load->view('barranav', $_SESSION['alerta']);
         $this->load->view('barraizq', $dato);
         $this->load->view('verpaquete', $dato);
-        $this->load->view('footeryscripspaquete');
+        $this->load->view($foot);
     }
 }
