@@ -35,7 +35,7 @@ class Dormitorios extends CI_Controller
                         <input class="form-control" size="5" maxlength="4" type="telephone" id="area" name="ar" placeholder="Area (011)">
                     </div>
                     <div class="input-group input-group">
-                        <input class="form-control" type="telephone" id="telefono" name="tel" placeholder="Ingresa tu teléfono sin 15.">
+                        <input class="form-control" type="telephone" id="telefono" maxlength="7" name="tel" placeholder="Ingresa tu teléfono sin 15.">
                     </div>
                     </div>
                 <div class="mt-2">
