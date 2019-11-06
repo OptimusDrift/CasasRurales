@@ -98,17 +98,50 @@
     var array = "";
 
     function ObtenerFechas(boton, pos) {
+      var sel = 1;
+      var dormitorios = [];
+      cantidadDormitorios = $("#completa").val().split(",")[1];
+      if ($("#completa").is(":checked")) {
+        for (let index = 0; index < cantidadDormitorios; index++) {
+          $("#dormitorio" + index).attr("disabled", true);
+          dormitorios[0] = 0;
+        }
+        sel = 0;
+      } else {
+        for (let index = 0; index < cantidadDormitorios; index++) {
+          $("#dormitorio" + index).attr("disabled", false);
+        }
+      }
+      var act = [];
+      var completa = false;
+      for (let index = 0; index < cantidadDormitorios; index++) {
+        if ($("#dormitorio" + index).is(":checked")) {
+          console.log("#dormitorio" + index + $("#dormitorio" + index).is(":checked"));
+          $("#completa").attr("disabled", true);
+          act[index] = index;
+          completa = true;
+          dormitorios[index] = index + 1;
+          sel = 0;
+        } else {
+          act[index] = -1;
+        }
+      }
+      if (!completa) {
+        $("#completa").attr("disabled", false);
+      }
       $.post("dormitorios", {
         idPaquete: <?php echo json_encode($idPaquete); ?>,
         lista: <?php echo json_encode($lista); ?>,
-        idDormitorio: boton.name,
-        val: pos
+        idDormitorio: dormitorios,
+        activas: act,
+        cantDormitorios: cantidadDormitorios,
+        seleccion: sel
       }, function(mensaje) {
+        console.log(mensaje);
         var msj = mensaje.split("~");
         var array = msj[1].split(",");
         document.getElementById("formularioReserva").innerHTML = msj[0];
         $(function() {
-
           //YYYY-MM-DD
           $('#reservar').daterangepicker({
             isInvalidDate: function(date) {

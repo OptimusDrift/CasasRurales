@@ -32,8 +32,9 @@ class dormitorio_model extends CI_Model
 
     public function DisponibleCompleta($idPropiedad)
     {
-        $result = $this->db->query("CALL `DisponibleCompleta` (" . $idPropiedad . ")");
-        if ($result->row(0)->disponibleCompleta == 1) {
+        $result = $this->db->query("CALL `DisponibleCompleta` (" . $idPropiedad . ")")->result_array();
+        $this->db->close();
+        if ($result[0]['disponibleCompleta'] == 1) {
             return true;
         }
         return false;

@@ -65,16 +65,15 @@ class Controladorpaquete extends CI_Controller
         //if (!($prop > 0)) {
         $this->db->close();
         $dato['formulario'] = "";
-        if ($this->dormitorio_model->DisponibleCompleta($idPorpiedad)) {
-            $dato['formulario'] = "<button class='btn btn-default ml-2' id='habitacion' onclick='ObtenerFechas(this)' name='0'> Propiedad Completa<br><i class='fas fa-home'></i></button>";
-        }
-        $this->db->close();
         $dormitorios = $this->dormitorio_model->ObtenerDormitorios($idPorpiedad)->result_array();
         $this->db->close();
+        if ($this->dormitorio_model->DisponibleCompleta($idPorpiedad)) {
+            $dato['formulario'] = "<label class='btn btn-secondary ml-2 active'><input type='checkbox' checked autocomplete='off' class='ml-2' id='completa' onclick='ObtenerFechas(this)' name='0' value='completa," . count($dormitorios) . "'> Propiedad Completa<br><i class='fas fa-home'></i></label>";
+        }
         $i = 0;
         while (count($dormitorios) > $i) {
             $dato['lista'][$i] = $this->dormitorio_model->CantidadCamas($dormitorios[$i]['id_dormitorio']);
-            $dato['formulario'] .=  "<button class='btn btn-default ml-2' id='habitacion' onclick='ObtenerFechas(this," . $i . ")' name='" . $dormitorios[$i]['id_dormitorio'] . "'> Dormitorio " . ($i + 1) . " <br><i class='fas fa-bed'></i></button>";
+            $dato['formulario'] .=  "<label class='btn btn-secondary ml-2 active'><input type='checkbox' id='dormitorio" . $i . "' onclick='ObtenerFechas(this," . $i . ")' name='" . $dormitorios[$i]['id_dormitorio'] . "' value='dormitorio," . count($dormitorios) . "' disabled='disabled'> Dormitorio " . ($i + 1) . " <br><i class='fas fa-bed'></i></label>";
             $i++;
         }
         $dato['formulario'] .= "<div id='formularioReserva'>

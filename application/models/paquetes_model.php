@@ -269,4 +269,10 @@ class Paquetes_model extends CI_Model
         $fecha = new DateTime($this->db->query("CALL `FechaFinalDeReservaPaquete` (" . $idPaquete . ")")->row(0)->fecha_final);
         return $fecha->format('d/m/Y');
     }
+    public function PrecioPaquete($idPaquete)
+    {
+        $precio = $this->db->query("CALL `PrecioPaquete` (" . $idPaquete . ")")->result_array();
+        $this->db->close();
+        return floatval($precio[0]['precio']);
+    }
 }
