@@ -74,9 +74,12 @@ class Dormitorios extends CI_Controller
                 </li>';
                     $cantidad .= $total;
                     $fechas = '';
+                    $result = $this->dormitorio_model->ObtenerDormitorios($_POST['idProp'])->result_array();
+                    $this->db->close();
                     for ($i = 0; $i < count($_POST['idDormitorio']); $i++) {
+                        //!asdasdasd
                         if ($_POST['idDormitorio'][$i] != '') {
-                            $fechas .= $this->paquetes_model->ObtenerDiasReservadosDormitorio($_POST['idDormitorio'][$i]);
+                            $fechas .= $this->paquetes_model->ObtenerDiasReservadosDormitorio($result[$i]['id_dormitorio']);
                         }
                     }
                 } else {

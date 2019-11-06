@@ -57,6 +57,7 @@ class Controladorpaquete extends CI_Controller
         $dato['misPropiedadesOpen'] = '';
         $dato['MisReservasOpen'] = '';
         $dato['minNoches'] = $paquete[0]['minNoches'];
+        $dato['idPropiedad'] = $idPorpiedad;
         //$dato['fechasAlquiladas'] = $this->paquetes_model->ObtenerDiasReservados($dato['idPaquete']);
         $dato['diaFinalDeReserva'] = $this->paquetes_model->ObtenerDiaFinalDeReserva($dato['idPaquete']);
         $this->db->close();
@@ -68,20 +69,18 @@ class Controladorpaquete extends CI_Controller
         $dormitorios = $this->dormitorio_model->ObtenerDormitorios($idPorpiedad)->result_array();
         $this->db->close();
         if ($this->dormitorio_model->DisponibleCompleta($idPorpiedad)) {
-            $disable = "disabled='disabled'";
             $dispCompleta = '';
-        }else{
-            $disable = '';
+        } else {
             $dispCompleta = 'hidden=""';
         }
-        $dato['formulario'] = "<label ".$dispCompleta."class='btn btn-secondary ml-2 active'><input type='checkbox' autocomplete='off' class='ml-2' id='completa' onclick='ObtenerFechas(this)' name='0' value='completa," . count($dormitorios) . "'> Propiedad Completa<br><i class='fas fa-home'></i></label>";
+        $dato['formulario'] = "<label " . $dispCompleta . "class='btn btn-secondary ml-2 active'><input type='checkbox' autocomplete='off' class='ml-2' id='completa' onclick='ObtenerFechas(this)' name='0' value='completa," . count($dormitorios) . "'> Propiedad Completa<br><i class='fas fa-home'></i></label>";
         $i = 0;
         while (count($dormitorios) > $i) {
             $dato['lista'][$i] = $this->dormitorio_model->CantidadCamas($dormitorios[$i]['id_dormitorio']);
-            $dato['formulario'] .=  "<label class='btn btn-secondary ml-2 active'><input type='checkbox' id='dormitorio" . $i . "' onclick='ObtenerFechas(this," . $i . ")' name='" . $dormitorios[$i]['id_dormitorio'] . "' value='dormitorio," . count($dormitorios) . "' ".$disable."> Dormitorio " . ($i + 1) . " <br><i class='fas fa-bed'></i></label>";
+            $dato['formulario'] .=  "<label class='btn btn-secondary ml-2 active'><input type='checkbox' id='dormitorio" . $i . "' onclick='ObtenerFechas(this," . $i . ")' name='" . $dormitorios[$i]['id_dormitorio'] . "' value='dormitorio," . count($dormitorios) . "' > Dormitorio " . ($i + 1) . " <br><i class='fas fa-bed'></i></label>";
             $i++;
         }
-        $dato['formulario'] .= "<div id='formularioReserva'>
+        $dato['formulario'] .= "<div id='formularioReserva'>Seleccione lo que quiere alquilar.
         </div>";
         //} else {
         //    $dato['formulario'] = '<br><h1>Esta es tu propiedad.</h1>';

@@ -131,6 +131,7 @@
       }
       $.post("dormitorios", {
         idPaquete: <?php echo json_encode($idPaquete); ?>,
+        idProp: <?php echo json_encode($idPropiedad); ?>,
         lista: <?php echo json_encode($lista); ?>,
         idDormitorio: dormitorios,
         activas: act,
