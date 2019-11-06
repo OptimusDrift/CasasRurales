@@ -63,28 +63,28 @@ class Controladorpaquete extends CI_Controller
         $this->db->close();
         $prop = $this->usuario_model->PropiedadUsuario($dato['idPaquete']);
         //! hacer que cuando intente alquilar en fechas ya alquiladas tire error onClick
-        //if (!($prop > 0)) {
-        $this->db->close();
-        $dato['formulario'] = "";
-        $dormitorios = $this->dormitorio_model->ObtenerDormitorios($idPorpiedad)->result_array();
-        $this->db->close();
-        if ($this->dormitorio_model->DisponibleCompleta($idPorpiedad)) {
-            $dispCompleta = '';
-        } else {
-            $dispCompleta = 'hidden=""';
-        }
-        $dato['formulario'] = "<label " . $dispCompleta . "class='btn btn-secondary ml-2 active'><input type='checkbox' autocomplete='off' class='ml-2' id='completa' onclick='ObtenerFechas(this)' name='0' value='completa," . count($dormitorios) . "'> Propiedad Completa<br><i class='fas fa-home'></i></label>";
-        $i = 0;
-        while (count($dormitorios) > $i) {
-            $dato['lista'][$i] = $this->dormitorio_model->CantidadCamas($dormitorios[$i]['id_dormitorio']);
-            $dato['formulario'] .=  "<label class='btn btn-secondary ml-2 active'><input type='checkbox' id='dormitorio" . $i . "' onclick='ObtenerFechas(this," . $i . ")' name='" . $dormitorios[$i]['id_dormitorio'] . "' value='dormitorio," . count($dormitorios) . "' > Dormitorio " . ($i + 1) . " <br><i class='fas fa-bed'></i></label>";
-            $i++;
-        }
-        $dato['formulario'] .= "<div id='formularioReserva'>Seleccione lo que quiere alquilar.
+        if (!($prop > 0)) {
+            $this->db->close();
+            $dato['formulario'] = "";
+            $dormitorios = $this->dormitorio_model->ObtenerDormitorios($idPorpiedad)->result_array();
+            $this->db->close();
+            if ($this->dormitorio_model->DisponibleCompleta($idPorpiedad)) {
+                $dispCompleta = '';
+            } else {
+                $dispCompleta = 'hidden=""';
+            }
+            $dato['formulario'] = "<label " . $dispCompleta . "class='btn btn-secondary ml-2 active'><input type='checkbox' autocomplete='off' class='ml-2' id='completa' onclick='ObtenerFechas(this)' name='0' value='completa," . count($dormitorios) . "'> Propiedad Completa<br><i class='fas fa-home'></i></label>";
+            $i = 0;
+            while (count($dormitorios) > $i) {
+                $dato['lista'][$i] = $this->dormitorio_model->CantidadCamas($dormitorios[$i]['id_dormitorio']);
+                $dato['formulario'] .=  "<label class='btn btn-secondary ml-2 active'><input type='checkbox' id='dormitorio" . $i . "' onclick='ObtenerFechas(this," . $i . ")' name='" . $dormitorios[$i]['id_dormitorio'] . "' value='dormitorio," . count($dormitorios) . "' > Dormitorio " . ($i + 1) . " <br><i class='fas fa-bed'></i></label>";
+                $i++;
+            }
+            $dato['formulario'] .= "<div id='formularioReserva'>Seleccione lo que quiere alquilar.
         </div>";
-        //} else {
-        //    $dato['formulario'] = '<br><h1>Esta es tu propiedad.</h1>';
-        //}
+        } else {
+            $dato['formulario'] = '<br><h1>Esta es tu propiedad.</h1>';
+        }
         $this->load->view('primera');
         $this->load->view('barranav', $_SESSION['alerta']);
         $this->load->view('barraizq', $dato);
