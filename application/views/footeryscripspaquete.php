@@ -232,7 +232,7 @@
           if (consisitido) {
             document.getElementById("enviar").submit();
           } else {
-            alert("Los datos ingresados no son validos.");
+            //alert("Los datos ingresados no son validos.");
           }
         })
     }
