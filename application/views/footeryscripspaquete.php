@@ -138,9 +138,8 @@
         cantDormitorios: cantidadDormitorios,
         seleccion: sel
       }, function(mensaje) {
-        console.log(mensaje);
         var msj = mensaje.split("~");
-        var array = msj[1].split(",");
+        array = msj[1].split(",");
         document.getElementById("formularioReserva").innerHTML = msj[0];
         $(function() {
           //YYYY-MM-DD
@@ -191,6 +190,52 @@
       });
     }
 
+    function ConsisitirForm() {
+      consisitido = true;
+      i = 0;
+      error = "";
+      $.post("validarFechas", {
+          fechasAConsisitir: $('#reservar').val(),
+          fechasParaConsisitir: array
+        },
+        function(mensaje) {
+          if (mensaje == 'alert') {
+            $('#reservar').css({
+              "border": "1px solid red"
+            });
+            consisitido = false;
+          } else {
+            $('#reservar').css({
+              "border": "1px solid green"
+            });
+          }
+          if ($('#area').val().toString().length < 3) {
+            $('#area').css({
+              "border": "1px solid red"
+            });
+            consisitido = false;
+          } else {
+            $('#area').css({
+              "border": "1px solid green"
+            });
+          }
+          if ($('#telefono').val().toString().length < 7) {
+            $('#telefono').css({
+              "border": "1px solid red"
+            });
+            consisitido = false;
+          } else {
+            $('#telefono').css({
+              "border": "1px solid green"
+            });
+          }
+          if (consisitido) {
+            document.getElementById("enviar").submit();
+          } else {
+            alert("Los datos ingresados no son validos.");
+          }
+        })
+    }
     //function cambiarFormulario(habitacion) {}
   </script>
   </body>

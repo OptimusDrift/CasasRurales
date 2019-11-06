@@ -13,7 +13,7 @@ class Dormitorios extends CI_Controller
     function index()
     {
         if ($_POST['seleccion'] != 1) {
-            $formulario = '<form action="controlarreserva" method="post">
+            $formulario = '<form action="controlarreserva" id="enviar" method="post">
                 <div class="form-inline py-2 mt-2">
                     <div class="input-group input-group">
                         <div class="input-group-prepend">
@@ -39,7 +39,7 @@ class Dormitorios extends CI_Controller
                     </div>
                     </div>
                 <div class="mt-2">
-                    <button class="btn btn-primary btn-lg" type="submit"><i class="fas fa-cart-plus fa-lg mr-2"></i> Reservar</button>
+                    <button class="btn btn-primary btn-lg" onclick="ConsisitirForm()" type="button"><i class="fas fa-cart-plus fa-lg mr-2"></i> Reservar</button>
                 </div>
             </form>';
             $precioDormitorio = $this->paquetes_model->PrecioPaquete($_POST['idPaquete']);
@@ -77,7 +77,6 @@ class Dormitorios extends CI_Controller
                     $result = $this->dormitorio_model->ObtenerDormitorios($_POST['idProp'])->result_array();
                     $this->db->close();
                     for ($i = 0; $i < count($_POST['idDormitorio']); $i++) {
-                        //!asdasdasd
                         if ($_POST['idDormitorio'][$i] != '') {
                             $fechas .= $this->paquetes_model->ObtenerDiasReservadosDormitorio($result[$i]['id_dormitorio']);
                         }
@@ -100,6 +99,5 @@ class Dormitorios extends CI_Controller
             $fechas = '';
         }
         echo $mensaje . "~" . $fechas;
-        //$this->dormitorio_model->obtenerDormitorio($_POST['valorBusqueda']);
     }
 }
