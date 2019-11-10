@@ -54,6 +54,12 @@
                 <p>Mis Paquetes</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url() . "index.php/"; ?>mispaquetes" class="nav-link <?php echo $paqueteactivo ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Historial de Reservas</p>
+              </a>
+            </li>
           </ul>
         </li>
         <li class="nav-item has-treeview <?php echo $MisReservasOpen ?>">
