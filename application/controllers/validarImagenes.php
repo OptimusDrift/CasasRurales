@@ -26,7 +26,7 @@ class ValidarImagenes extends CI_Controller
             if (!file_exists($link)) {
                 mkdir($link, 0777, true);
             }
-            if ($this->reservas_model->SubirImagenReserva($idReserva, $link . $_FILES['imagen']['name'])) {
+            if ($this->reservas_model->SubirImagenReserva($idReserva, $_FILES['imagen']['name'])) {
                 copy($_FILES['imagen']['tmp_name'], $link . $_FILES['imagen']['name']);
                 $this->reservas_model->PagarReserva($idReserva);
             }
