@@ -25,6 +25,8 @@ class Dormitorios extends CI_Controller
                     </div>
                 </div>
                 <div class="form-inline py-2">
+                <input hidden="" name="idPaquete" value="' . $_POST['idPaquete'] . '">
+                <input hidden=""name="idPaquete" value="' . $_POST['idPaquete'] . '">
                 <input hidden="">
                     <div class="input-group input-group">
                         <div class="input-group-prepend">

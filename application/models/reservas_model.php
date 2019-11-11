@@ -16,6 +16,15 @@ class reservas_model extends CI_Model
         return $result;
     }
 
+    public function SubirReserva($idusuario, $fechaDeInicio, $fechaFinal, $precio, $codigo, $telefono, $idPaquete, $idDormitorio)
+    {
+        $this->db->query("CALL `SubirReserva` (" . $idusuario . ", " . $fechaDeInicio . ", " . $fechaFinal . ", " . $precio . ")");
+        $idReserva = $this->db->query("CALL `ObtenerIdReserva` (" . $idusuario . ")")->result_array();
+        $this->db->close();
+        $this->db->query("CALL `SubirTelefonoReserva` (" . $idReserva[0]['id_reserva'] . ", " . $idusuario . ", " . $codigo . ", " . $telefono . ")");
+        $this->db->query("CALL `SubirResPaqDorm` (" . $idReserva[0]['id_reserva'] . ", " . $idPaquete . ", " . $idDormitorio . ")");
+    }
+
     public function ObtenerReservasPendientes($idusr)
     {
         $result = $this->db->query("CALL `VistaReservasPendientes` (" . $idusr . ")");

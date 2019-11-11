@@ -134,6 +134,7 @@
         idProp: <?php echo json_encode($idPropiedad); ?>,
         lista: <?php echo json_encode($lista); ?>,
         idDormitorio: dormitorios,
+        idUsuario: ,
         activas: act,
         cantDormitorios: cantidadDormitorios,
         seleccion: sel

@@ -23,20 +23,23 @@ class ReservasrealizadasCI extends CI_Controller
     } else {
       $i = 0;
       while (count($reservas) > $i) {
+        $botonComprobante = "";
         //arregla error de base de datos 'out of sync'
         $this->db->reconnect();
         $reserva = $reservas[$i];
-        if (!$this->reservas_model->ReservaCancelada($reserva['id_reserva'])) 
-        {
-          if ($this->reservas_model->ReservaPagada($reserva['id_reserva'])) 
-          {
+        if (!$this->reservas_model->ReservaCancelada($reserva['id_reserva'])) {
+          if ($this->reservas_model->ReservaPagada($reserva['id_reserva'])) {
             $form = "<form action=\" " . base_url() . "index.php/validarImagenes\" enctype=\"multipart/form-data\" method=\"post\">
                   <input type='text' value='" . $reserva['id_reserva'] . "' name='idReserva' hidden=''>
                   <input class='btn-block' id=\"imagen\" name=\"imagen\" size=\"30\" type=\"file\">
-                  <input class='btn btn-block btn-success' type=\"submit\" value=\"Subir comprobante\">
+                  <input class='btn btn-block btn-success' type=\"submit\" value=\"Subir comprobante\" style='width: 200px;'>
                 </form>";
           } else {
             $form = "Pagada!";
+            $botonComprobante = '<a href="' . base_url() . 'comprobantes/' . $reserva['id_reserva'] . '/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
+            <input class="btn btn-block btn-success" type="button" value="Ver Comprobante">
+            </a>';
+            $this->db->close();
           }
         } else {
           $form = "La reserva fue cancelada!";
@@ -63,14 +66,14 @@ class ReservasrealizadasCI extends CI_Controller
                 </td>
               </tr>
               <tr>
-              <td>
+              <td valign='bottom'>
+              " . $botonComprobante . "
               </td>
               <td>
               </td>
               <td>
               </td>
-              <td>" . $form .
-          "</td>
+              <td>" . $form . "</td>
               </tr>
             </table>
             </div>

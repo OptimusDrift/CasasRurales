@@ -13,7 +13,10 @@ class Controlarreserva extends CI_Controller
     function index()
     {
         $this->load->view('manejoDeSesion');
-
+        //$this->reservas_model->SubirReserva($idusuario, $fechaDeInicio, $fechaFinal, $precio, $codigo, $telefono, $idPaquete, $idDormitorio);
+        foreach ($_POST as $key) {
+            echo $key;
+        }
         $dato['inicioactivo'] = '';
         $dato['misalquileresactivo'] = 'active';
         $dato['reservapendienteactivo'] = '';
