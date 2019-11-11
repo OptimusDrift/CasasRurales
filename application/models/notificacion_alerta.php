@@ -31,7 +31,8 @@ class notificacion_alerta extends CI_Model
                 $vencimiento = strtotime(substr($vencimiento, 0, 10));
 
                 $reserva = strtotime(substr($reserva, 0, 10));
-                if ($hoy >= $vencimiento) {
+                if ($hoy >= $vencimiento) 
+                {
                     $numAlertas++;
                 }
                 $i++;
@@ -40,7 +41,8 @@ class notificacion_alerta extends CI_Model
 
         }
 
-        if ($numAlertas > 0) {
+        if ($numAlertas > 0) 
+        {
             $datosAlerta['numAlertas'] = $numAlertas;
             $datosAlerta['tipoAlerta'] = "alertas de falta de pago";
             $datosAlerta['notiAlerta'] = '<a href="reservaspendientes" class="dropdown-item">
@@ -48,7 +50,8 @@ class notificacion_alerta extends CI_Model
             .'<span class="float-right text-muted text-sm"></span>
           </a>' ;
         }
-         else {
+         else 
+         {
             $datosAlerta['numAlertas'] = '0';
             $datosAlerta['tipoAlerta'] = '';
             $datosAlerta['notiAlerta'] = '';
