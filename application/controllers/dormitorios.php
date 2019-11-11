@@ -26,24 +26,7 @@ class Dormitorios extends CI_Controller
                 </div>
                 <div class="form-inline py-2">
                 <input hidden="" name="idPaquete" value="' . $_POST['idPaquete'] . '">
-                <input hidden=""name="idPaquete" value="' . $_POST['idPaquete'] . '">
-                <input hidden="">
-                    <div class="input-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="btn btn-dark">
-                                <i class="fas fa-phone"></i>
-                            </span>
-                        </div>
-                        <input class="form-control" size="5" maxlength="4" type="telephone" id="area" name="ar" placeholder="Area (011)">
-                    </div>
-                    <div class="input-group input-group">
-                        <input class="form-control" type="telephone" id="telefono" maxlength="7" name="tel" placeholder="Ingresa tu teléfono sin 15.">
-                    </div>
-                    </div>
-                <div class="mt-2">
-                    <button class="btn btn-primary btn-lg" onclick="ConsisitirForm()" type="button"><i class="fas fa-cart-plus fa-lg mr-2"></i> Reservar</button>
-                </div>
-            </form>';
+                <input hidden=""name="idUsuario" value="' . $_POST['idUsuario'] . '">';
             $precioDormitorio = $this->paquetes_model->PrecioPaquete($_POST['idPaquete']);
             $mensaje = "<ul class='py-2'>";
             if ($_POST['idDormitorio'][0] != '' && $_POST['idDormitorio'][0] == 0) {
@@ -58,6 +41,9 @@ class Dormitorios extends CI_Controller
             <li>
             Precio por noche: $' . ($precioDormitorio * floatval($_POST['cantDormitorios'])) . '
             </li>';
+                $formulario .= '<input hidden="" name="completa" value="1">';
+                //! Precio temporal
+                $formulario .= '<input hidden="" name="precio" value="' . $precioDormitorio * floatval($_POST['cantDormitorios']) . '">';
             } else {
                 $precioStr = '<li>
             Precio por noche: $';
@@ -78,10 +64,12 @@ class Dormitorios extends CI_Controller
                     $fechas = '';
                     $result = $this->dormitorio_model->ObtenerDormitorios($_POST['idProp'])->result_array();
                     $this->db->close();
+                    $formulario .= '<input hidden="" name="cantidadDormitorios" value="' . count($_POST['idDormitorio']) . '">';
                     for ($i = 0; $i < count($_POST['idDormitorio']); $i++) {
                         if ($_POST['idDormitorio'][$i] != '') {
                             $fechas .= $this->paquetes_model->ObtenerDiasReservadosDormitorio($result[$i]['id_dormitorio']);
                         }
+                        $formulario .= '<input hidden="" name="dormitorio' . $i . '" value="' . $_POST['idDormitorio'][$i] . '">';
                     }
                 } else {
                     $cantidad = "Seleccione lo que quiere alquilar.";
@@ -95,6 +83,22 @@ class Dormitorios extends CI_Controller
                 ';
             }
             $mensaje .= '</ul>';
+            $formulario .= '<div class="input-group input-group">
+            <div class="input-group-prepend">
+                <span class="btn btn-dark">
+                    <i class="fas fa-phone"></i>
+                </span>
+            </div>
+            <input class="form-control" size="5" maxlength="4" type="telephone" id="area" name="ar" placeholder="Area (011)">
+        </div>
+        <div class="input-group input-group">
+            <input class="form-control" type="telephone" id="telefono" maxlength="7" name="tel" placeholder="Ingresa tu teléfono sin 15.">
+        </div>
+        </div>
+            <div class="mt-2">
+            <button class="btn btn-primary btn-lg" onclick="ConsisitirForm()" type="button"><i class="fas fa-cart-plus fa-lg mr-2"></i> Reservar</button>
+            </div>
+            </form>';
             $mensaje .= $formulario;
         } else {
             $mensaje = "Seleccione lo que quiere alquilar.";

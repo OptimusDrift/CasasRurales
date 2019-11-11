@@ -55,6 +55,7 @@ class Controladorpaquete extends CI_Controller
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
         $dato['misPropiedadesOpen'] = '';
+        $dato['idUsuario'] = $_SESSION['id'];
         $dato['MisReservasOpen'] = '';
         $dato['minNoches'] = $paquete[0]['minNoches'];
         $dato['idPropiedad'] = $idPorpiedad;
@@ -64,7 +65,7 @@ class Controladorpaquete extends CI_Controller
         $prop = $this->usuario_model->PropiedadUsuario($dato['idPaquete']);
         //! hacer que cuando intente alquilar en fechas ya alquiladas tire error onClick
         //if (!($prop > 0)) {
-            if (!($_SESSION['id'] == $infoPropiedad->id_propietario)) {
+        if (!($_SESSION['id'] == $infoPropiedad->id_propietario)) {
             $this->db->close();
             $dato['formulario'] = "";
             $dormitorios = $this->dormitorio_model->ObtenerDormitorios($idPorpiedad)->result_array();
