@@ -62,6 +62,7 @@ class reservas_model extends CI_Model
         $dias = $dif / (60 * 60 * 24);
         $this->db->close();
         $paquete = $this->paquetes_model->ObtenerPaquete($res['id_paquete']);
+      
         $precio = $paquete->row(0)->precio * $dias;
         $result['result'] .= "Pesos arg: $" . $precio  . "<br>";
         return $result['result'];
