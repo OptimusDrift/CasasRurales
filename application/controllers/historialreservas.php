@@ -24,7 +24,7 @@ class Historialreservas extends CI_Controller
           $reservastr["reservastr"] = "<h1>No se encontraron resultados.</h1>";
         } else {
           $i = 0;
-          while (count($reservas) > o) {
+          while (count($reservas) > $i) {
             $reserva = $reservas[$i];
     
             $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
