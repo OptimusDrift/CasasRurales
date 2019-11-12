@@ -33,3 +33,4 @@ application/config/config.php
 application/config/database.php
 application/controllers/buscarcasapruebas.php
 assets/plugins/daterangepicker/website.js
+application/config/database.php
