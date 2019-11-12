@@ -17,7 +17,7 @@
               <div class="row">
                   <!-- /.col-md-6 -->
                   <div class="col-lg-12">
-
+                  <?php echo $reservastr; ?>
                   </div>
                   <!-- /.col-md-6 -->
               </div>
