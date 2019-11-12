@@ -128,4 +128,12 @@ class reservas_model extends CI_Model
         $this->db->close();
         return false;
     }
+
+
+    public function ObtenerHistorialReservas($idusr)
+    {
+        $result = $this->db->query("CALL `VistaHistorialReservas` (" . $idusr . ")");
+        return $result;
+    }
+
 }

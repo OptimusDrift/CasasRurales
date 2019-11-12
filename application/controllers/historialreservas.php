@@ -14,7 +14,7 @@ class Historialreservas extends CI_Controller
     {
         $this->load->view('manejoDeSesion');
         $id = $_SESSION['id'];
-        $res = $this->reservas_model->ObtenerReservasPendientes($id);
+        $res = $this->reservas_model->ObtenerHistorialReservas($id);
     
         $reservas = $res->result_array();
         $this->db->close();
@@ -24,7 +24,7 @@ class Historialreservas extends CI_Controller
           $reservastr["reservastr"] = "<h1>No se encontraron resultados.</h1>";
         } else {
           $i = 0;
-          while (count($reservas) > $i) {
+          while (count($reservas) > o) {
             $reserva = $reservas[$i];
     
             $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
