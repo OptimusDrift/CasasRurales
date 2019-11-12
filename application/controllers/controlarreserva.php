@@ -22,6 +22,7 @@ class Controlarreserva extends CI_Controller
         $dato['paqueteactivo'] = 'active';
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
+        $dato['historialactivo'] = '';
         $dato['misPropiedadesOpen'] = 'menu-open';
         $dato['MisReservasOpen'] = '';
         $this->load->view('primera');

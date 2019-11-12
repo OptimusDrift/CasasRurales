@@ -89,6 +89,7 @@ class ReservasrealizadasCI extends CI_Controller
     $dato['propiedadactivo'] = '';
     $dato['paqueteactivo'] = '';
     $dato['misreservaactivo'] = 'active';
+    $dato['historialactivo'] = '';
     $dato['reservaactivo'] = 'active';
     $dato['misPropiedadesOpen'] = '';
     $dato['MisReservasOpen'] = 'menu-open';

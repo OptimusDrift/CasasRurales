@@ -54,6 +54,7 @@ class Controladorpaquete extends CI_Controller
         $dato['paqueteactivo'] = '';
         $dato['misreservaactivo'] = '';
         $dato['reservaactivo'] = '';
+        $dato['historialactivo'] = '';
         $dato['misPropiedadesOpen'] = '';
         $dato['idUsuario'] = $_SESSION['id'];
         $dato['MisReservasOpen'] = '';

@@ -55,7 +55,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() . "index.php/"; ?>mispaquetes" class="nav-link <?php echo $paqueteactivo ?>">
+              <a href="<?php echo base_url() . "index.php/"; ?>historialreservas" class="nav-link <?php echo $historialactivo ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Historial de Reservas</p>
               </a>

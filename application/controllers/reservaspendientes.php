@@ -73,6 +73,7 @@ class Reservaspendientes extends CI_Controller
     $dato['paqueteactivo'] = '';
     $dato['misreservaactivo'] = '';
     $dato['reservaactivo'] = '';
+    $dato['historialactivo'] = '';
     $dato['misPropiedadesOpen'] = 'menu-open';
     $dato['MisReservasOpen'] = '';
     $this->load->model('notificacion_alerta');

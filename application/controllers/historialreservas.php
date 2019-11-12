@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class PaginaInicial extends CI_Controller
+class Historialreservas extends CI_Controller
 {
     function __construct()
     {
@@ -16,20 +16,20 @@ class PaginaInicial extends CI_Controller
         $datosAlerta = $this->notificacion_alerta->Alerta();
         $_SESSION['alerta'] = $datosAlerta;
         //////////////////////////
-        $dato['inicioactivo'] = 'active';
-        $dato['misalquileresactivo'] = '';
+        $dato['inicioactivo'] = '';
+        $dato['misalquileresactivo'] = 'active';
         $dato['reservapendienteactivo'] = '';
         $dato['propiedadactivo'] = '';
         $dato['paqueteactivo'] = '';
         $dato['misreservaactivo'] = '';
-        $dato['historialactivo'] = '';
         $dato['reservaactivo'] = '';
-        $dato['misPropiedadesOpen'] = '';
+        $dato['historialactivo'] = 'active';
+        $dato['misPropiedadesOpen'] = 'menu-open';
         $dato['MisReservasOpen'] = '';
         $this->load->view('primera');
         $this->load->view('sinbarranav', $datosAlerta);
         $this->load->view('barraizq', $dato);
-        $this->load->view('template');
+        $this->load->view('historialreservas');
         $this->load->view('footeryscrips');
     }
 }
