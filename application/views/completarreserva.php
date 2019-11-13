@@ -69,7 +69,7 @@
                                                   <input type="submit" class="btn btn-success" value="Confirmar Alquiler">
                                               </td>
                                               <td>
-                                                  <button class="btn btn-danger">Cancelar</button>
+                                                  <button type="button" class="btn btn-danger" onclick="cancelar()">Cancelar</button>
                                               </td>
                                           </tr>
                                       </table>

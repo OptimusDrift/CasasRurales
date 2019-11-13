@@ -15,30 +15,37 @@ class Subirreservaymostrardatos extends CI_Controller
     function index()
     {
         $this->load->view('manejoDeSesion');
-        print_r($_POST);
-        $idReserva = $this->reservas_model->SubirReserva(
-            $_POST['idUsuario'],
-            $_POST['FI'],
-            $_POST['FF'],
-            $_POST['precio'],
-            $_POST['codigo'],
-            $_POST['telefono']
-        );
-        if (isset($_POST['completa'])) {
-            $dorm = $this->dormitorio_model->ObtenerDormitorios($_POST['idPropiedad'])->result_array();
-            $this->db->close();
-            $j = 0;
-            echo count($dorm);
-            while (count($dorm) > $j) {
-                $this->reservas_model->SubirResPaqDorm($idReserva, $_POST['idPaquete'], $dorm[$j]['id_dormitorio']);
-                $j++;
-            }
-        } else {
-            for ($i = 0; $i < intval($_POST['cantidadDormitorios']); $i++) {
-                if (isset($_POST['dormitorio' . $i])) {
-                    $this->reservas_model->SubirResPaqDorm($idReserva, $_POST['paquete'], $_POST['dormitorio' . $i]);
+        if ($_SESSION['completar'] == '2') {
+            $_SESSION['completar'] = '0';
+            print_r($_POST);
+            $idReserva = $this->reservas_model->SubirReserva(
+                $_POST['idUsuario'],
+                $_POST['FI'],
+                $_POST['FF'],
+                $_POST['precio'],
+                $_POST['codigo'],
+                $_POST['telefono']
+            );
+
+            if (isset($_POST['completa'])) {
+                $dorm = $this->dormitorio_model->ObtenerDormitorios($_POST['idPropiedad'])->result_array();
+                $this->db->close();
+                $j = 0;
+                echo count($dorm);
+                while (count($dorm) > $j) {
+                    $this->reservas_model->SubirResPaqDorm($idReserva, $_POST['idPaquete'], $dorm[$j]['id_dormitorio']);
+                    $j++;
+                }
+            } else {
+                for ($i = 0; $i < intval($_POST['cantidadDormitorios']); $i++) {
+                    if (isset($_POST['idDormitorio' . $i])) {
+                        echo "asdasd";
+                        $this->reservas_model->SubirResPaqDorm($idReserva, $_POST['idPaquete'], $_POST['idDormitorio' . $i]);
+                    }
                 }
             }
+        } else {
+            redirect('paginaInicial');
         }
     }
 }

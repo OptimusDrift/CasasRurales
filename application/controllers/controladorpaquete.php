@@ -19,7 +19,7 @@ class Controladorpaquete extends CI_Controller
         if (!isset($dato['idPaquete'])) {
             redirect('paginaInicial');
         }
-
+        $_SESSION['completar'] = '1';
         $paquetes = $this->paquetes_model->ObtenerPaquete($dato['idPaquete']);
         $paquete = $paquetes->result_array();
         $this->db->close();
