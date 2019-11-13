@@ -65,7 +65,6 @@ class Controladorpaquete extends CI_Controller
         $this->db->close();
         $prop = $this->usuario_model->PropiedadUsuario($dato['idPaquete']);
         //! hacer que cuando intente alquilar en fechas ya alquiladas tire error onClick
-        //if (!($prop > 0)) {
         if (!($_SESSION['id'] == $infoPropiedad->id_propietario)) {
             $this->db->close();
             $dato['formulario'] = "";

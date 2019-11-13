@@ -26,7 +26,8 @@ class Dormitorios extends CI_Controller
                 </div>
                 <div class="form-inline py-2">
                 <input hidden="" name="idPaquete" value="' . $_POST['idPaquete'] . '">
-                <input hidden=""name="idUsuario" value="' . $_POST['idUsuario'] . '">';
+                <input hidden=""name="idUsuario" value="' . $_POST['idUsuario'] . '">
+                <input hidden=""name="idPropiedad" value="' . $_POST['idProp'] . '">';
             $precioDormitorio = $this->paquetes_model->PrecioPaquete($_POST['idPaquete']);
             $mensaje = "<ul class='py-2'>";
             if ($_POST['idDormitorio'][0] != '' && $_POST['idDormitorio'][0] == 0) {
@@ -60,6 +61,8 @@ class Dormitorios extends CI_Controller
                     }
                     $precioStr .= $precio . '
                 </li>';
+                    //! Precio temporal
+                    $formulario .= '<input hidden="" name="precio" value="' . $precio . '">';
                     $cantidad .= $total;
                     $fechas = '';
                     $result = $this->dormitorio_model->ObtenerDormitorios($_POST['idProp'])->result_array();

@@ -60,9 +60,9 @@
       //Date range picker
       $('#reservation').daterangepicker({
         opens: 'center',
-        startDate: moment(),
-        endDate: moment().add(24, 'hour'),
-        minDate: moment(),
+        startDate: moment().add(24, 'hour'),
+        endDate: moment().add(72, 'hour'),
+        minDate: moment().add(24, 'hour'),
         autoApply: true,
         showDropdowns: true,
         locale: {
@@ -139,6 +139,7 @@
         cantDormitorios: cantidadDormitorios,
         seleccion: sel
       }, function(mensaje) {
+        console.log(mensaje);
         var msj = mensaje.split("~");
         array = msj[1].split(",");
         document.getElementById("formularioReserva").innerHTML = msj[0];
@@ -153,9 +154,9 @@
               }
             },
             opens: 'center',
-            startDate: moment(),
-            endDate: moment().add(24, 'hour'),
-            minDate: moment(),
+            startDate: moment().add(24, 'hour'),
+            endDate: moment().add(72, 'hour'),
+            minDate: moment().add(24, 'hour'),
             autoApply: true,
             maxDate: maxDia,
             showDropdowns: true,
