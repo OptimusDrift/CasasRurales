@@ -103,12 +103,20 @@ class Paquetes_model extends CI_Model
         }
         return $result;
     }
-    private function FormatearFecha($fechaAModificar)
+    public function FormatearFecha($fechaAModificar, $sim = '/')
     {
         $dia = preg_split('[/]', $fechaAModificar)[0];
         $mes = preg_split('[/]', $fechaAModificar)[1];
         $anno = preg_split('[/]', $fechaAModificar)[2];
-        $fechaAModificar = $mes . "/" . $dia . "/" . $anno;
+        $fechaAModificar = $mes . $sim . $dia . $sim . $anno;
+        return str_replace(" ", "", $fechaAModificar);
+    }
+    public function FormatearFechaBDD($fechaAModificar, $sim = '-')
+    {
+        $dia = preg_split('[/]', $fechaAModificar)[0];
+        $mes = preg_split('[/]', $fechaAModificar)[1];
+        $anno = preg_split('[/]', $fechaAModificar)[2];
+        $fechaAModificar = $anno . $sim . $mes . $sim . $dia;
         return str_replace(" ", "", $fechaAModificar);
     }
     public function BuscarPaquetes($ubicacion, $fechas, $cantidadPersonasIngresadas = 1)

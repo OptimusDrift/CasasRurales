@@ -16,13 +16,17 @@ class reservas_model extends CI_Model
         return $result;
     }
 
-    public function SubirReserva($idusuario, $fechaDeInicio, $fechaFinal, $precio, $codigo, $telefono, $idPaquete, $idDormitorio)
+    public function SubirReserva($idusuario, $fechaDeInicio, $fechaFinal, $precio, $codigo, $telefono)
     {
-        $this->db->query("CALL `SubirReserva` (" . $idusuario . ", " . $fechaDeInicio . ", " . $fechaFinal . ", " . $precio . ")");
+        $this->db->query("CALL `SubirReserva` (" . $idusuario . ", '" . $fechaDeInicio . "', '" . $fechaFinal . "', " . $precio . ")");
         $idReserva = $this->db->query("CALL `ObtenerIdReserva` (" . $idusuario . ")")->result_array();
         $this->db->close();
         $this->db->query("CALL `SubirTelefonoReserva` (" . $idReserva[0]['id_reserva'] . ", " . $idusuario . ", " . $codigo . ", " . $telefono . ")");
-        $this->db->query("CALL `SubirResPaqDorm` (" . $idReserva[0]['id_reserva'] . ", " . $idPaquete . ", " . $idDormitorio . ")");
+        return $idReserva[0]['id_reserva'];
+    }
+    public function SubirResPaqDorm($idReserva, $idPaquete, $idDormitorio)
+    {
+        $this->db->query("CALL `SubirResPaqDorm` (" . $idReserva . ", " . $idPaquete . ", " . $idDormitorio . ")");
     }
 
     public function ObtenerReservasPendientes($idusr)
@@ -71,7 +75,7 @@ class reservas_model extends CI_Model
         $dias = $dif / (60 * 60 * 24);
         $this->db->close();
         $paquete = $this->paquetes_model->ObtenerPaquete($res['id_paquete']);
-      
+
         $precio = $paquete->row(0)->precio * $dias;
         $result['result'] .= "Pesos arg: $" . $precio  . "<br>";
         return $result['result'];
@@ -135,5 +139,4 @@ class reservas_model extends CI_Model
         $result = $this->db->query("CALL `VistaHistorialReservas` (" . $idusr . ")");
         return $result;
     }
-
 }

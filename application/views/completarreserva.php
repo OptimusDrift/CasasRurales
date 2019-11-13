@@ -20,7 +20,8 @@
                           <div class="row">
                               <!-- /.col-md-6 -->
                               <div class="col-lg-12">
-                                  <form action="">
+                                  <form action="subirreservaymostrardatos" method="POST">
+                                      <?php echo $input; ?>
                                       <table>
                                           <tr>
                                               <td align="right">
@@ -47,6 +48,16 @@
                                               <td>
                                                   <h3>
                                                       <?php echo $telefono; ?>
+                                                  </h3>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td align="right">
+                                                  <h3>Nombre de la propiedad: </h3>
+                                              </td>
+                                              <td>
+                                                  <h3>
+                                                      <?php echo $propiedad; ?>
                                                   </h3>
                                               </td>
                                           </tr>
