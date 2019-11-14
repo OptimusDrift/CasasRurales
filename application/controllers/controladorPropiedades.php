@@ -21,8 +21,8 @@ class ControladorPropiedades extends CI_Controller
     } else {
       while (count($propiedades) > $i) {
         //$reserva = $this->paquetes_model->ObtenerIdPaquetePropiedad($propiedades[$i]['id_propiedad']);
-        /*<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>*/
-        $propStr["propStr"] .= "  <div class=\"card card-outline card-dark\">
+        $propStr["propStr"] .= "<a href=\"" . base_url() . "index.php/mispaquetes\" style='text-decoration:none;color:black;'>
+        <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
               <h5 class=\"m-0\">" . $propiedades[$i]['nombre_propiedad'] . "</h5>
             </div>

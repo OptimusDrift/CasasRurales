@@ -203,7 +203,6 @@
           precio: $('#precio').val()
         },
         function(mensaje) {
-          console.log(mensaje);
           if (mensaje == 'alquilada') {
             $('#reservar').css({
               "border": "1px solid red"
