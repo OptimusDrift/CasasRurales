@@ -94,6 +94,10 @@
         }
       });
     })
+
+    function cancelar() {
+      window.history.back();
+    }
   </script>
   </body>
 

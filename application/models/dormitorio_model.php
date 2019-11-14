@@ -29,7 +29,12 @@ class dormitorio_model extends CI_Model
         $result = $this->db->query("CALL `ObtenerDormitorios` (" . $idPropiedad . ")");
         return $result;
     }
-
+    public function ObtenerDuenno($idDormitorio)
+    {
+        $result = $this->db->query("CALL `ObtenerDuenno` (" . $idDormitorio . ")")->result_array();
+        $this->db->close();
+        return $result[0];
+    }
     public function DisponibleCompleta($idPropiedad)
     {
         $result = $this->db->query("CALL `DisponibleCompleta` (" . $idPropiedad . ")")->result_array();

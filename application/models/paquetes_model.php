@@ -103,13 +103,20 @@ class Paquetes_model extends CI_Model
         }
         return $result;
     }
-    private function FormatearFecha($fechaAModificar)
+    public function FormatearFecha($fechaAModificar, $sim = '/')
     {
-
         $dia = preg_split('[/]', $fechaAModificar)[0];
         $mes = preg_split('[/]', $fechaAModificar)[1];
         $anno = preg_split('[/]', $fechaAModificar)[2];
-        $fechaAModificar = $mes . "/" . $dia . "/" . $anno;
+        $fechaAModificar = $mes . $sim . $dia . $sim . $anno;
+        return str_replace(" ", "", $fechaAModificar);
+    }
+    public function FormatearFechaBDD($fechaAModificar, $sim = '-')
+    {
+        $dia = preg_split('[/]', $fechaAModificar)[0];
+        $mes = preg_split('[/]', $fechaAModificar)[1];
+        $anno = preg_split('[/]', $fechaAModificar)[2];
+        $fechaAModificar = $anno . $sim . $mes . $sim . $dia;
         return str_replace(" ", "", $fechaAModificar);
     }
     public function BuscarPaquetes($ubicacion, $fechas, $cantidadPersonasIngresadas = 1)
@@ -238,7 +245,15 @@ class Paquetes_model extends CI_Model
         $this->db->close();
         return $dias;
     }
-
+    public function CalcularPrecioFechas($fechas, $precio)
+    {
+        $FI = $this->FormatearFecha(preg_split('[-]', $fechas)[0]);
+        $FF = $this->FormatearFecha(preg_split('[-]', $fechas)[1]);
+        $FI = new DateTime($FI);
+        $FF = new DateTime($FF);
+        $diff = $FI->diff($FF);
+        return ($diff->days * ($precio));
+    }
     public function ObtenerDiasReservadosDormitorio($idDormitorio)
     {
         $result = $this->db->query("CALL `FechasDeReservaDormitorio` (" . $idDormitorio . ")");

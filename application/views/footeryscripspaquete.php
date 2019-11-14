@@ -60,9 +60,9 @@
       //Date range picker
       $('#reservation').daterangepicker({
         opens: 'center',
-        startDate: moment(),
-        endDate: moment().add(24, 'hour'),
-        minDate: moment(),
+        startDate: moment().add(24, 'hour'),
+        endDate: moment().add(72, 'hour'),
+        minDate: moment().add(24, 'hour'),
         autoApply: true,
         showDropdowns: true,
         locale: {
@@ -139,6 +139,7 @@
         cantDormitorios: cantidadDormitorios,
         seleccion: sel
       }, function(mensaje) {
+        console.log(mensaje);
         var msj = mensaje.split("~");
         array = msj[1].split(",");
         document.getElementById("formularioReserva").innerHTML = msj[0];
@@ -153,9 +154,9 @@
               }
             },
             opens: 'center',
-            startDate: moment(),
-            endDate: moment().add(24, 'hour'),
-            minDate: moment(),
+            startDate: moment().add(24, 'hour'),
+            endDate: moment().add(72, 'hour'),
+            minDate: moment().add(24, 'hour'),
             autoApply: true,
             maxDate: maxDia,
             showDropdowns: true,
@@ -197,30 +198,46 @@
       error = "";
       $.post("validarFechas", {
           fechasAConsisitir: $('#reservar').val(),
-          fechasParaConsisitir: array
+          fechasParaConsisitir: array,
+          minNoches: <?php echo json_encode($minNoches); ?>,
+          precio: $('#precio').val()
         },
         function(mensaje) {
-          if (mensaje == 'alert') {
+          console.log(mensaje);
+          if (mensaje == 'alquilada') {
             $('#reservar').css({
               "border": "1px solid red"
             });
             consisitido = false;
+            document.getElementById("preciototal").innerHTML = "Ya esta alquilada entre esas fechas.";
+          } else if (mensaje == "minNoches") {
+            $('#reservar').css({
+              "border": "1px solid red"
+            });
+            consisitido = false;
+            document.getElementById("preciototal").innerHTML = "El minimo de noches es: " + <?php echo json_encode($minNoches); ?>;
           } else {
             $('#reservar').css({
               "border": "1px solid green"
             });
+            document.getElementById("preciototal").innerHTML = mensaje;
           }
-          if ($('#area').val().toString().length < 3) {
+          try {
+            if ($('#area').val().toString().length < 3 || isNaN(Number($('#area').val().toString()))) {
+              throw error;
+            } else {
+              $('#area').css({
+                "border": "1px solid green"
+              });
+            }
+          } catch (error) {
             $('#area').css({
               "border": "1px solid red"
             });
             consisitido = false;
-          } else {
-            $('#area').css({
-              "border": "1px solid green"
-            });
           }
-          if ($('#telefono').val().toString().length < 7) {
+
+          if ($('#telefono').val().toString().length < 7 || isNaN(Number($('#telefono').val().toString()))) {
             $('#telefono').css({
               "border": "1px solid red"
             });

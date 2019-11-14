@@ -26,7 +26,8 @@ class Dormitorios extends CI_Controller
                 </div>
                 <div class="form-inline py-2">
                 <input hidden="" name="idPaquete" value="' . $_POST['idPaquete'] . '">
-                <input hidden=""name="idUsuario" value="' . $_POST['idUsuario'] . '">';
+                <input hidden=""name="idUsuario" value="' . $_POST['idUsuario'] . '">
+                <input hidden=""name="idPropiedad" value="' . $_POST['idProp'] . '">';
             $precioDormitorio = $this->paquetes_model->PrecioPaquete($_POST['idPaquete']);
             $mensaje = "<ul class='py-2'>";
             if ($_POST['idDormitorio'][0] != '' && $_POST['idDormitorio'][0] == 0) {
@@ -43,7 +44,7 @@ class Dormitorios extends CI_Controller
             </li>';
                 $formulario .= '<input hidden="" name="completa" value="1">';
                 //! Precio temporal
-                $formulario .= '<input hidden="" name="precio" value="' . $precioDormitorio * floatval($_POST['cantDormitorios']) . '">';
+                $formulario .= '<input hidden="" name="precio" id="precio" value="' . $precioDormitorio * floatval($_POST['cantDormitorios']) . '">';
             } else {
                 $precioStr = '<li>
             Precio por noche: $';
@@ -60,6 +61,8 @@ class Dormitorios extends CI_Controller
                     }
                     $precioStr .= $precio . '
                 </li>';
+                    //! Precio temporal
+                    $formulario .= '<input hidden="" name="precio" id="precio" value="' . $precio . '">';
                     $cantidad .= $total;
                     $fechas = '';
                     $result = $this->dormitorio_model->ObtenerDormitorios($_POST['idProp'])->result_array();
@@ -95,6 +98,8 @@ class Dormitorios extends CI_Controller
             <input class="form-control" type="telephone" id="telefono" maxlength="7" name="tel" placeholder="Ingresa tu teléfono sin 15.">
         </div>
         </div>
+        <div id="preciototal">
+            </div>
             <div class="mt-2">
             <button class="btn btn-primary btn-lg" onclick="ConsisitirForm()" type="button"><i class="fas fa-cart-plus fa-lg mr-2"></i> Reservar</button>
             </div>
