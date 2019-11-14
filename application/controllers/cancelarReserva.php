@@ -17,6 +17,7 @@ class cancelarReserva extends CI_Controller
       if ($this->reservas_model->cancelarReserva($_POST['idReserva'])) {
         redirect('reservaspendientes');
       }
+      
     }
   }
 }
