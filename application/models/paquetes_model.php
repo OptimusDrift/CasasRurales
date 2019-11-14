@@ -93,14 +93,16 @@ class Paquetes_model extends CI_Model
         for ($i = 0; $i < count($nroPersonas); $i++) {
             if ($nroPersonas[$i] >= $cantidadPersonasIngresadas) {
                 $result[$j] = $paquete[$i];
+                $p[$j] = $nroPersonas[$i];
                 $j++;
-            } else {
-                for ($j = $i; $j < count($nroPersonas) - 1; $j++) {
-                    $nroPersonas[$j] = $nroPersonas[$i + 1];
-                }
-                unset($nroPersonas[count($nroPersonas) - 1]);
             }
         }
+        if (isset($p)) {
+            $result['nroPersonas'] = $p;
+        } else {
+            return null;
+        }
+
         return $result;
     }
     public function FormatearFecha($fechaAModificar, $sim = '/')
@@ -134,6 +136,8 @@ class Paquetes_model extends CI_Model
         //? Consisto la cantidad de personas
         $paquete = $this->ConsisitirPersonas($paquete, $numeroPersonas, $cantidadPersonasIngresadas);
         if ($paquete == null) return null;
+        $res['numeroPersonas'] = $paquete['nroPersonas'];
+        unset($paquete['nroPersonas']);
         //?Fechas ingresadas por el usuario
         $fechaDeInicio = $this->FormatearFecha($fechaDeInicio = preg_split('[-]', $fechas)[0]);
         $fechaDeFin = $this->FormatearFecha($fechaDeFin = preg_split('[-]', $fechas)[1]);
@@ -143,7 +147,6 @@ class Paquetes_model extends CI_Model
         //? Elimino las filas que no se usan
         $paquete = $this->EliminarPaquetesRepetidos($paquete);
         $res['paquete'] = $paquete;
-        $res['numeroPersonas'] = $numeroPersonas;
         return $res;
     }
 
