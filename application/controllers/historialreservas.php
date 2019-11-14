@@ -3,32 +3,45 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Historialreservas extends CI_Controller
 {
-    function __construct()
-    {
-        parent::__construct();
-        
-        $this->load->model('reservas_model');
-        $this->load->model('Propiedades_model');
-    }
-    function index()
-    {
-        $this->load->view('manejoDeSesion');
-        $id = $_SESSION['id'];
-        $res = $this->reservas_model->ObtenerHistorialReservas($id);
-    
-        $reservas = $res->result_array();
-        $this->db->close();
-    
-        $reservastr["reservastr"] = "";
-        if (count($reservas) == 0) {
-          $reservastr["reservastr"] = "<h1>No se encontraron resultados.</h1>";
+  function __construct()
+  {
+    parent::__construct();
+
+    $this->load->model('reservas_model');
+    $this->load->model('Propiedades_model');
+  }
+  function index()
+  {
+    $this->load->view('manejoDeSesion');
+    $id = $_SESSION['id'];
+    $res = $this->reservas_model->ObtenerHistorialReservas($id);
+    $reservas = $res->result_array();
+    $this->db->close();
+
+    $reservastr["reservastr"] = "";
+    if (count($reservas) == 0) {
+      $reservastr["reservastr"] = "<h1>No se encontraron resultados.</h1>";
+    } else {
+      $i = 0;
+      while (count($reservas) > $i) {
+        $reserva = $reservas[$i];
+        $estado = "";
+        $btn = "";
+        if ($reservas[$i]['estado_reserva'] == '1') {
+          if ($reservas[$i]['estado_pago'] == '1') {
+            $estado = "La reserva fue pagada!";
+            $btn = '<a href="' . base_url() . 'comprobantes/' . $reserva['id_reserva'] . '/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
+            <input class="btn btn-block btn-success" type="button" value="Ver Comprobante">
+            </a>';
+            $this->db->close();
+          } else {
+            $estado = "La reserva aun no fue pagada!";
+          }
         } else {
-          $i = 0;
-          while (count($reservas) > $i) {
-            $reserva = $reservas[$i];
-    
-            $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
-            $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
+          $estado = "La reserva fue cancelada!";
+        }
+        $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
+        $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
                 <div class=\"card card-outline card-dark\">
                 <div class=\"card-header\">
                   <h5>" . $propiedad->nombre_propiedad . "</h5>
@@ -49,7 +62,7 @@ class Historialreservas extends CI_Controller
                   </tr>
                   <tr>
                     <td>
-                    <input type='button' class='btn btn-block btn-success' value='Ver Comprobante' name='verComprobante'>
+                    " . $btn . "
                     </td>
                     <td>
                     <input type='text' value='" . $reserva['id_reserva'] . "' name='idReserva' hidden=''> 
@@ -57,34 +70,34 @@ class Historialreservas extends CI_Controller
                     <td>
                     </td>
                     <td>
-                    
+                    " . $estado . "
                     </td>
                   </tr>
                 </table>
                 </div>
               </div>
               </a>";
-            $i++;
-          }
-        }
-    
-     
-      
-        $dato['inicioactivo'] = '';
-        $dato['misalquileresactivo'] = 'active';
-        $dato['reservapendienteactivo'] = '';
-        $dato['propiedadactivo'] = '';
-        $dato['paqueteactivo'] = '';
-        $dato['misreservaactivo'] = '';
-        $dato['reservaactivo'] = '';
-        $dato['historialactivo'] = 'active';
-        $dato['misPropiedadesOpen'] = 'menu-open';
-        $dato['MisReservasOpen'] = '';
-        $this->load->view('primera');
-        $this->load->view('sinbarranav',  $_SESSION['alerta']);
-        $this->load->view('barraizq', $dato);
-        $this->load->view('historialreservas',$reservastr);
-        $this->load->view('footeryscrips');
-    
+        $this->db->close();
+        $i++;
+      }
     }
+
+
+
+    $dato['inicioactivo'] = '';
+    $dato['misalquileresactivo'] = 'active';
+    $dato['reservapendienteactivo'] = '';
+    $dato['propiedadactivo'] = '';
+    $dato['paqueteactivo'] = '';
+    $dato['misreservaactivo'] = '';
+    $dato['reservaactivo'] = '';
+    $dato['historialactivo'] = 'active';
+    $dato['misPropiedadesOpen'] = 'menu-open';
+    $dato['MisReservasOpen'] = '';
+    $this->load->view('primera');
+    $this->load->view('barranav',  $_SESSION['alerta']);
+    $this->load->view('barraizq', $dato);
+    $this->load->view('historialreservas', $reservastr);
+    $this->load->view('footeryscrips');
+  }
 }

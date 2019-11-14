@@ -15,7 +15,6 @@ class reservas_model extends CI_Model
         $result = $this->db->query("CALL `VistaReservasRealizadas` (" . $idusr . ")");
         return $result;
     }
-
     public function SubirReserva($idusuario, $fechaDeInicio, $fechaFinal, $precio, $codigo, $telefono)
     {
         $this->db->query("CALL `SubirReserva` (" . $idusuario . ", '" . $fechaDeInicio . "', '" . $fechaFinal . "', " . $precio . ")");
