@@ -19,28 +19,31 @@ class ControladorPropiedades extends CI_Controller
     if ($propiedades == null) {
       $propStr["propStr"] = "<h1>No tienes propiedades.</h1>";
     } else {
-      while ($propiedades->num_rows() > $i) {
-        $propStr["propStr"] .= "<div class=\"card card-outline card-dark\">
+      while (count($propiedades) > $i) {
+        //$reserva = $this->paquetes_model->ObtenerIdPaquetePropiedad($propiedades[$i]['id_propiedad']);
+        /*<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>*/
+        $propStr["propStr"] .= "  <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
-              <h5 class=\"m-0\">" . $propiedades->row($i)->nombre_propiedad . "</h5>
+              <h5 class=\"m-0\">" . $propiedades[$i]['nombre_propiedad'] . "</h5>
             </div>
             <div class=\"card-body\">
             <table>
               <tr>
                 <td>
-                  <img src=\"" . base_url() . "assets/imagenes" . $this->propiedades_model->ObtenerImagenesPropiedades($propiedades->row($i)->id_propiedad)[0] . ".jpg\" alt=\"casa1\" class=\"\" width=\"200\" height=\"150\">
+                  <img src=\"" . base_url() . "assets/imagenes" . $this->propiedades_model->ObtenerImagenesPropiedades($propiedades[$i]['id_propiedad'])[0] . ".jpg\" alt=\"casa1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td>
                 </td>
                 <td>
                 </td>
                 <td>
-                  <p class=\"card-text\" align=\"justify\">" . substr($propiedades->row($i)->descripcion, 0, 300) . "...</p>
+                  <p class=\"card-text\" align=\"justify\">" . substr($propiedades[$i]['descripcion'], 0, 300) . "...</p>
                 </td>
               </tr>
             </table>
             </div>
-          </div>";
+          </div>
+          </a>";
         $i++;
       }
     }

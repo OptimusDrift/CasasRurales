@@ -174,7 +174,11 @@ class Paquetes_model extends CI_Model
         return $casas;
     }
 
-
+    public function ObtenerIdPaquetePropiedad($propiedad)
+    {
+        $result = $this->db->query("CALL `ObtenerIdPaquetePropiedad` (" . $propiedad . ")");
+        return $result;
+    }
 
     public function ObtenerPaquete($paquete)
     {
