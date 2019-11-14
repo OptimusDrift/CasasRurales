@@ -6,6 +6,9 @@ class Welcome extends CI_Controller
 	public function index()
 	{
 		session_start();
+		if (!isset($_SESSION["error"])) {
+			$_SESSION["error"] = "";
+		}
 		if (isset($_SESSION['correo'])) {
 			redirect('paginaInicial');
 		} else if (isset($_POST['contrasenna']) && isset($_POST['correo'])) {
@@ -18,10 +21,11 @@ class Welcome extends CI_Controller
 				$_SESSION['correo'] = $_POST['correo'];
 				redirect('paginaInicial');
 			} else {
-				redirect('login#FAIL');
+				$_SESSION["error"] = "El nombre de usuario o contraseña es invalido.";
+				redirect('Welcome');
 			}
 		}
 		$this->load->view('primera');
-		$this->load->view('login');
+		$this->load->view('login', $_SESSION);
 	}
 }

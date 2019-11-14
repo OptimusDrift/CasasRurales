@@ -139,7 +139,6 @@
         cantDormitorios: cantidadDormitorios,
         seleccion: sel
       }, function(mensaje) {
-        console.log(mensaje);
         var msj = mensaje.split("~");
         array = msj[1].split(",");
         document.getElementById("formularioReserva").innerHTML = msj[0];
