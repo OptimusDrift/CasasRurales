@@ -13,7 +13,12 @@
 
       <!-- Main content -->
       <center>
-          <div class="card col-8">
+          <div class="card card-outline card-dark col-8">
+              <div class="card-header">
+                  <h2>
+                      ¡Revise bien los datos y confirme la compra!.
+                  </h2>
+              </div>
               <div class="card-body">
                   <div class="content">
                       <div class="container-fluid">

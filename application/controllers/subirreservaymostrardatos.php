@@ -17,7 +17,6 @@ class Subirreservaymostrardatos extends CI_Controller
         $this->load->view('manejoDeSesion');
         if ($_SESSION['completar'] == '2') {
             $_SESSION['completar'] = '0';
-            print_r($_POST);
             $idReserva = $this->reservas_model->SubirReserva(
                 $_POST['idUsuario'],
                 $_POST['FI'],
@@ -39,11 +38,33 @@ class Subirreservaymostrardatos extends CI_Controller
             } else {
                 for ($i = 0; $i < intval($_POST['cantidadDormitorios']); $i++) {
                     if (isset($_POST['idDormitorio' . $i])) {
-                        echo "asdasd";
+                        $idDorm = $_POST['idDormitorio' . $i];
                         $this->reservas_model->SubirResPaqDorm($idReserva, $_POST['idPaquete'], $_POST['idDormitorio' . $i]);
                     }
                 }
             }
+            $dato['inicioactivo'] = '';
+            $dato['misalquileresactivo'] = '';
+            $dato['reservapendienteactivo'] = '';
+            $dato['propiedadactivo'] = '';
+            $dato['paqueteactivo'] = '';
+            $dato['misreservaactivo'] = '';
+            $dato['reservaactivo'] = '';
+            $dato['historialactivo'] = '';
+            $dato['misPropiedadesOpen'] = '';
+            $dato['MisReservasOpen'] = '';
+            $duenno = $this->dormitorio_model->ObtenerDuenno($idDorm);
+            $dato['nombre'] = $duenno['nombre'];
+            $dato['apellido'] = $duenno['apellido'];
+            $dato['cbu'] = $duenno['cbu'];
+            $dato['cuil'] = $duenno['cuil'];
+            $dato['correo'] = $duenno['correo'];
+            $dato['telefono'] = $duenno['telefono'];
+            $this->load->view('primera');
+            $this->load->view('barranav',  $_SESSION['alerta']);
+            $this->load->view('barraizq', $dato);
+            $this->load->view('confirmaralquiler', $dato);
+            $this->load->view('footeryscrips');
         } else {
             redirect('paginaInicial');
         }

@@ -16,7 +16,6 @@ class Controlarreserva extends CI_Controller
         $this->load->view('manejoDeSesion');
         if ($_SESSION['completar'] == '1') {
             $_SESSION['completar'] = '2';
-            print_r($_POST);
             $c = "";
             if (isset($_POST['completa'])) {
                 $dato['completa'] = '<td colspan="2">
