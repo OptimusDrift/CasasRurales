@@ -28,9 +28,9 @@ class Subirreservaymostrardatos extends CI_Controller
 
             if (isset($_POST['completa'])) {
                 $dorm = $this->dormitorio_model->ObtenerDormitorios($_POST['idPropiedad'])->result_array();
+                $idDorm = $dorm[0]['id_dormitorio'];
                 $this->db->close();
                 $j = 0;
-                echo count($dorm);
                 while (count($dorm) > $j) {
                     $this->reservas_model->SubirResPaqDorm($idReserva, $_POST['idPaquete'], $dorm[$j]['id_dormitorio']);
                     $j++;
