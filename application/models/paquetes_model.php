@@ -6,7 +6,12 @@ class Paquetes_model extends CI_Model
     {
         parent::__construct();
     }
-
+    public function DiaInicialReserva($idPaquete)
+    {
+        $result = $this->db->query("CALL `DiaInicialReserva` (" . $idPaquete . ")")->result_array();
+        $this->db->close();
+        return $result[0]['fecha_inicial'];
+    }
     private function EliminarPaquetesRepetidos($paquetes, $nroPersonas = null)
     {
         $p = 0;
@@ -219,15 +224,15 @@ class Paquetes_model extends CI_Model
         $result['result'] = "";
         $dormitorio = $this->dormitorio_model->obtenerDormitorio($res['id_dormitorio']);
         $result['result'] = "";
-        $result['result'] .= "Ubicado en " . $prop['nombre_poblacion'] . "<br>";
+        $result['result'] .= "Ubicado en " . ucwords($prop['nombre_poblacion'])  . "<br>";
         $result['result'] .= "Habitacion de " . $dormitorio->mtsCuadrado . "mts. Cuadrados" . "<br>";
         $camas = $this->dormitorio_model->obtenerCamas($dormitorio->id_dormitorio);
         $cantCamas =  $camas->num_rows();
         if ($cantCamas < 2) {
-            $result['result'] .="<br>" ."Posee una cama tipo " . $camas->row(0)->tipo_cama  . "<br>";
+            $result['result'] .= "<br>" . "Posee una cama tipo " . $camas->row(0)->tipo_cama  . "<br>";
         } else {
 
-            $result['result'] .="<br>" ."Posee " . $cantCamas . " camas:"  . "<br>";
+            $result['result'] .= "<br>" . "Posee " . $cantCamas . " camas:"  . "<br>";
             $i = 0;
             while ($camas->num_rows() > $i) {
                 $result['result'] .= "• " . $camas->row($i)->cant_camas . " cama tipo " . $camas->row($i)->tipo_cama . "<br>";
@@ -235,9 +240,9 @@ class Paquetes_model extends CI_Model
             }
         }
         $this->db->close();
-        $fechas= $this->ObtenerFechasDePaquete($res['id_paquete']);
-        $result['result'] .= "<br>" ."Fechas habilitadas: "  . "<br>";
-        $j=0;
+        $fechas = $this->ObtenerFechasDePaquete($res['id_paquete']);
+        $result['result'] .= "<br>" . "Fechas habilitadas: "  . "<br>";
+        $j = 0;
         while (count($fechas) > $j) {
             $result['result'] .= "• Desde " . $fechas[$j]['fecha_inicial'] . " Hasta " . $fechas[$j]['fecha_final'] . "<br>";
             $j++;
@@ -245,7 +250,7 @@ class Paquetes_model extends CI_Model
 
 
         $precio = $res['precio'];
-        $result['result'] .= "<br>" ."Pesos arg: $" . $precio . ' por Noche' . "<br>";
+        $result['result'] .= "<br>" . "Pesos arg: $" . $precio . ' por Noche' . "<br>";
         return $result['result'];
     }
 
@@ -327,7 +332,7 @@ class Paquetes_model extends CI_Model
 
     public function ObtenerFechasDePaquete($idPaquete)
     {
-        $fechas = $this->db->query("select* from rango_dias where id_paquete=" . $idPaquete )->result_array();
+        $fechas = $this->db->query("select* from rango_dias where id_paquete=" . $idPaquete)->result_array();
         $this->db->close();
         return $fechas;
     }
