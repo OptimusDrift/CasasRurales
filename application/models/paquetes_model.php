@@ -201,7 +201,7 @@ class Paquetes_model extends CI_Model
         $result['result'] = "";
         $dormitorio = $this->dormitorio_model->obtenerDormitorio($res['id_dormitorio']);
         $result['result'] = "";
-        $result['result'] .= "Ubicado en " . $prop->nombre_poblacion . "<br>";
+        $result['result'] .= "Ubicado en " . $prop['nombre_poblacion'] . "<br>";
         $result['result'] .= "Habitacion de " . $dormitorio->mtsCuadrado . "mts. Cuadrados" . "<br>";
         $camas = $this->dormitorio_model->obtenerCamas($dormitorio->id_dormitorio);
         $cantCamas =  $camas->num_rows();
