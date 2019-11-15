@@ -32,7 +32,7 @@ class Historialreservas extends CI_Controller
           $btnCancelar = "<input type='submit' class='btn btn-block btn-danger' value='Cancelar Reserva' name='cancelarReserva'>";
           if ($reservas[$i]['estado_pago'] == '1') {
             $estado = "La reserva fue pagada!";
-            $btn = '<a href="' . base_url() . 'comprobantes/' . $reserva['id_reserva'] . '/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
+            $btn = '<a href="' . base_url() . 'comprobantes/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
             <input class="btn btn-block btn-success" type="button" value="Ver Comprobante">
             </a>';
             $this->db->close();

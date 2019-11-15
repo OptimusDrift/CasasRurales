@@ -15,7 +15,7 @@ class ReservasrealizadasCI extends CI_Controller
     $this->load->view('manejoDeSesion');
     $id = $_SESSION['id'];
     $res = $this->reservas_model->ObtenerReservasRealizadas($id);
-    
+
 
     $reservas = $res->result_array();
     $this->db->close();
@@ -38,7 +38,7 @@ class ReservasrealizadasCI extends CI_Controller
                 </form>";
           } else {
             $form = "Pagada!";
-            $botonComprobante = '<a href="' . base_url() . 'comprobantes/' . $reserva['id_reserva'] . '/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
+            $botonComprobante = '<a href="' . base_url() . 'comprobantes/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
             <input class="btn btn-block btn-success" type="button" value="Ver Comprobante">
             </a>';
             $this->db->close();
@@ -48,11 +48,11 @@ class ReservasrealizadasCI extends CI_Controller
         }
 
         $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
-        $propiedad= $propiedad->result_array();
-        $propiedad= $propiedad[0];
-      
+        $propiedad = $propiedad->result_array();
+        $propiedad = $propiedad[0];
+
         $descipcionUsuario = $this->reservas_model->DescripcionPropietario($propiedad['id_propietario']);
-        
+
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
