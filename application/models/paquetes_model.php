@@ -7,7 +7,7 @@ class Paquetes_model extends CI_Model
         parent::__construct();
     }
 
-    private function EliminarPaquetesRepetidos($paquetes)
+    private function EliminarPaquetesRepetidos($paquetes, $nroPersonas = null)
     {
         $p = 0;
         $ant = null;
@@ -17,14 +17,23 @@ class Paquetes_model extends CI_Model
             if ($ant != null) {
                 if ($ant != $paquetes[$i]['id_paquete']) {
                     $result[$p] = $paquetes[$i];
+                    if ($nroPersonas != null) {
+                        $numeroPersonas[$p] = $nroPersonas[$i];
+                    }
                     $p++;
                 }
             } else {
                 $result[$p] = $paquetes[$i];
+                if ($nroPersonas != null) {
+                    $numeroPersonas[$p] = $nroPersonas[$i];
+                }
                 $p++;
             }
             //? Guarda el anterior
             $ant = $paquetes[$i]['id_paquete'];
+        }
+        if (isset($numeroPersonas)) {
+            $result['nroPersonas'] = $numeroPersonas;
         }
         return $result;
     }
@@ -68,6 +77,7 @@ class Paquetes_model extends CI_Model
                             for ($j = 0; $j < $resultFechas->num_rows(); $j++) {
                                 if (strtotime(date($resultFechas->row($j)->fecha_final_reserva)) < $dateIn) {
                                     $result[$fila] = $paquete[$i];
+                                    $nroPe[$fila] = $numeroPersonas[$i];
                                     $fila++;
                                 }
                             }
@@ -85,7 +95,9 @@ class Paquetes_model extends CI_Model
                 }
             }
         }
-        $result['nroPersonas'] = $nroPe;
+        if (isset($nroPe)) {
+            $result['nroPersonas'] = $nroPe;
+        }
         return $result;
     }
     private function ConsisitirPersonas($paquete, $nroPersonas, $cantidadPersonasIngresadas)
@@ -149,7 +161,9 @@ class Paquetes_model extends CI_Model
         unset($paquete['nroPersonas']);
         if ($paquete == null) return null;
         //? Elimino las filas que no se usan
-        $paquete = $this->EliminarPaquetesRepetidos($paquete);
+        $paquete = $this->EliminarPaquetesRepetidos($paquete, $res['numeroPersonas']);
+        $res['numeroPersonas'] = $paquete['nroPersonas'];
+        unset($paquete['nroPersonas']);
         $res['paquete'] = $paquete;
         return $res;
     }
