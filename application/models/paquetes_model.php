@@ -224,19 +224,28 @@ class Paquetes_model extends CI_Model
         $camas = $this->dormitorio_model->obtenerCamas($dormitorio->id_dormitorio);
         $cantCamas =  $camas->num_rows();
         if ($cantCamas < 2) {
-            $result['result'] .= "Posee una cama tipo " . $camas->row(0)->tipo_cama  . "<br>";
+            $result['result'] .="<br>" ."Posee una cama tipo " . $camas->row(0)->tipo_cama  . "<br>";
         } else {
 
-            $result['result'] .= "Posee " . $cantCamas . " camas:"  . "<br>";
+            $result['result'] .="<br>" ."Posee " . $cantCamas . " camas:"  . "<br>";
             $i = 0;
             while ($camas->num_rows() > $i) {
                 $result['result'] .= "• " . $camas->row($i)->cant_camas . " cama tipo " . $camas->row($i)->tipo_cama . "<br>";
                 $i++;
             }
         }
+        $this->db->close();
+        $fechas= $this->ObtenerFechasDePaquete($res['id_paquete']);
+        $result['result'] .= "<br>" ."Fechas habilitadas: "  . "<br>";
+        $j=0;
+        while (count($fechas) > $j) {
+            $result['result'] .= "• Desde " . $fechas[$j]['fecha_inicial'] . " Hasta " . $fechas[$j]['fecha_final'] . "<br>";
+            $j++;
+        }
+
 
         $precio = $res['precio'];
-        $result['result'] .= "Pesos arg: $" . $precio . ' por Noche' . "<br>";
+        $result['result'] .= "<br>" ."Pesos arg: $" . $precio . ' por Noche' . "<br>";
         return $result['result'];
     }
 
@@ -314,5 +323,12 @@ class Paquetes_model extends CI_Model
         $precio = $this->db->query("CALL `PrecioPaquete` (" . $idPaquete . ")")->result_array();
         $this->db->close();
         return floatval($precio[0]['precio']);
+    }
+
+    public function ObtenerFechasDePaquete($idPaquete)
+    {
+        $fechas = $this->db->query("select* from rango_dias where id_paquete=" . $idPaquete )->result_array();
+        $this->db->close();
+        return $fechas;
     }
 }

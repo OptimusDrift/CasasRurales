@@ -36,7 +36,7 @@ class ReservasrealizadasCI extends CI_Controller
             $form = "<form action=\" " . base_url() . "index.php/validarImagenes\" enctype=\"multipart/form-data\" method=\"post\">
                   <input type='text' value='" . $reserva['id_reserva'] . "' name='idReserva' hidden=''>
                   <input class='btn-block' id=\"imagen\" name=\"imagen\" size=\"30\" type=\"file\">
-                  <input class='btn btn-block btn-success' type=\"submit\" value=\"Subir comprobante\" style='width: 200px;'>
+                  <input class='btn btn-block btn-warning' type=\"submit\" value=\"Subir comprobante\" style='width: 200px;'>
                 </form>";
           } else {
             $estado = "Pagada!";
