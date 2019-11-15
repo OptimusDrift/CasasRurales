@@ -27,9 +27,9 @@ class Reservaspendientes extends CI_Controller
         $reserva = $reservas[$i];
 
         $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
-        $propiedad= $propiedad->result_array();
-        $propiedad= $propiedad[0];
-        $descripcionCliente = $this->reservas_model->DescripcionCliente($reserva['id_cliente'],$reserva['id_reserva']);
+        $propiedad = $propiedad->result_array();
+        $propiedad = $propiedad[0];
+        $descripcionCliente = $this->reservas_model->DescripcionCliente($reserva['id_cliente'], $reserva['id_reserva']);
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
@@ -37,18 +37,17 @@ class Reservaspendientes extends CI_Controller
             </div>
             <div class=\"card-body\">
             <table>
+            
               <tr>
                 <td>
                 <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($reserva['id_propiedad'])[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
+                <td width=\"50\"></td>
                 <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad,$descripcionCliente) . "</p>
+                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad, $descripcionCliente) . "</p>
                 </td>
               </tr>
+
               <tr>
                 <td>
                 <input type='submit' class='btn btn-block btn-danger' value='Cancelar Reserva' name='cancelarReserva'>
@@ -56,11 +55,8 @@ class Reservaspendientes extends CI_Controller
                 <td>
                 <input type='text' value='" . $reserva['id_reserva'] . "' name='idReserva' hidden=''> 
                 </td>
-                <td>
-                </td>
-                <td>
-                </td>
               </tr>
+
             </table>
             </div>
           </div>
