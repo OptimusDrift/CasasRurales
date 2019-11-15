@@ -48,13 +48,13 @@ class reservas_model extends CI_Model
         return $result;
     }
 
-    public function DescripcionReserva($res, $prop,$usr)
+    public function DescripcionReserva($res, $prop)
     {
 
         $result['result'] = "";
         $dormitorio = $this->dormitorio_model->obtenerDormitorio($res['id_dormitorio']);
         $result['result'] = "";
-        $result['result'] .= "Reservado en " . $prop['nombre_poblacion'] . "<br>";
+        $result['result'] .= "Reservado en " . ucwords($prop['nombre_poblacion'])  . "<br>";
         $result['result'] .= "Habitacion de " . $dormitorio->mtsCuadrado . "mts. Cuadrados" . "<br>";
         $camas = $this->dormitorio_model->obtenerCamas($dormitorio->id_dormitorio);
         $cantCamas =  $camas->num_rows();
@@ -76,13 +76,14 @@ class reservas_model extends CI_Model
         $vencimiento = date("d-m-Y", strtotime($fReserva . "+3 day"));
         $vencimiento = strtotime(substr($vencimiento, 0, 10));
         $result['result'] .= "Entre " . date("d-m-Y", strtotime($fInicio)) . " y " . date("d-m-Y", strtotime($fFin))  . "<br>";
-        
-        if($hoy >= $vencimiento)
-        {$result['result'] .= "<span style='color: #ff0000;'><b>Reservado el dia: " . date("d-m-Y", strtotime($fReserva))  . " !!!</b></span><br>"; }
-        else
-        {$result['result'] .= "Reservado el dia: " . date("d-m-Y", strtotime($fReserva))  . "<br>"; }
-        
-        
+
+        if ($hoy >= $vencimiento) {
+            $result['result'] .= "<span style='color: #ff0000;'><b>Reservado el dia: " . date("d-m-Y", strtotime($fReserva))  . " !!!</b></span><br>";
+        } else {
+            $result['result'] .= "Reservado el dia: " . date("d-m-Y", strtotime($fReserva))  . "<br>";
+        }
+
+
         $dif = strtotime($fFin) - strtotime($fInicio);
         $dias = $dif / (60 * 60 * 24);
         $this->db->close();
@@ -91,7 +92,7 @@ class reservas_model extends CI_Model
         $precio = $paquete->row(0)->precio * $dias;
         $result['result'] .= "Pesos arg: $" . $precio  . "<br>";
 
-        $result['result'] .= $usr;
+        //$result['result'] .= $usr; SAQUE EL $usr DE LOS PARAMETROS...
         return $result['result'];
     }
 
@@ -155,29 +156,29 @@ class reservas_model extends CI_Model
     }
 
     public function DescripcionPropietario($idUsr)
-    {  
+    {
         $this->db->reconnect();
-        $result['result'] = "<br>" ."Datos del Propietario : " . "<br>";
+        $result['result'] = "<br>" . "Datos del Propietario : " . "<br>";
         $prop = $this->usuario_model->ObtenerUsuario($idUsr);
 
-        $result['result'] .= "• Nombre: " .$prop->nombre   . "<br>";
-        $result['result'] .= "• Apellido : " .$prop->apellido   . "<br>";
-        $result['result'] .= "• Cuil : " .$prop->cuil   . "<br>";
-        $result['result'] .= "• CBU : " .$prop->cbu   . "<br>";
-        $result['result'] .= "• Telefono : " .$prop->telefono   . "<br>";
+        $result['result'] .= "• Nombre: " . $prop->nombre   . "<br>";
+        $result['result'] .= "• Apellido : " . $prop->apellido   . "<br>";
+        $result['result'] .= "• Cuil : " . $prop->cuil   . "<br>";
+        $result['result'] .= "• CBU : " . $prop->cbu   . "<br>";
+        $result['result'] .= "• Telefono : " . $prop->telefono   . "<br>";
         return $result['result'];
     }
 
     public function DescripcionCliente($idUsr, $idres)
-    {  
+    {
         $this->db->reconnect();
-        $result['result'] = "<br>" ."Datos del Cliente : " . "<br>";
+        $result['result'] = "<br>" . "Datos del Cliente : " . "<br>";
         $prop = $this->usuario_model->ObtenerUsuario($idUsr);
-        $numero = $this->db->query('select * from reserva_usuario_telefono where id_reserva =' .$idres .' and id_usuario= ' .$idUsr);
+        $numero = $this->db->query('select * from reserva_usuario_telefono where id_reserva =' . $idres . ' and id_usuario= ' . $idUsr);
         $numero = $numero->row(0);
-        $result['result'] .= "• Nombre: " .$prop->nombre   . "<br>";
-        $result['result'] .= "• Apellido : " .$prop->apellido   . "<br>";
-        $result['result'] .= "• Cod. Area - Telefono : " .$numero->codigo_area ." - " .$numero->telefono  . "<br>";
+        $result['result'] .= "• Nombre: " . $prop->nombre   . "<br>";
+        $result['result'] .= "• Apellido : " . $prop->apellido   . "<br>";
+        $result['result'] .= "• Cod. Area - Telefono : " . $numero->codigo_area . " - " . $numero->telefono  . "<br>";
         return $result['result'];
     }
 }

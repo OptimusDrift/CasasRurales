@@ -26,6 +26,8 @@ class ReservasrealizadasCI extends CI_Controller
       $i = 0;
       while (count($reservas) > $i) {
         $botonComprobante = "";
+        $estado = "";
+        $form = "";
         //arregla error de base de datos 'out of sync'
         $this->db->reconnect();
         $reserva = $reservas[$i];
@@ -37,7 +39,7 @@ class ReservasrealizadasCI extends CI_Controller
                   <input class='btn btn-block btn-success' type=\"submit\" value=\"Subir comprobante\" style='width: 200px;'>
                 </form>";
           } else {
-            $form = "Pagada!";
+            $estado = "Pagada!";
             $botonComprobante = '<a href="' . base_url() . 'comprobantes/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
             <input class="btn btn-block btn-success" type="button" value="Ver Comprobante">
             </a>';
@@ -51,7 +53,7 @@ class ReservasrealizadasCI extends CI_Controller
         $propiedad = $propiedad->result_array();
         $propiedad = $propiedad[0];
 
-        $descipcionUsuario = $this->reservas_model->DescripcionPropietario($propiedad['id_propietario']);
+        $descripcionPropietario = $this->reservas_model->DescripcionPropietario($propiedad['id_propietario']);
 
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
@@ -60,28 +62,28 @@ class ReservasrealizadasCI extends CI_Controller
             </div>
             <div class=\"card-body\">
             <table>
+
               <tr>
-                <td>
-                  <img src=\"" . base_url() . "assets/imagenes" . $this->propiedades_model->ObtenerImagenesPropiedades($reserva['id_propiedad'])[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
+                <td width=\"200\">
+                  <img src=\"" . base_url() . "assets/imagenes" . $this->propiedades_model->ObtenerImagenesPropiedades($reserva['id_propiedad'])[0] . ".jpg \" alt=\"reserva1\" class=\"\" height=\"150\">
+                </td>
+                <td width=\"50\"></td>
+                <td width=\"300\">
+                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad) . "</p>
                 </td>
                 <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad, $descipcionUsuario) . "</p>
+                " . $descripcionPropietario . "
                 </td>
               </tr>
+
               <tr>
               <td valign='bottom'>
-              " . $botonComprobante . "
+              " . $botonComprobante . $form . "
               </td>
-              <td>
-              </td>
-              <td>
-              </td>
-              <td>" . $form . "</td>
+              <td></td>
+              <td><b>" . $estado . "</b></td>
               </tr>
+
             </table>
             </div>
           </div>

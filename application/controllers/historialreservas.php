@@ -43,9 +43,9 @@ class Historialreservas extends CI_Controller
           $estado = "La reserva fue cancelada!";
         }
         $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
-        $propiedad= $propiedad->result_array();
-        $propiedad= $propiedad[0];
-        $descripcionCliente = $this->reservas_model->DescripcionCliente($reserva['id_cliente'],$reserva['id_reserva']);
+        $propiedad = $propiedad->result_array();
+        $propiedad = $propiedad[0];
+        $descripcionCliente = $this->reservas_model->DescripcionCliente($reserva['id_cliente'], $reserva['id_reserva']);
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
                 <div class=\"card card-outline card-dark\">
                 <div class=\"card-header\">
@@ -53,40 +53,34 @@ class Historialreservas extends CI_Controller
                 </div>
                 <div class=\"card-body\">
                 <table>
+
                   <tr>
-                    <td>
+                    <td width=\"200\">
                     <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($reserva['id_propiedad'])[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                     </td>
-                    <td>
+                    <td width=\"50\"></td>
+                    <td width=\"300\">
+                      <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad) . "</p>
                     </td>
-                    <td>
-                    </td>
-                    <td>
-                      <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad,$descripcionCliente) . "</p>
+                    <td valign=\"top\">
+                    " . $descripcionCliente . "
                     </td>
                   </tr>
              
                   <tr>
-                 
-                    <td>
-                    " . $btn . "
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    " . $estado . "
-                    </td>
-                    
-                    
-                    <td>
-                    <input type='text' value='" . $reserva['id_reserva'] . "' name='idReservaH' hidden=''> 
-                    </td>
                     <td>
                     " . $btnCancelar . "
                     </td>
+                    <td></td>
+                    <td>                    
+                    " . $btn . "
+                    </td>
+                    <td>
+                    <input type='text' value='" . $reserva['id_reserva'] . "' name='idReservaH' hidden=''> 
+                    <b>" . $estado . "</b>
+                    </td>
                   </tr>
+
                 </table>
                 </div>
               </div>
