@@ -6,6 +6,7 @@ class Welcome extends CI_Controller
 	public function index()
 	{
 		session_start();
+		$this->load->model('notificacion_alerta');
 		if (!isset($_SESSION["error"])) {
 			$_SESSION["error"] = "";
 		}
@@ -19,6 +20,10 @@ class Welcome extends CI_Controller
 				$_SESSION['apellido'] = $usuario->apellido;
 				$_SESSION['id'] = $usuario->id_usuario;
 				$_SESSION['correo'] = $_POST['correo'];
+				        //manejo de la alerta de las reservas pendientes a pagar
+						$datosAlerta = $this->notificacion_alerta->Alerta();
+						$_SESSION['alerta'] = $datosAlerta;
+						//////////////////////////
 				redirect('paginaInicial');
 			} else {
 				$_SESSION["error"] = "El nombre de usuario o contraseña es invalido.";
