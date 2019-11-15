@@ -73,14 +73,17 @@ class Historialreservas extends CI_Controller
              
                   <tr>
                     <td>
+                    <form class='col-lg-12' action='" .base_url() ."index.php/cancelarReserva' method='post' onsubmit='return CancelarReserva()'>
                     " . $btnCancelar . "
+                    <input type='text' value='" . $reserva['id_reserva'] . "' name='idReservaH' hidden=''> 
+                    </form>
                     </td>
                     <td></td>
                     <td>                    
                     " . $btn . "
                     </td>
                     <td>
-                    <input type='text' value='" . $reserva['id_reserva'] . "' name='idReservaH' hidden=''> 
+                   
                     <b>" . $estado . "</b>
                     </td>
                   </tr>

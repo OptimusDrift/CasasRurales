@@ -12,7 +12,7 @@ class cancelarReserva extends CI_Controller
   function index()
   {
     $this->load->view('manejoDeSesion');
-   // echo $_POST['idReserva'];
+    
     if (isset($_POST['cancelarReserva'])) {
 
       if(isset($_POST['idReserva']))
@@ -23,6 +23,7 @@ class cancelarReserva extends CI_Controller
 
       if(isset($_POST['idReservaH']))
       {
+        
         $this->reservas_model->cancelarReserva($_POST['idReservaH']);
         redirect('historialreservas');
       }
