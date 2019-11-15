@@ -6,6 +6,7 @@ class Welcome extends CI_Controller
 	public function index()
 	{
 		session_start();
+		$this->load->model('notificacion_alerta');
 		if (!isset($_SESSION["error"])) {
 			$_SESSION["error"] = "";
 		}
