@@ -47,7 +47,7 @@ class Controlarreserva extends CI_Controller
             }
             $dato['precio'] = $this->paquetes_model->CalcularPrecioFechas($_POST['fechas'], $_POST['precio']);
             $info = $this->propiedades_model->ObtenerInfoPropiedad($_POST['idPropiedad']);
-            $dato['propiedad'] = $info->nombre_propiedad;
+            $dato['propiedad'] = $info->row(0)->nombre_propiedad;
             $this->db->close();
             $dato['fechas'] = $_POST['fechas'];
             $dato['telefono'] = "(" . $_POST['ar'] . ')-' . $_POST['tel'];
