@@ -37,14 +37,17 @@ class Reservaspendientes extends CI_Controller
             </div>
             <div class=\"card-body\">
             <table>
-            
+
               <tr>
                 <td>
                 <img src=\"" . base_url() . "assets/imagenes" . $this->Propiedades_model->ObtenerImagenesPropiedades($reserva['id_propiedad'])[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
                 <td width=\"50\"></td>
-                <td>
-                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad, $descripcionCliente) . "</p>
+                <td width=\"300\">
+                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad) . "</p>
+                </td>
+                <td valign=\"top\">
+                " . $descripcionCliente . "
                 </td>
               </tr>
 
