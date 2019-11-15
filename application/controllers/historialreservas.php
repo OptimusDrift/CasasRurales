@@ -30,7 +30,7 @@ class Historialreservas extends CI_Controller
         if ($reservas[$i]['estado_reserva'] == '1') {
           if ($reservas[$i]['estado_pago'] == '1') {
             $estado = "La reserva fue pagada!";
-            $btn = '<a href="' . base_url() . 'comprobantes/' . $reserva['id_reserva'] . '/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
+            $btn = '<a href="' . base_url() . 'comprobantes/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
             <input class="btn btn-block btn-success" type="button" value="Ver Comprobante">
             </a>';
             $this->db->close();
@@ -41,8 +41,8 @@ class Historialreservas extends CI_Controller
           $estado = "La reserva fue cancelada!";
         }
         $propiedad = $this->Propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
-        $propiedad= $propiedad->result_array();
-        $propiedad= $propiedad[0];
+        $propiedad = $propiedad->result_array();
+        $propiedad = $propiedad[0];
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
                 <div class=\"card card-outline card-dark\">
                 <div class=\"card-header\">
@@ -59,7 +59,7 @@ class Historialreservas extends CI_Controller
                     <td>
                     </td>
                     <td>
-                      <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad,"") . "</p>
+                      <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad, "") . "</p>
                     </td>
                   </tr>
                   <tr>
