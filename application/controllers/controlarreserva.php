@@ -37,7 +37,7 @@ class Controlarreserva extends CI_Controller
                     $c .= '<input hidden="" name="cantidadDormitorios" value="' . $n . '">';
                 }
                 $dato['completa'] = '<td align="right">
-            <h3> Nombre de los dormitorios: </h3>
+            <h3> Dormitorios: </h3>
         </td>
         <td>
             <h3>

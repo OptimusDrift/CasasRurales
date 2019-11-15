@@ -8,12 +8,14 @@ class ReservasrealizadasCI extends CI_Controller
     parent::__construct();
     $this->load->model('reservas_model');
     $this->load->model('propiedades_model');
+    $this->load->model('usuario_model');
   }
   function index()
   {
     $this->load->view('manejoDeSesion');
     $id = $_SESSION['id'];
     $res = $this->reservas_model->ObtenerReservasRealizadas($id);
+    
 
     $reservas = $res->result_array();
     $this->db->close();
@@ -46,10 +48,15 @@ class ReservasrealizadasCI extends CI_Controller
         }
 
         $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($reserva['id_propiedad']);
+        $propiedad= $propiedad->result_array();
+        $propiedad= $propiedad[0];
+      
+        $descipcionUsuario = $this->reservas_model->DescripcionPropietario($propiedad['id_propietario']);
+        
         $reservastr["reservastr"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $reserva['id_paquete'] . "\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
-              <h5 class=\"m-0\">" . $propiedad->nombre_propiedad . "</h5>
+              <h5 class=\"m-0\">" . $propiedad['nombre_propiedad'] . "</h5>
             </div>
             <div class=\"card-body\">
             <table>
@@ -62,7 +69,7 @@ class ReservasrealizadasCI extends CI_Controller
                 <td>
                 </td>
                 <td>
-                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad) . "</p>
+                  <p class=\"card-text\" align=\"justify\">" . $this->reservas_model->DescripcionReserva($reserva, $propiedad, $descipcionUsuario) . "</p>
                 </td>
               </tr>
               <tr>

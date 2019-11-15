@@ -49,4 +49,10 @@ class Usuario_model extends CI_Model
             }
         } while ($mysqli->more_results() && $mysqli->next_result());
     }
+
+    public function ObtenerUsuario($idusr)
+    {
+        $result = $this->db->query("select * From usuario where id_usuario = " . $idusr);
+        return $result->row(0);
+    }
 }
