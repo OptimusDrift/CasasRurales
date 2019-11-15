@@ -24,7 +24,7 @@ class ValidarFechas extends CI_Controller
         $FI = new DateTime($annoI . "-" . $mesI . "-" . $diaI);
         $fechaFinal = new DateTime($annoF . "-" . $mesF . "-" . $diaF);
         $mensaje = "";
-        if (($FI->diff($fechaFinal)->days - 1) >= $_POST['minNoches']) {
+        if (($FI->diff($fechaFinal)->days) >= $_POST['minNoches']) {
             while ($fechaInicial->diff($fechaFinal)->days > 0) {
                 if ($mensaje == 'alquilada') {
                     break;
@@ -40,7 +40,7 @@ class ValidarFechas extends CI_Controller
                 }
             }
             if ($mensaje != 'alquilada') {
-                $mensaje = "El precio total es de: $" . ($FI->diff($fechaFinal)->days - 1) * $_POST['precio'];
+                $mensaje = "El precio total es de: $" . ($FI->diff($fechaFinal)->days) * $_POST['precio'];
             }
         } else {
             $mensaje = 'minNoches';

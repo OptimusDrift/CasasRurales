@@ -9,8 +9,9 @@ class Propiedades_model extends CI_Model
 
     function ObtenerPropiedades($idUsuario)
     {
-        $result = $this->db->query("select * from propiedad where id_propietario = " . $idUsuario);
-        if ($result->num_rows() > 0) {
+        $result = $this->db->query("select * from propiedad where id_propietario = " . $idUsuario)->result_array();
+        $this->db->close();
+        if (count($result) > 0) {
             return $result;
         } else {
             return false;

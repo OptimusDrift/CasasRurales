@@ -28,10 +28,10 @@
       <div class="card">
         <div class="card-body login-card-body">
           <p class="login-box-msg">Inicia sesión para comenzar.</p>
-
           <form action="" method="POST">
             <div class="input-group mb-3">
               <input type="email" name="correo" class="form-control" placeholder="Correo electrónico" value="correo1@gmail.com">
+              <!--<input name="error" class="form-control" placeholder="Correo electrónico" value="error">-->
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -46,6 +46,7 @@
                 </div>
               </div>
             </div>
+            <p style="color:red;" class="m-md-2"><?php echo $error ?></p>
             <div class="row">
               <div class="col-8">
                 <div class="icheck-primary">
