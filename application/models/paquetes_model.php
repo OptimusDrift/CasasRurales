@@ -49,7 +49,7 @@ class Paquetes_model extends CI_Model
         }
         return $numeroPersonas;
     }
-    private function ConsisitirFechas($paquete, $fechaDeInicio, $fechaDeFin)
+    private function ConsisitirFechas($paquete, $fechaDeInicio, $fechaDeFin, $numeroPersonas)
     {
         $fila = 0;
         $result = null;
@@ -76,6 +76,7 @@ class Paquetes_model extends CI_Model
                             $estado = $this->db->query("CALL `EstadoReserva` (" . $paquete[$i]['id_paquete'] . ")");
                             if (!($estado->num_rows > 0)) {
                                 $result[$fila] = $paquete[$i];
+                                $nroPe[$fila] = $numeroPersonas[$i];
                                 $fila++;
                             }
                         }
@@ -84,6 +85,7 @@ class Paquetes_model extends CI_Model
                 }
             }
         }
+        $result['nroPersonas'] = $nroPe;
         return $result;
     }
     private function ConsisitirPersonas($paquete, $nroPersonas, $cantidadPersonasIngresadas)
@@ -142,7 +144,9 @@ class Paquetes_model extends CI_Model
         $fechaDeInicio = $this->FormatearFecha($fechaDeInicio = preg_split('[-]', $fechas)[0]);
         $fechaDeFin = $this->FormatearFecha($fechaDeFin = preg_split('[-]', $fechas)[1]);
         //? Consisto las fechas
-        $paquete = $this->ConsisitirFechas($paquete, $fechaDeInicio, $fechaDeFin);
+        $paquete = $this->ConsisitirFechas($paquete, $fechaDeInicio, $fechaDeFin, $res['numeroPersonas']);
+        $res['numeroPersonas'] = $paquete['nroPersonas'];
+        unset($paquete['nroPersonas']);
         if ($paquete == null) return null;
         //? Elimino las filas que no se usan
         $paquete = $this->EliminarPaquetesRepetidos($paquete);
