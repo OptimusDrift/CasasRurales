@@ -40,11 +40,9 @@ class Controladorpaquete extends CI_Controller
         for ($i = 0; $i < count($imagenes); $i++) {
             $dato['imagen'] .= "<div class=\"product-image-thumb\"><img onclick=\"cambiar(this)\" id=\"img" . $i . "\" name=\"" . $idPorpiedad . "\" src=\"" . base_url() . "assets/imagenes" . $imagenes[$i] . ".jpg\"class=\"product-image\" alt=\"Product Image\"></div>";
         }
-
-
         $infoPropiedad = $this->propiedades_model->ObtenerInfoPropiedad($idPorpiedad);
-        $dato['nombre'] = $infoPropiedad->nombre_propiedad;
-        $dato['descripcion'] = $infoPropiedad->descripcion;
+        $dato['nombre'] = $infoPropiedad->row(0)->nombre_propiedad;
+        $dato['descripcion'] = $infoPropiedad->row(0)->descripcion;
         $this->db->close();
         $dato['precio'] = $paquete[0]['precio'];
         $dato['inicioactivo'] = '';
@@ -65,7 +63,7 @@ class Controladorpaquete extends CI_Controller
         $this->db->close();
         $prop = $this->usuario_model->PropiedadUsuario($dato['idPaquete']);
         //! hacer que cuando intente alquilar en fechas ya alquiladas tire error onClick
-        if (!($_SESSION['id'] == $infoPropiedad->id_propietario)) {
+        if (!($_SESSION['id'] == $infoPropiedad->row(0)->id_propietario)) {
             $this->db->close();
             $dato['formulario'] = "";
             $dormitorios = $this->dormitorio_model->ObtenerDormitorios($idPorpiedad)->result_array();
