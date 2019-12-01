@@ -4,7 +4,7 @@
   <!-- link del usuario -->
   <a href="<?php echo base_url() . "index.php/paginaInicial"; ?>" class="brand-link">
     <!-- link de la imagen del logo -->
-    <img src="<?php echo base_url() . "assets/"; ?>dist/img/WoodenHouse.png" alt="WoodenHouse Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="<?php echo base_url() . "assets/"; ?>dist/img/WoodenHouse.png" alt="WoodenHouse Logo" class="brand-image img-circle elevation-3">
     <span class="brand-text font-weight-light">Wooden House</span>
   </a>
 
