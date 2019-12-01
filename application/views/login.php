@@ -48,13 +48,14 @@
             </div>
             <p style="color:red;" class="m-md-2"><?php echo $error ?></p>
             <div class="row">
-              <div class="col-8">
-                <div class="icheck-primary">
-                </div>
+              <div class="col-5">
+                <button type="button" class="btn btn-primary btn-block" onclick="window.location.href='registro'">Registrarse</button>
+              </div>
+              <div class="col-2">
               </div>
               <!-- /.col -->
-              <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block btn-outline-secondary btn-flat badge-dark">Ingresar</button>
+              <div class="col-5">
+                <button type="submit" class="btn btn-success btn-block">Ingresar</button>
               </div>
               <!-- /.col -->
             </div>
