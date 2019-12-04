@@ -11,7 +11,7 @@ class validarRegistro extends CI_Controller
     }
     function index()
     {
-        
+        echo $_POST['nombre'];
 
    
         $this->load->view('primera');
