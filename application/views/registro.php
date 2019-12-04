@@ -8,9 +8,9 @@
       <div class="card-body register-card-body">
         <p class="login-box-msg">Registrar una nueva membresía</p>
 
-        <form action="../../index.html" method="post">
+        <form action="<?php echo base_url();?>index.php/validarRegistro" method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Nombre">
+            <input type="text" class="form-control" placeholder="Nombre" name="nombre">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -18,7 +18,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Apellido">
+            <input type="text" class="form-control" placeholder="Apellido" name="apellido">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="CBU">
+            <input type="text" class="form-control" placeholder="CBU" name="cbu">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="CUIL">
+            <input type="text" class="form-control" placeholder="CUIL" name="cuil">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Teléfono">
+            <input type="text" class="form-control" placeholder="Teléfono" name="telefono">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-phone"></span>
@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" class="form-control" placeholder="Email" name="mail">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Contraseña">
+            <input type="password" class="form-control" placeholder="Contraseña" name="contrasena">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -66,7 +66,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Vuelva a escribir la contraseña">
+            <input type="password" class="form-control" placeholder="Vuelva a escribir la contraseña" name="contrasena">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -75,7 +75,7 @@
           </div>
           <div class="row">
             <div class="col-8">
-              <a href="login.html" class="text-center">Ya estoy registrado.</a>
+              <a href="<?php echo base_url();?>index.php/welcome" class="text-center">Ya estoy registrado.</a>
             </div>
             <!-- /.col -->
             <div class="col-4">
