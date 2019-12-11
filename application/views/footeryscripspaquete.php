@@ -140,7 +140,6 @@
         seleccion: sel
       }, function(mensaje) {
         var msj = mensaje.split("~");
-        console.log("asd" + moment(mensaje.split("~")[2].replace("-", "")));
         array = msj[1].split(",");
         document.getElementById("formularioReserva").innerHTML = msj[0];
         $(function() {
@@ -153,11 +152,10 @@
                 }
               }
             },
-            drops: 'up',
             opens: 'center',
-            startDate: moment(mensaje.split("~")[2]).add(24, 'hour'),
-            endDate: moment(mensaje.split("~")[2]).add(72, 'hour'),
-            minDate: moment(mensaje.split("~")[2]),
+            startDate: moment().add(24, 'hour'),
+            endDate: moment().add(72, 'hour'),
+            minDate: moment().add(24, 'hour'),
             autoApply: true,
             maxDate: maxDia,
             showDropdowns: true,

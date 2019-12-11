@@ -30,8 +30,8 @@ class mispaquetes extends CI_Controller
         $paquete = $paquetes[$i];
 
         $propiedad = $this->propiedades_model->ObtenerInfoPropiedad($paquete['id_propiedad']);
-        $propiedad = $propiedad->result_array();
-        $propiedad = $propiedad[0];
+        $propiedad= $propiedad->result_array();
+        $propiedad= $propiedad[0];
         $paquetesrt["paquetesrt"] .= "<a href=\"" . base_url() . "index.php/controladorpaquete?paquete=" . $paquete['id_paquete'] . "\" style='text-decoration:none;color:black;'>
             <div class=\"card card-outline card-dark\">
             <div class=\"card-header\">
@@ -43,7 +43,9 @@ class mispaquetes extends CI_Controller
                 <td>
                   <img src=\"" . base_url() . "assets/imagenes" . $this->propiedades_model->ObtenerImagenesPropiedades($propiedad['id_propiedad'])[0] . ".jpg \" alt=\"reserva1\" class=\"\" width=\"200\" height=\"150\">
                 </td>
-                <td width=\"50\">
+                <td>
+                </td>
+                <td>
                 </td>
                 <td>
                   <p class=\"card-text\" align=\"justify\">" . $this->paquetes_model->DescripcionPaquete($paquete, $propiedad) . "</p>

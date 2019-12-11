@@ -29,15 +29,15 @@ class Historialreservas extends CI_Controller
         $btn = "";
         $btnCancelar = "";
         if ($reservas[$i]['estado_reserva'] == '1') {
-          $FI = strtotime($reservas[$i]['fecha_final_reserva']);
-          $FF = strtotime(date("Y-m-d"));
-          if ($FI > $FF) {
+          $FI = new DateTime($reservas[$i]['fecha_final_reserva']);
+          $FF = new DateTime(date("Y-m-d"));
+          if ($FI->diff($FF)->days > 0) {
             $btnCancelar = "<input type='submit' class='btn btn-block btn-danger' value='Cancelar Reserva' name='cancelarReserva'>";
           }
           if ($reservas[$i]['estado_pago'] == '1') {
             $estado = "La reserva fue pagada!";
             $btn = '<a href="' . base_url() . 'comprobantes/' . $this->reservas_model->ObtenerImagenesComprobante($reserva['id_reserva'])->row(0)->link . '" target="_blank">
-            <input  class="btn btn-block btn-success" type="button" value="Ver Comprobante">
+            <input class="btn btn-block btn-success" type="button" value="Ver Comprobante">
             </a>';
             $this->db->close();
           } else {
@@ -73,7 +73,7 @@ class Historialreservas extends CI_Controller
              
                   <tr>
                     <td>
-                    <form class='col-lg-12' action='" . base_url() . "index.php/cancelarReserva' method='post' onsubmit='return CancelarReserva()'>
+                    <form class='col-lg-12' action='" .base_url() ."index.php/cancelarReserva' method='post' onsubmit='return CancelarReserva()'>
                     " . $btnCancelar . "
                     <input type='text' value='" . $reserva['id_reserva'] . "' name='idReservaH' hidden=''> 
                     </form>
