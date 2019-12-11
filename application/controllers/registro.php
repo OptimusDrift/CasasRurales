@@ -25,5 +25,6 @@ class Registro extends CI_Controller
         $dato['MisReservasOpen'] = '';
         $this->load->view('primera');
         $this->load->view('registro');
+        $this->load->view('registroConsistir');
     }
 }
