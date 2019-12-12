@@ -46,4 +46,11 @@
         CambiarColor(campo, 'green');
         return true;
     }
+
+    function Consistir() {
+        document.getElementById("errorCampos").innerHTML = "mensaje";
+        if (ConsisitirTexto('Nombre', 'Debe tener al menos 3 caracteres.') && ConsisitirTexto('Apellido', 'Debe tener al menos 3 caracteres.') && ConsisitirNumero('CBU', 22, 'Deben tener 22 números.') && ConsisitirNumero('CUIL', 11, 'Deben tener 11 números sin -.') && ConsisitirNumero('Tel', 10, 'Deben tener 10 números sin 0 ni 15.') && ConsisitirCorreo('Correo', 'Confirmar', 'Los correos deben ser iguales.') && ConsisitirContrasenna('Cont', 'Vuelva', 'Las contraseñas deben ser iguales y debe tener almenos 3 caracteres.')) {
+            document.getElementById("regi").submit();
+        }
+    }
 </script>

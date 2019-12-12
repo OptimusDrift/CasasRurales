@@ -55,4 +55,30 @@ class Usuario_model extends CI_Model
         $result = $this->db->query("select * From usuario where id_usuario = " . $idusr);
         return $result->row(0);
     }
+
+    public function NuevoUsuario($correo, $cuil, $nombre, $apellido, $cbu, $contrasenna, $telefono, $codigo_registro)
+    {
+        try {
+            $this->db->query("CALL AgregarUsuario('" . $correo . "', '" . $cuil . "', '" . $nombre . "', '" . $apellido . "', '" . $cbu . "', '" . $contrasenna . "', '" . $telefono . "', '" . $codigo_registro . "');");
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
+    public function ActivarUsuario($codigo)
+    {
+        $result = $this->db->query(" CALL `BuscarCodigo`('" . $codigo . "');");
+        if ($result->num_rows() > 0) {
+            $this->db->close();
+            $this->db->query(" CALL `ActivarUsuario`('" . $codigo . "');");
+            return true;
+        }
+        return false;
+    }
+
+    public function ActualizarCodigo($codigo, $correo)
+    {
+        $this->db->query(" CALL `ActualizarCodigo`('" . $codigo . "', '" . $correo . "');");
+    }
 }
