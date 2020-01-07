@@ -12,14 +12,6 @@ class Dormitorios extends CI_Controller
 
     function index()
     {
-        $FIi = $this->paquetes_model->DiaInicialReserva($_POST['idPaquete']);
-        $FIii = strtotime($FIi);
-        $FF = strtotime(date("Y-m-d"));
-        if ($FIii > $FF) {
-            $FI = $FIi;
-        } else {
-            $FI = date("Y-m-d");
-        }
         if ($_POST['seleccion'] != 1) {
             $formulario = '<form action="controlarreserva" id="enviar" method="post">
                 <div class="form-inline py-2 mt-2">
@@ -117,6 +109,6 @@ class Dormitorios extends CI_Controller
             $mensaje = "Seleccione lo que quiere alquilar.";
             $fechas = '';
         }
-        echo $mensaje . "~" . $fechas . "~" . $FI;
+        echo $mensaje . "~" . $fechas;
     }
 }

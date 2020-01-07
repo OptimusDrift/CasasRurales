@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Log in</title>
+    <title><b>Wooden</b>House</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,13 +22,13 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="<?php echo base_url() . 'index.php/paginaInicial'; ?>"><b>Wooden</b>House</a>
+        <b>Wooden</b>House
       </div>
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Inicia sesión para comenzar.</p>
-          <form action="" method="POST">
+          <p class="login-box-msg"><?php echo $mensaje ?></p>
+          <form action="<?php echo $red ?>" method="POST">
             <div class="input-group mb-3">
               <input type="email" name="correo" class="form-control" placeholder="Correo electrónico" value="correo1@gmail.com">
               <!--<input name="error" class="form-control" placeholder="Correo electrónico" value="error">-->
